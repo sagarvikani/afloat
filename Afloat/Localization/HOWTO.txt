@@ -1,0 +1,115 @@
+# This file explains how to localize Afloat by
+#  using the Localization Manager application by
+#  Blue Technologies (blue-tec.com).
+
+# Afloat is licensed under the Artistic License (found
+#  either in the included LICENSE file or, if not
+#  included, at the
+#  http://www.opensource.org/licenses/artistic-license.php
+#  web site).
+# This file is part of Afloat's source code.
+
+# Afloat is © Emanuele Vulcano, 2006.
+
+
+== HOW TO LOCALIZE AFLOAT ==
+
+Afloat's development locale is English. However, Afloat can
+take advantage of Mac OS X's localization tools to present
+its user interface in a variety of languages.
+
+The Localization Manager application by Blue Technologies is
+used to allow for continuous translation that's mostly independent
+from the evolution of the original source code. However,
+the LDB format used by Localization Manager has shortcomings
+that require simple workarounds.
+
+The LDB format used by Localization Manager expects source
+files to always be in a fixed location in the filesystem. This
+prevents distribution to arbitrary machines, which is of
+course what Open Source is all about. However, LDB files support
+extraction of the localized string into a filesystem-independent
+format, ".loc", which is meant for distribution. These bundles
+are used to store the localizations in the Subversion repository.
+To localize Afloat on your machine, you will need to use
+the Localization Manager application to rebuild a LDB from the
+".loc" bundles provided here, and then use its Update Files
+function to generate localized .lproj folders.
+
+
+ <<< CREATING A LDB >>>
+ 
+This is a step-by-step guide to producing a LDB that contains
+the localization for Afloat and that can be used for work and
+distribution.
+
+ 1. Retrieve the English.lproj folder from Afloat.prefPane's or
+    Afloat.bundle's resources. These files are found in all binary
+    and source distributions of Afloat.
+
+ 2. Place the English.lproj file in a clean location. (NOTE:
+    an empty Resources folder is provided in the PreferencePane
+    and SIMBLPlugin subfolders of this folder just for
+    this purpose.)
+
+ 3. Make a copy of the template LDB provided. (This template
+    is empty, except it has an entry for the English language,
+    and has its reference language setting is English.)
+    Open the copy.
+
+ 4. Use the Import Files command or drag all files from the
+    English.lproj folder to the Files pane of the LDB.
+    Save the LDB.
+
+ 5. Use the Import Localizations command to load ".loc" bundles
+    into the LDB. Each should add its own language to the
+    left pane of the LDB. Save the LDB afterwards.
+
+The LDB can then be used to produce additional localizations or
+to generate .lproj folders (by clicking the Update Files button).
+The .lproj folders will be placed wherever you placed the English.lproj
+folder.
+
+
+ == LANGUAGE POLICY ==
+ 
+ * Although part or all of the policy may already be in
+ effect, the APIs here are tentative; they might not
+ be implemented, or subject to change.
+ 
+Afloat's UI localizations are produced with the intent that a
+sizeable part of the audience will be able see them. This
+works very well with Mac OS X's default Tier 1 and 2 languages.
+However, users of Tier 3 or unsupported languages, such as Modern
+Greek, may be using English as their main language. If this
+happens, the localization intended for these users might not
+be seen at all.
+
+A solution exists: creating a monolingual distribution of Afloat.
+The following will be done:
+
+ - The Pagepress Server priority APIs are used to serve the
+ correct version of the language even though the user agent
+ may not report the correct locale range in its Accept-Language
+ header. This is done by using the PPSetPriorityCountries() API,
+ and uploading the GeoIP database to the site.
+ 
+ For example:
+ 
+ <?php
+ 	require_once 'geoip.inc.php';
+ 	define('kPPGeoIPDatabase', 'geoip.dat');
+ 
+ 	PPSetPriorityCountries(
+ 		array('PL' => 'pl')
+ 	); // shows pages in Polish for Poland IPs.
+ 	
+ 	PPShowLocalizedPage('index.html');
+ ?>
+ 
+ - The version of Afloat that is linked by the localized page
+ is monolingual, that is, contains only one .lproj and has
+ its CFBundleDevelopmentRegion set to the .lproj's code. This
+ forces OS X to show the correct locale regardless of language
+ settings.
+ 

@@ -1,0 +1,11 @@
+#!/bin/sh
+
+# Assumes 'svn' in the path.
+
+echo " ***** [Afloat Change Report & Patches]"
+svn info
+echo " ***** "
+svn st
+echo " ***** "
+svn diff
+

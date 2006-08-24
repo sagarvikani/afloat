@@ -1,0 +1,9 @@
+To modify, build or examine Afloat's sources, you will need the following tools:
+
+ - A Mac with Tiger and Xcode 2.3 or later. Leopard and Xcode 3 are likely compatible, but this is untested. Panther and Xcode versions lower than 2.3 are incompatible with the project format. 
+ 
+ - Vectorial images are stored as Macromedia Fireworks 8 PNG files.
+ 
+ - The PDF documentation is written using Pages 2.0.
+ 
+All other used file formats are open or easily viewable.

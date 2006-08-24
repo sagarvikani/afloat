@@ -1,0 +1,24 @@
+{
+
+	'Catcheye':
+	"Spraw, by Twe okna <em>wzniosły się</em> nad inne, uczyń je <em>przezroczystymi</em> przesuwając palcem po touchpadzie i <em>przesuwaj je</em> bez poszukiwań belki tytułowej. To wszystko, dzięki <em>mocy Twych kliknięc</em>, będzie dostępne w prawie każdym programie na Twoim Macintoshu.",
+	
+	'Prerequisites':
+		'<li>Afloat jest Uniwersalnym Binarium i działa na wszystkich Makach z systemem Mac OS X 10.3.9 "Panther" lub 10.4 "Tiger" i nowszymi. Wersja 0.81 <a href="http://culater.net/software/SIMBL/SIMBL.php">frameworka SIMBL</a> jest dołączona do ściąganego obrazu dysku.</li>	<li>by uzyskać więcej informacji, zajrzyj do <a href="Readme-pl.pdf">notki wydania i pliku “czytaj mnie”</a>.</li>',
+		
+	'a work of ∞.':
+		'dzieło ∞.',
+		
+	'contact me':
+		'skontaktuj się ze mną',
+		
+	'Afloat. Light as air.':
+		"Afloat. Lżejszy od powietrza.",
+				
+	'Download Afloat 1.0 (pre-release 2) now.':
+		'Ściągnij Afloat 1.0. ',
+		
+	'development blog.':
+		'dziennik twórcy.'
+		
+}
