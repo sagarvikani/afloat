@@ -6,6 +6,21 @@
 	objectVersion = 42;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		7EE6A4150AA57773004ED342 /* Install as InputManager */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 7EE6A41D0AA57789004ED342 /* Build configuration list for PBXAggregateTarget "Install as InputManager" */;
+			buildPhases = (
+				7EE6A4140AA57773004ED342 /* CopyFiles */,
+			);
+			dependencies = (
+				7EE6A4190AA5777B004ED342 /* PBXTargetDependency */,
+			);
+			name = "Install as InputManager";
+			productName = "Install as InputManager";
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		7EAD12640A97618100E35A7F /* L0Afloat.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EAD12470A97618000E35A7F /* L0Afloat.m */; };
 		7EAD12650A97618100E35A7F /* L0AfloatAni.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EAD12490A97618100E35A7F /* L0AfloatAni.m */; };
@@ -24,9 +39,35 @@
 		7EAD12720A97618100E35A7F /* L0AfloatWindowTransitions.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EAD12630A97618100E35A7F /* L0AfloatWindowTransitions.m */; };
 		7EAD12840A97621500E35A7F /* Transparency.nib in Resources */ = {isa = PBXBuildFile; fileRef = 7EAD12800A97621500E35A7F /* Transparency.nib */; };
 		7EAD12850A97621500E35A7F /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 7EAD12820A97621500E35A7F /* MainMenu.nib */; };
+		7EE6A41A0AA57781004ED342 /* Afloat.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8D5B49B6048680CD000E48DA /* Afloat.bundle */; };
+		7EE6A4210AA577AE004ED342 /* Info in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7EE6A4200AA577AE004ED342 /* Info */; };
 		8D5B49B0048680CD000E48DA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C167DFE841241C02AAC07 /* InfoPlist.strings */; };
 		8D5B49B4048680CD000E48DA /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		7EE6A4180AA5777B004ED342 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8D5B49AC048680CD000E48DA /* Afloat */;
+			remoteInfo = Afloat;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		7EE6A4140AA57773004ED342 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "/$(HOME)/Library/InputManagers/Afloat Support";
+			dstSubfolderSpec = 0;
+			files = (
+				7EE6A41A0AA57781004ED342 /* Afloat.bundle in CopyFiles */,
+				7EE6A4210AA577AE004ED342 /* Info in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		089C1672FE841209C02AAC07 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
@@ -66,7 +107,7 @@
 		7EAD12630A97618100E35A7F /* L0AfloatWindowTransitions.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = L0AfloatWindowTransitions.m; sourceTree = "<group>"; };
 		7EAD12810A97621500E35A7F /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/Transparency.nib; sourceTree = "<group>"; };
 		7EAD12830A97621500E35A7F /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/MainMenu.nib; sourceTree = "<group>"; };
-		7EE57E130A97922800C7025B /* L0AfloatVersionInfo.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = L0AfloatVersionInfo.h; sourceTree = "<group>"; };
+		7EE6A4200AA577AE004ED342 /* Info */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Info; sourceTree = "<group>"; };
 		8D5B49B6048680CD000E48DA /* Afloat.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Afloat.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D5B49B7048680CD000E48DA /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Info.plist; sourceTree = "<group>"; };
 		D2F7E65807B2D6F200F64583 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
@@ -87,10 +128,8 @@
 		089C166AFE841209C02AAC07 /* Afloat */ = {
 			isa = PBXGroup;
 			children = (
-				08FB77AFFE84173DC02AAC07 /* Classes */,
+				08FB77AFFE84173DC02AAC07 /* InputManager */,
 				32C88E010371C26100C91783 /* Other Sources */,
-				089C167CFE841241C02AAC07 /* Resources */,
-				089C1671FE841209C02AAC07 /* Frameworks and Libraries */,
 				19C28FB8FE9D52D311CA2CBB /* Products */,
 			);
 			name = Afloat;
@@ -116,15 +155,18 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
-		08FB77AFFE84173DC02AAC07 /* Classes */ = {
+		08FB77AFFE84173DC02AAC07 /* InputManager */ = {
 			isa = PBXGroup;
 			children = (
+				7EE6A4200AA577AE004ED342 /* Info */,
+				089C1671FE841209C02AAC07 /* Frameworks and Libraries */,
+				089C167CFE841241C02AAC07 /* Resources */,
 				7EAD12750A9761B300E35A7F /* Modules */,
 				7EAD12740A97618900E35A7F /* Animation Services */,
 				7EAD12460A97618000E35A7F /* L0Afloat.h */,
 				7EAD12470A97618000E35A7F /* L0Afloat.m */,
 			);
-			name = Classes;
+			path = InputManager;
 			sourceTree = "<group>";
 		};
 		1058C7ACFEA557BF11CA2CBB /* Linked Frameworks */ = {
@@ -156,7 +198,6 @@
 		32C88E010371C26100C91783 /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
-				7EE57E130A97922800C7025B /* L0AfloatVersionInfo.h */,
 				32DBCF630370AF2F00C91783 /* Afloat_Prefix.pch */,
 			);
 			name = "Other Sources";
@@ -268,6 +309,7 @@
 			projectDirPath = "";
 			targets = (
 				8D5B49AC048680CD000E48DA /* Afloat */,
+				7EE6A4150AA57773004ED342 /* Install as InputManager */,
 			);
 		};
 /* End PBXProject section */
@@ -310,6 +352,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		7EE6A4190AA5777B004ED342 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8D5B49AC048680CD000E48DA /* Afloat */;
+			targetProxy = 7EE6A4180AA5777B004ED342 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		089C167DFE841241C02AAC07 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
@@ -349,7 +399,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Afloat_Prefix.pch;
-				INFOPLIST_FILE = Info.plist;
+				INFOPLIST_FILE = InputManager/Info.plist;
 				INSTALL_PATH = "$(HOME)/Library/Bundles";
 				PRODUCT_NAME = Afloat;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -370,7 +420,7 @@
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Afloat_Prefix.pch;
-				INFOPLIST_FILE = Info.plist;
+				INFOPLIST_FILE = InputManager/Info.plist;
 				INSTALL_PATH = "$(HOME)/Library/Bundles";
 				PRODUCT_NAME = Afloat;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -402,6 +452,28 @@
 			};
 			name = Release;
 		};
+		7EE6A41E0AA57789004ED342 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				PRODUCT_NAME = "Install as InputManager";
+			};
+			name = Debug;
+		};
+		7EE6A41F0AA57789004ED342 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				PRODUCT_NAME = "Install as InputManager";
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -419,6 +491,15 @@
 			buildConfigurations = (
 				1DEB913F08733D840010E9CD /* Debug */,
 				1DEB914008733D840010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7EE6A41D0AA57789004ED342 /* Build configuration list for PBXAggregateTarget "Install as InputManager" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7EE6A41E0AA57789004ED342 /* Debug */,
+				7EE6A41F0AA57789004ED342 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
