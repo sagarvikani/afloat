@@ -19,4 +19,12 @@
 
 - (id /* an AfloatWindow */) focusedWindow { return nil; }
 
++ (id) sharedInstance {
+	static id me = nil;
+	if (!me)
+		me = [self new];
+	
+	return me;
+}
+
 @end
