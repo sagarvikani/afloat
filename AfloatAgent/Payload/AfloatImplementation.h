@@ -14,4 +14,6 @@
 - (NSArray* /* of id <AfloatWindow> */) windows;
 - (id /* <AfloatWindow> */) focusedWindow;
 
++ (id) sharedInstance;
+
 @end
