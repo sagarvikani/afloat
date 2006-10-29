@@ -1,0 +1,25 @@
+{
+    IBClasses = (
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {CLASS = L0AfloatSIMBLPlugin; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {
+            ACTIONS = {
+                beginDocumentModalPanel = id; 
+                endDocumentModalPanel = id; 
+                takeTransparencyValueFromSender = id; 
+            }; 
+            CLASS = L0AfloatTransparencyUI; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {transparencySlider = NSSlider; }; 
+            SUPERCLASS = NSWindowController; 
+        }, 
+        {CLASS = NSObject; LANGUAGE = ObjC; }, 
+        {
+            ACTIONS = {"L0Afloat__makeWindowFloating" = id; }; 
+            CLASS = NSWindow; 
+            LANGUAGE = ObjC; 
+            SUPERCLASS = NSResponder; 
+        }
+    ); 
+    IBVersion = 1; 
+}

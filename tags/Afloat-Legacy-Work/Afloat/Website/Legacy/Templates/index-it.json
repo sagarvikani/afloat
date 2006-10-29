@@ -1,0 +1,26 @@
+{
+
+	'Catcheye':
+	"Fai <em>galleggiare le tue finestre sopra tutte le altre</em>, rendile <em>trasparenti</em> con un giro di rotellina di mouse o la pressione di un tasto, e <em>spostale</em> senza dover cercare la barra del titolo. Tutto questo in pochi clic, in quasi tutte le applicazioni per Mac.",
+	
+	'Prerequisites':
+		'<li>Afloat è Universal Binary e funziona su tutti i Mac con Mac OS X 10.3.9 "Panther" o 10.4 "Tiger" o successivi. Il download include il <a href="http://culater.net/software/SIMBL/SIMBL.php">framework SIMBL</a> versione 0.81.</li>	<li>per altre informazioni, vedi <a href="Readme-it.pdf">le note di rilascio e il “leggimi”</a>.</li>',
+
+	'Afloat updates feed':
+		'Feed degli aggiornamenti di Afloat',
+		
+	'a work of ∞.':
+		'sudore e sangue di ∞.',
+		
+	'contact me':
+		'contattami',
+		
+	'Afloat. Light as air.':
+		"Afloat. Leggero come l'aria.",
+				
+	'Download Afloat 1.0 (pre-release 2) now.':
+		'Scarica Afloat 1.0 (pre-rilascio 2).',
+		
+	'development blog.':
+		'blog di sviluppo.'
+}

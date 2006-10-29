@@ -1,0 +1,37 @@
+{
+    IBClasses = (
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {
+            ACTIONS = {
+                agree = id; 
+                disagree = id; 
+                fixAfloatOlderBuildFound = id; 
+                fixSIMBLNotInstalled = id; 
+                takeAfloatEnabledStatusFrom = id; 
+            }; 
+            CLASS = L0AfloatPreferencePane; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                enableButton = NSButton; 
+                enableField = NSTextField; 
+                licensePanel = NSPanel; 
+                licenseTextView = NSTextView; 
+                troubleButton = NSButton; 
+                troubleField = NSTextField; 
+            }; 
+            SUPERCLASS = NSPreferencePane; 
+        }, 
+        {
+            CLASS = NSPreferencePane; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                "_firstKeyView" = NSView; 
+                "_initialKeyView" = NSView; 
+                "_lastKeyView" = NSView; 
+                "_window" = NSWindow; 
+            }; 
+            SUPERCLASS = NSObject; 
+        }
+    ); 
+    IBVersion = 1; 
+}

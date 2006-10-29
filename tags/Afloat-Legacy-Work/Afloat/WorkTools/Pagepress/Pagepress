@@ -1,0 +1,28 @@
+#!/usr/bin/env php
+<?php
+
+# Pagepress 2.
+
+require_once 'PPClient.php';
+
+$template = $argv[1];
+$basename = './' . _PPStripExtension(basename($template));
+
+$locales = array();
+for ($i = 2; $i < sizeof($argv); $i++)
+	$locales[] = $argv[$i];
+
+foreach ($locales as $l) {
+	$tpl = &new PPTemplate($l, $locales);
+	
+	ob_start();
+	$tpl->RenderWith($template);
+	$result = ob_get_clean();
+	
+	$filename = _PPLocalizedName($basename, $l) .'.'. $tpl->Extension();
+	$fh = fopen($filename, 'w');
+	fwrite($fh, $result);
+	fclose($fh);
+}
+
+?>

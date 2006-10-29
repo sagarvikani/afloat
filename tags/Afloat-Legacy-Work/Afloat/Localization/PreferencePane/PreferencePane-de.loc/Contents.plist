@@ -1,0 +1,1268 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>files</key>
+	<array>
+		<dict>
+			<key>changeDone</key>
+			<false/>
+			<key>class</key>
+			<string>BLNibFileObject</string>
+			<key>flags</key>
+			<integer>1</integer>
+			<key>name</key>
+			<string>AfloatPrefPane.nib</string>
+			<key>objects</key>
+			<array>
+				<dict>
+					<key>changeDone</key>
+					<false/>
+					<key>changed values</key>
+					<array/>
+					<key>class</key>
+					<string>BLStringKeyObject</string>
+					<key>comment</key>
+					<string>NSTextField (An older version of Afloat was found. This version will not be able to work until the older version is removed.) : &lt;title:An older version of Afloat was found. This version will not be able to work until the older version is removed.&gt; (oid:11)</string>
+					<key>flags</key>
+					<integer>0</integer>
+					<key>key</key>
+					<string>An older version of Afloat was found. This version will not be able to work until the older version is removed.</string>
+					<key>localizations</key>
+					<dict>
+						<key>English</key>
+						<string>An older version of Afloat was found. This version will not be able to work until the older version is removed.</string>
+						<key>de</key>
+						<string></string>
+					</dict>
+				</dict>
+				<dict>
+					<key>changeDone</key>
+					<false/>
+					<key>changed values</key>
+					<array/>
+					<key>class</key>
+					<string>BLStringKeyObject</string>
+					<key>comment</key>
+					<string>NSButton (Enable Afloat) : &lt;title:Enable Afloat&gt; (oid:10)</string>
+					<key>flags</key>
+					<integer>0</integer>
+					<key>key</key>
+					<string>Enable Afloat</string>
+					<key>localizations</key>
+					<dict>
+						<key>English</key>
+						<string>Enable Afloat</string>
+						<key>de</key>
+						<string></string>
+					</dict>
+				</dict>
+				<dict>
+					<key>changeDone</key>
+					<false/>
+					<key>changed values</key>
+					<array/>
+					<key>class</key>
+					<string>BLStringKeyObject</string>
+					<key>comment</key>
+					<string>NSTextField (Enabling Afloat will only take effect for any applications you launch (or relaunch) after enabling it.) : &lt;title:Enabling Afloat will only take effect for any applications you launch (or relaunch) after enabling it.&gt; (oid:13)</string>
+					<key>flags</key>
+					<integer>0</integer>
+					<key>key</key>
+					<string>Enabling Afloat will only take effect for any applications you launch (or relaunch) after enabling it.</string>
+					<key>localizations</key>
+					<dict>
+						<key>English</key>
+						<string>Enabling Afloat will only take effect for any applications you launch (or relaunch) after enabling it.</string>
+						<key>de</key>
+						<string></string>
+					</dict>
+				</dict>
+				<dict>
+					<key>changeDone</key>
+					<false/>
+					<key>changed values</key>
+					<array/>
+					<key>class</key>
+					<string>BLStringKeyObject</string>
+					<key>comment</key>
+					<string>NSButton (Remove Older Version…) : &lt;title:Remove Older Version…&gt; (oid:12)</string>
+					<key>flags</key>
+					<integer>0</integer>
+					<key>key</key>
+					<string>Remove Older Version…</string>
+					<key>localizations</key>
+					<dict>
+						<key>English</key>
+						<string>Remove Older Version…</string>
+						<key>de</key>
+						<string></string>
+					</dict>
+				</dict>
+				<dict>
+					<key>changeDone</key>
+					<false/>
+					<key>changed values</key>
+					<array/>
+					<key>class</key>
+					<string>BLStringKeyObject</string>
+					<key>comment</key>
+					<string>NSButton (Agree) : &lt;title:Agree&gt; (oid:29)</string>
+					<key>flags</key>
+					<integer>0</integer>
+					<key>key</key>
+					<string>Agree</string>
+					<key>localizations</key>
+					<dict>
+						<key>English</key>
+						<string>Agree</string>
+						<key>de</key>
+						<string></string>
+					</dict>
+				</dict>
+				<dict>
+					<key>changeDone</key>
+					<false/>
+					<key>changed values</key>
+					<array/>
+					<key>class</key>
+					<string>BLStringKeyObject</string>
+					<key>comment</key>
+					<string>NSButton (Do Not Agree) : &lt;title:Do Not Agree&gt; (oid:30)</string>
+					<key>flags</key>
+					<integer>0</integer>
+					<key>key</key>
+					<string>Do Not Agree</string>
+					<key>localizations</key>
+					<dict>
+						<key>English</key>
+						<string>Do Not Agree</string>
+						<key>de</key>
+						<string></string>
+					</dict>
+				</dict>
+				<dict>
+					<key>changeDone</key>
+					<false/>
+					<key>changed values</key>
+					<array/>
+					<key>class</key>
+					<string>BLStringKeyObject</string>
+					<key>comment</key>
+					<string>NSTextField (If you don't agree, then you will not be able to use Afloat.) : &lt;title:If you don't agree, then you will not be able to use Afloat.&gt; (oid:28)</string>
+					<key>flags</key>
+					<integer>0</integer>
+					<key>key</key>
+					<string>If you don't agree, then you will not be able to use Afloat.</string>
+					<key>localizations</key>
+					<dict>
+						<key>English</key>
+						<string>If you don't agree, then you will not be able to use Afloat.</string>
+						<key>de</key>
+						<string></string>
+					</dict>
+				</dict>
+				<dict>
+					<key>changeDone</key>
+					<false/>
+					<key>changed values</key>
+					<array/>
+					<key>class</key>
+					<string>BLStringKeyObject</string>
+					<key>comment</key>
+					<string>NSTextField (The use of Afloat and other included components is regulated by a license agreement.) : &lt;title:The use of Afloat and other included components is regulated by a license agreement.&gt; (oid:25)</string>
+					<key>flags</key>
+					<integer>0</integer>
+					<key>key</key>
+					<string>The use of Afloat and other included components is regulated by a license agreement.</string>
+					<key>localizations</key>
+					<dict>
+						<key>English</key>
+						<string>The use of Afloat and other included components is regulated by a license agreement.</string>
+						<key>de</key>
+						<string></string>
+					</dict>
+				</dict>
+			</array>
+			<key>old objects</key>
+			<array>
+				<dict>
+					<key>changeDone</key>
+					<false/>
+					<key>changed values</key>
+					<array/>
+					<key>class</key>
+					<string>BLStringKeyObject</string>
+					<key>comment</key>
+					<string>NSTextField (An older version of Afloat was found. This version will not be able to work until the older version is removed.) : &lt;title:An older version of Afloat was found. This version will not be able to work until the older version is removed.&gt; (oid:11)</string>
+					<key>flags</key>
+					<integer>0</integer>
+					<key>key</key>
+					<string>An older version of Afloat was found. This version will not be able to work until the older version is removed.</string>
+					<key>localizations</key>
+					<dict>
+						<key>English</key>
+						<string>An older version of Afloat was found. This version will not be able to work until the older version is removed.</string>
+						<key>de</key>
+						<string></string>
+					</dict>
+				</dict>
+				<dict>
+					<key>changeDone</key>
+					<false/>
+					<key>changed values</key>
+					<array/>
+					<key>class</key>
+					<string>BLStringKeyObject</string>
+					<key>comment</key>
+					<string>NSButton (Enable Afloat) : &lt;title:Enable Afloat&gt; (oid:10)</string>
+					<key>flags</key>
+					<integer>0</integer>
+					<key>key</key>
+					<string>Enable Afloat</string>
+					<key>localizations</key>
+					<dict>
+						<key>English</key>
+						<string>Enable Afloat</string>
+						<key>de</key>
+						<string></string>
+					</dict>
+				</dict>
+				<dict>
+					<key>changeDone</key>
+					<false/>
+					<key>changed values</key>
+					<array/>
+					<key>class</key>
+					<string>BLStringKeyObject</string>
+					<key>comment</key>
+					<string>NSTextField (Enabling Afloat will only take effect for any applications you launch (or relaunch) after enabling it.) : &lt;title:Enabling Afloat will only take effect for any applications you launch (or relaunch) after enabling it.&gt; (oid:13)</string>
+					<key>flags</key>
+					<integer>0</integer>
+					<key>key</key>
+					<string>Enabling Afloat will only take effect for any applications you launch (or relaunch) after enabling it.</string>
+					<key>localizations</key>
+					<dict>
+						<key>English</key>
+						<string>Enabling Afloat will only take effect for any applications you launch (or relaunch) after enabling it.</string>
+						<key>de</key>
+						<string></string>
+					</dict>
+				</dict>
+				<dict>
+					<key>changeDone</key>
+					<false/>
+					<key>changed values</key>
+					<array/>
+					<key>class</key>
+					<string>BLStringKeyObject</string>
+					<key>comment</key>
+					<string>NSButton (Remove Older Version…) : &lt;title:Remove Older Version…&gt; (oid:12)</string>
+					<key>flags</key>
+					<integer>0</integer>
+					<key>key</key>
+					<string>Remove Older Version…</string>
+					<key>localizations</key>
+					<dict>
+						<key>English</key>
+						<string>Remove Older Version…</string>
+						<key>de</key>
+						<string></string>
+					</dict>
+				</dict>
+				<dict>
+					<key>changeDone</key>
+					<false/>
+					<key>changed values</key>
+					<array/>
+					<key>class</key>
+					<string>BLStringKeyObject</string>
+					<key>comment</key>
+					<string>NSButton (Agree) : &lt;title:Agree&gt; (oid:29)</string>
+					<key>flags</key>
+					<integer>0</integer>
+					<key>key</key>
+					<string>Agree</string>
+					<key>localizations</key>
+					<dict>
+						<key>English</key>
+						<string>Agree</string>
+						<key>de</key>
+						<string></string>
+					</dict>
+				</dict>
+				<dict>
+					<key>changeDone</key>
+					<false/>
+					<key>changed values</key>
+					<array/>
+					<key>class</key>
+					<string>BLStringKeyObject</string>
+					<key>comment</key>
+					<string>NSButton (Do Not Agree) : &lt;title:Do Not Agree&gt; (oid:30)</string>
+					<key>flags</key>
+					<integer>0</integer>
+					<key>key</key>
+					<string>Do Not Agree</string>
+					<key>localizations</key>
+					<dict>
+						<key>English</key>
+						<string>Do Not Agree</string>
+						<key>de</key>
+						<string></string>
+					</dict>
+				</dict>
+				<dict>
+					<key>changeDone</key>
+					<false/>
+					<key>changed values</key>
+					<array/>
+					<key>class</key>
+					<string>BLStringKeyObject</string>
+					<key>comment</key>
+					<string>NSTextField (If you don't agree, then you will not be able to use Afloat.) : &lt;title:If you don't agree, then you will not be able to use Afloat.&gt; (oid:28)</string>
+					<key>flags</key>
+					<integer>0</integer>
+					<key>key</key>
+					<string>If you don't agree, then you will not be able to use Afloat.</string>
+					<key>localizations</key>
+					<dict>
+						<key>English</key>
+						<string>If you don't agree, then you will not be able to use Afloat.</string>
+						<key>de</key>
+						<string></string>
+					</dict>
+				</dict>
+				<dict>
+					<key>changeDone</key>
+					<false/>
+					<key>changed values</key>
+					<array/>
+					<key>class</key>
+					<string>BLStringKeyObject</string>
+					<key>comment</key>
+					<string>NSTextField (The use of Afloat and other included components is regulated by a license agreement.) : &lt;title:The use of Afloat and other included components is regulated by a license agreement.&gt; (oid:25)</string>
+					<key>flags</key>
+					<integer>0</integer>
+					<key>key</key>
+					<string>The use of Afloat and other included components is regulated by a license agreement.</string>
+					<key>localizations</key>
+					<dict>
+						<key>English</key>
+						<string>The use of Afloat and other included components is regulated by a license agreement.</string>
+						<key>de</key>
+						<string></string>
+					</dict>
+				</dict>
+			</array>
+		</dict>
+		<dict>
+			<key>changeDone</key>
+			<false/>
+			<key>class</key>
+			<string>BLStringsFileObject</string>
+			<key>flags</key>
+			<integer>1</integer>
+			<key>name</key>
+			<string>Localizable.strings</string>
+			<key>objects</key>
+			<array>
+				<dict>
+					<key>changeDone</key>
+					<false/>
+					<key>changed values</key>
+					<array/>
+					<key>class</key>
+					<string>BLStringKeyObject</string>
+					<key>comment</key>
+					<string>Can't install SIMBL</string>
+					<key>flags</key>
+					<integer>0</integer>
+					<key>key</key>
+					<string>Afloat could not install SIMBL.</string>
+					<key>localizations</key>
+					<dict>
+						<key>English</key>
+						<string>Afloat could not install SIMBL.</string>
+						<key>de</key>
+						<string></string>
+					</dict>
+				</dict>
+				<dict>
+					<key>changeDone</key>
+					<false/>
+					<key>changed values</key>
+					<array/>
+					<key>class</key>
+					<string>BLStringKeyObject</string>
+					<key>comment</key>
+					<string>Trouble: older Afloat in app support</string>
+					<key>flags</key>
+					<integer>0</integer>
+					<key>key</key>
+					<string>An older version of Afloat was found. This version will not be able to work until the older version is removed.</string>
+					<key>localizations</key>
+					<dict>
+						<key>English</key>
+						<string>An older version of Afloat was found. This version will not be able to work until the older version is removed.</string>
+						<key>de</key>
+						<string></string>
+					</dict>
+				</dict>
+				<dict>
+					<key>changeDone</key>
+					<false/>
+					<key>changed values</key>
+					<array/>
+					<key>class</key>
+					<string>BLStringKeyObject</string>
+					<key>comment</key>
+					<string>Fix SIMBL not installed</string>
+					<key>flags</key>
+					<integer>0</integer>
+					<key>key</key>
+					<string>Install SIMBL...</string>
+					<key>localizations</key>
+					<dict>
+						<key>English</key>
+						<string>Install SIMBL...</string>
+						<key>de</key>
+						<string></string>
+					</dict>
+				</dict>
+				<dict>
+					<key>changeDone</key>
+					<false/>
+					<key>changed values</key>
+					<array/>
+					<key>class</key>
+					<string>BLStringKeyObject</string>
+					<key>comment</key>
+					<string>Log out alert button</string>
+					<key>flags</key>
+					<integer>0</integer>
+					<key>key</key>
+					<string>Log Out</string>
+					<key>localizations</key>
+					<dict>
+						<key>English</key>
+						<string>Log Out</string>
+						<key>de</key>
+						<string></string>
+					</dict>
+				</dict>
+				<dict>
+					<key>changeDone</key>
+					<false/>
+					<key>changed values</key>
+					<array/>
+					<key>class</key>
+					<string>BLStringKeyObject</string>
+					<key>comment</key>
+					<string>Logging out recommended</string>
+					<key>flags</key>
+					<integer>0</integer>
+					<key>key</key>
+					<string>Logging out is recommended after working with older versions of Afloat.</string>
+					<key>localizations</key>
+					<dict>
+						<key>English</key>
+						<string>Logging out is recommended after working with older versions of Afloat.</string>
+						<key>de</key>
+						<string></string>
+					</dict>
+				</dict>
+				<dict>
+					<key>changeDone</key>
+					<false/>
+					<key>changed values</key>
+					<array/>
+					<key>class</key>
+					<string>BLStringKeyObject</string>
+					<key>comment</key>
+					<string>Trouble fixer: remove older</string>
+					<key>flags</key>
+					<integer>0</integer>
+					<key>key</key>
+					<string>Remove Older Version...</string>
+					<key>localizations</key>
+					<dict>
+						<key>English</key>
+						<string>Remove Older Version...</string>
+						<key>de</key>
+						<string></string>
+					</dict>
+				</dict>
+				<dict>
+					<key>changeDone</key>
+					<false/>
+					<key>changed values</key>
+					<array/>
+					<key>class</key>
+					<string>BLStringKeyObject</string>
+					<key>comment</key>
+					<string>SIMBL not installed</string>
+					<key>flags</key>
+					<integer>0</integer>
+					<key>key</key>
+					<string>SIMBL is not installed. Afloat requires SIMBL to work properly.</string>
+					<key>localizations</key>
+					<dict>
+						<key>English</key>
+						<string>SIMBL is not installed. Afloat requires SIMBL to work properly.</string>
+						<key>de</key>
+						<string></string>
+					</dict>
+				</dict>
+				<dict>
+					<key>changeDone</key>
+					<false/>
+					<key>changed values</key>
+					<array/>
+					<key>class</key>
+					<string>BLStringKeyObject</string>
+					<key>comment</key>
+					<string>Stay logged in alert button</string>
+					<key>flags</key>
+					<integer>0</integer>
+					<key>key</key>
+					<string>Stay Logged In</string>
+					<key>localizations</key>
+					<dict>
+						<key>English</key>
+						<string>Stay Logged In</string>
+						<key>de</key>
+						<string></string>
+					</dict>
+				</dict>
+				<dict>
+					<key>changeDone</key>
+					<false/>
+					<key>changed values</key>
+					<array/>
+					<key>class</key>
+					<string>BLStringKeyObject</string>
+					<key>comment</key>
+					<string>Alert: can't find the Trash</string>
+					<key>flags</key>
+					<integer>0</integer>
+					<key>key</key>
+					<string>There was a problem removing the older version of Afloat.</string>
+					<key>localizations</key>
+					<dict>
+						<key>English</key>
+						<string>There was a problem removing the older version of Afloat.</string>
+						<key>de</key>
+						<string></string>
+					</dict>
+				</dict>
+				<dict>
+					<key>changeDone</key>
+					<false/>
+					<key>changed values</key>
+					<array/>
+					<key>class</key>
+					<string>BLStringKeyObject</string>
+					<key>comment</key>
+					<string>Explain logging out recommended.</string>
+					<key>flags</key>
+					<integer>0</integer>
+					<key>key</key>
+					<string>This will ensure that the older version of Afloat is properly removed from your Mac. When you log back in, the new version of Afloat can be enabled from the "Afloat" System Preferences pane.</string>
+					<key>localizations</key>
+					<dict>
+						<key>English</key>
+						<string>This will ensure that the older version of Afloat is properly removed from your Mac. When you log back in, the new version of Afloat can be enabled from the "Afloat" System Preferences pane.</string>
+						<key>de</key>
+						<string></string>
+					</dict>
+				</dict>
+				<dict>
+					<key>changeDone</key>
+					<false/>
+					<key>changed values</key>
+					<array/>
+					<key>class</key>
+					<string>BLStringKeyObject</string>
+					<key>comment</key>
+					<string>Explain can't install SIMBL.</string>
+					<key>flags</key>
+					<integer>0</integer>
+					<key>key</key>
+					<string>You can install SIMBL manually by downloading it from http://culater.net/software/SIMBL/SIMBL.php.</string>
+					<key>localizations</key>
+					<dict>
+						<key>English</key>
+						<string>You can install SIMBL manually by downloading it from http://culater.net/software/SIMBL/SIMBL.php.</string>
+						<key>de</key>
+						<string></string>
+					</dict>
+				</dict>
+				<dict>
+					<key>changeDone</key>
+					<false/>
+					<key>changed values</key>
+					<array/>
+					<key>class</key>
+					<string>BLStringKeyObject</string>
+					<key>comment</key>
+					<string>Alert exp: can't find the Trash</string>
+					<key>flags</key>
+					<integer>0</integer>
+					<key>key</key>
+					<string>You can remove it manually by searching inside the SIMBL folder, which is found in the Application Support folder of your personal Library.</string>
+					<key>localizations</key>
+					<dict>
+						<key>English</key>
+						<string>You can remove it manually by searching inside the SIMBL folder, which is found in the Application Support folder of your personal Library.</string>
+						<key>de</key>
+						<string></string>
+					</dict>
+				</dict>
+				<dict>
+					<key>changeDone</key>
+					<false/>
+					<key>changed values</key>
+					<array/>
+					<key>class</key>
+					<string>BLStringKeyObject</string>
+					<key>comment</key>
+					<string>About to install SIMBL: cancel</string>
+					<key>flags</key>
+					<integer>0</integer>
+					<key>key</key>
+					<string>Cancel</string>
+					<key>localizations</key>
+					<dict>
+						<key>English</key>
+						<string>Cancel</string>
+						<key>de</key>
+						<string></string>
+					</dict>
+				</dict>
+				<dict>
+					<key>changeDone</key>
+					<false/>
+					<key>changed values</key>
+					<array/>
+					<key>class</key>
+					<string>BLStringKeyObject</string>
+					<key>comment</key>
+					<string>About to install SIMBL: continue</string>
+					<key>flags</key>
+					<integer>0</integer>
+					<key>key</key>
+					<string>Install SIMBL</string>
+					<key>localizations</key>
+					<dict>
+						<key>English</key>
+						<string>Install SIMBL</string>
+						<key>de</key>
+						<string></string>
+					</dict>
+				</dict>
+				<dict>
+					<key>changeDone</key>
+					<false/>
+					<key>changed values</key>
+					<array/>
+					<key>class</key>
+					<string>BLStringKeyObject</string>
+					<key>comment</key>
+					<string>Explain about to install SIMBL</string>
+					<key>flags</key>
+					<integer>0</integer>
+					<key>key</key>
+					<string>SIMBL is a library that allows plug-ins, such as Afloat or PithHelmet, to modify other applications. It will be installed in the InputManagers folder of your personal Library.</string>
+					<key>localizations</key>
+					<dict>
+						<key>English</key>
+						<string>SIMBL is a library that allows plug-ins, such as Afloat or PithHelmet, to modify other applications. It will be installed in the InputManagers folder of your personal Library.</string>
+						<key>de</key>
+						<string></string>
+					</dict>
+				</dict>
+				<dict>
+					<key>changeDone</key>
+					<false/>
+					<key>changed values</key>
+					<array/>
+					<key>class</key>
+					<string>BLStringKeyObject</string>
+					<key>comment</key>
+					<string>About to install SIMBL</string>
+					<key>flags</key>
+					<integer>0</integer>
+					<key>key</key>
+					<string>SIMBL is going to be installed. Do you want to continue?</string>
+					<key>localizations</key>
+					<dict>
+						<key>English</key>
+						<string>SIMBL is going to be installed. Do you want to continue?</string>
+						<key>de</key>
+						<string></string>
+					</dict>
+				</dict>
+				<dict>
+					<key>changeDone</key>
+					<false/>
+					<key>changed values</key>
+					<array/>
+					<key>class</key>
+					<string>BLStringKeyObject</string>
+					<key>comment</key>
+					<string>About to install SIMBL: go to web site</string>
+					<key>flags</key>
+					<integer>0</integer>
+					<key>key</key>
+					<string>Visit SIMBL web site</string>
+					<key>localizations</key>
+					<dict>
+						<key>English</key>
+						<string>Visit SIMBL web site</string>
+						<key>de</key>
+						<string></string>
+					</dict>
+				</dict>
+				<dict>
+					<key>changeDone</key>
+					<false/>
+					<key>changed values</key>
+					<array/>
+					<key>class</key>
+					<string>BLStringKeyObject</string>
+					<key>comment</key>
+					<string>Explain did update to newer Afloat</string>
+					<key>flags</key>
+					<integer>1</integer>
+					<key>key</key>
+					<string>New features will only be available to applications you start from now on. If other applications are open, they will not get the new features until you quit them and reopen them.</string>
+					<key>localizations</key>
+					<dict>
+						<key>English</key>
+						<string>New features will only be available to applications you start from now on. If other applications are open, they will not get the new features until you quit them and reopen them.</string>
+						<key>de</key>
+						<string></string>
+					</dict>
+				</dict>
+				<dict>
+					<key>changeDone</key>
+					<false/>
+					<key>changed values</key>
+					<array/>
+					<key>class</key>
+					<string>BLStringKeyObject</string>
+					<key>comment</key>
+					<string>Did update to newer Afloat</string>
+					<key>flags</key>
+					<integer>1</integer>
+					<key>key</key>
+					<string>This version of Afloat upgraded a previous version successfully.</string>
+					<key>localizations</key>
+					<dict>
+						<key>English</key>
+						<string>This version of Afloat upgraded a previous version successfully.</string>
+						<key>de</key>
+						<string></string>
+					</dict>
+				</dict>
+				<dict>
+					<key>changeDone</key>
+					<false/>
+					<key>changed values</key>
+					<array/>
+					<key>class</key>
+					<string>BLStringKeyObject</string>
+					<key>comment</key>
+					<string>Welcome</string>
+					<key>flags</key>
+					<integer>1</integer>
+					<key>key</key>
+					<string>Welcome to Afloat.</string>
+					<key>localizations</key>
+					<dict>
+						<key>English</key>
+						<string>Welcome to Afloat.</string>
+						<key>de</key>
+						<string></string>
+					</dict>
+				</dict>
+				<dict>
+					<key>changeDone</key>
+					<false/>
+					<key>changed values</key>
+					<array/>
+					<key>class</key>
+					<string>BLStringKeyObject</string>
+					<key>comment</key>
+					<string>Explain welcome</string>
+					<key>flags</key>
+					<integer>1</integer>
+					<key>key</key>
+					<string>For safety, Afloat was not enabled automatically for this user when it was installed. Put a checkmark near "Enable Afloat" to start using it!</string>
+					<key>localizations</key>
+					<dict>
+						<key>English</key>
+						<string>For safety, Afloat was not enabled automatically for this user when it was installed. Put a checkmark near "Enable Afloat" to start using it!</string>
+						<key>de</key>
+						<string></string>
+					</dict>
+				</dict>
+			</array>
+			<key>old objects</key>
+			<array>
+				<dict>
+					<key>changeDone</key>
+					<false/>
+					<key>changed values</key>
+					<array/>
+					<key>class</key>
+					<string>BLStringKeyObject</string>
+					<key>comment</key>
+					<string>Can't install SIMBL</string>
+					<key>flags</key>
+					<integer>0</integer>
+					<key>key</key>
+					<string>Afloat could not install SIMBL.</string>
+					<key>localizations</key>
+					<dict>
+						<key>English</key>
+						<string>Afloat could not install SIMBL.</string>
+						<key>de</key>
+						<string></string>
+					</dict>
+				</dict>
+				<dict>
+					<key>changeDone</key>
+					<false/>
+					<key>changed values</key>
+					<array/>
+					<key>class</key>
+					<string>BLStringKeyObject</string>
+					<key>comment</key>
+					<string>Trouble: older Afloat in app support</string>
+					<key>flags</key>
+					<integer>0</integer>
+					<key>key</key>
+					<string>An older version of Afloat was found. This version will not be able to work until the older version is removed.</string>
+					<key>localizations</key>
+					<dict>
+						<key>English</key>
+						<string>An older version of Afloat was found. This version will not be able to work until the older version is removed.</string>
+						<key>de</key>
+						<string></string>
+					</dict>
+				</dict>
+				<dict>
+					<key>changeDone</key>
+					<false/>
+					<key>changed values</key>
+					<array/>
+					<key>class</key>
+					<string>BLStringKeyObject</string>
+					<key>comment</key>
+					<string>Fix SIMBL not installed</string>
+					<key>flags</key>
+					<integer>0</integer>
+					<key>key</key>
+					<string>Install SIMBL...</string>
+					<key>localizations</key>
+					<dict>
+						<key>English</key>
+						<string>Install SIMBL...</string>
+						<key>de</key>
+						<string></string>
+					</dict>
+				</dict>
+				<dict>
+					<key>changeDone</key>
+					<false/>
+					<key>changed values</key>
+					<array/>
+					<key>class</key>
+					<string>BLStringKeyObject</string>
+					<key>comment</key>
+					<string>Log out alert button</string>
+					<key>flags</key>
+					<integer>0</integer>
+					<key>key</key>
+					<string>Log Out</string>
+					<key>localizations</key>
+					<dict>
+						<key>English</key>
+						<string>Log Out</string>
+						<key>de</key>
+						<string></string>
+					</dict>
+				</dict>
+				<dict>
+					<key>changeDone</key>
+					<false/>
+					<key>changed values</key>
+					<array/>
+					<key>class</key>
+					<string>BLStringKeyObject</string>
+					<key>comment</key>
+					<string>Logging out recommended</string>
+					<key>flags</key>
+					<integer>0</integer>
+					<key>key</key>
+					<string>Logging out is recommended after working with older versions of Afloat.</string>
+					<key>localizations</key>
+					<dict>
+						<key>English</key>
+						<string>Logging out is recommended after working with older versions of Afloat.</string>
+						<key>de</key>
+						<string></string>
+					</dict>
+				</dict>
+				<dict>
+					<key>changeDone</key>
+					<false/>
+					<key>changed values</key>
+					<array/>
+					<key>class</key>
+					<string>BLStringKeyObject</string>
+					<key>comment</key>
+					<string>Trouble fixer: remove older</string>
+					<key>flags</key>
+					<integer>0</integer>
+					<key>key</key>
+					<string>Remove Older Version...</string>
+					<key>localizations</key>
+					<dict>
+						<key>English</key>
+						<string>Remove Older Version...</string>
+						<key>de</key>
+						<string></string>
+					</dict>
+				</dict>
+				<dict>
+					<key>changeDone</key>
+					<false/>
+					<key>changed values</key>
+					<array/>
+					<key>class</key>
+					<string>BLStringKeyObject</string>
+					<key>comment</key>
+					<string>SIMBL not installed</string>
+					<key>flags</key>
+					<integer>0</integer>
+					<key>key</key>
+					<string>SIMBL is not installed. Afloat requires SIMBL to work properly.</string>
+					<key>localizations</key>
+					<dict>
+						<key>English</key>
+						<string>SIMBL is not installed. Afloat requires SIMBL to work properly.</string>
+						<key>de</key>
+						<string></string>
+					</dict>
+				</dict>
+				<dict>
+					<key>changeDone</key>
+					<false/>
+					<key>changed values</key>
+					<array/>
+					<key>class</key>
+					<string>BLStringKeyObject</string>
+					<key>comment</key>
+					<string>Stay logged in alert button</string>
+					<key>flags</key>
+					<integer>0</integer>
+					<key>key</key>
+					<string>Stay Logged In</string>
+					<key>localizations</key>
+					<dict>
+						<key>English</key>
+						<string>Stay Logged In</string>
+						<key>de</key>
+						<string></string>
+					</dict>
+				</dict>
+				<dict>
+					<key>changeDone</key>
+					<false/>
+					<key>changed values</key>
+					<array/>
+					<key>class</key>
+					<string>BLStringKeyObject</string>
+					<key>comment</key>
+					<string>Alert: can't find the Trash</string>
+					<key>flags</key>
+					<integer>0</integer>
+					<key>key</key>
+					<string>There was a problem removing the older version of Afloat.</string>
+					<key>localizations</key>
+					<dict>
+						<key>English</key>
+						<string>There was a problem removing the older version of Afloat.</string>
+						<key>de</key>
+						<string></string>
+					</dict>
+				</dict>
+				<dict>
+					<key>changeDone</key>
+					<false/>
+					<key>changed values</key>
+					<array/>
+					<key>class</key>
+					<string>BLStringKeyObject</string>
+					<key>comment</key>
+					<string>Explain logging out recommended.</string>
+					<key>flags</key>
+					<integer>0</integer>
+					<key>key</key>
+					<string>This will ensure that the older version of Afloat is properly removed from your Mac. When you log back in, the new version of Afloat can be enabled from the "Afloat" System Preferences pane.</string>
+					<key>localizations</key>
+					<dict>
+						<key>English</key>
+						<string>This will ensure that the older version of Afloat is properly removed from your Mac. When you log back in, the new version of Afloat can be enabled from the "Afloat" System Preferences pane.</string>
+						<key>de</key>
+						<string></string>
+					</dict>
+				</dict>
+				<dict>
+					<key>changeDone</key>
+					<false/>
+					<key>changed values</key>
+					<array/>
+					<key>class</key>
+					<string>BLStringKeyObject</string>
+					<key>comment</key>
+					<string>Explain can't install SIMBL.</string>
+					<key>flags</key>
+					<integer>0</integer>
+					<key>key</key>
+					<string>You can install SIMBL manually by downloading it from http://culater.net/software/SIMBL/SIMBL.php.</string>
+					<key>localizations</key>
+					<dict>
+						<key>English</key>
+						<string>You can install SIMBL manually by downloading it from http://culater.net/software/SIMBL/SIMBL.php.</string>
+						<key>de</key>
+						<string></string>
+					</dict>
+				</dict>
+				<dict>
+					<key>changeDone</key>
+					<false/>
+					<key>changed values</key>
+					<array/>
+					<key>class</key>
+					<string>BLStringKeyObject</string>
+					<key>comment</key>
+					<string>Alert exp: can't find the Trash</string>
+					<key>flags</key>
+					<integer>0</integer>
+					<key>key</key>
+					<string>You can remove it manually by searching inside the SIMBL folder, which is found in the Application Support folder of your personal Library.</string>
+					<key>localizations</key>
+					<dict>
+						<key>English</key>
+						<string>You can remove it manually by searching inside the SIMBL folder, which is found in the Application Support folder of your personal Library.</string>
+						<key>de</key>
+						<string></string>
+					</dict>
+				</dict>
+				<dict>
+					<key>changeDone</key>
+					<false/>
+					<key>changed values</key>
+					<array/>
+					<key>class</key>
+					<string>BLStringKeyObject</string>
+					<key>comment</key>
+					<string>About to install SIMBL: cancel</string>
+					<key>flags</key>
+					<integer>0</integer>
+					<key>key</key>
+					<string>Cancel</string>
+					<key>localizations</key>
+					<dict>
+						<key>English</key>
+						<string>Cancel</string>
+						<key>de</key>
+						<string></string>
+					</dict>
+				</dict>
+				<dict>
+					<key>changeDone</key>
+					<false/>
+					<key>changed values</key>
+					<array/>
+					<key>class</key>
+					<string>BLStringKeyObject</string>
+					<key>comment</key>
+					<string>About to install SIMBL: continue</string>
+					<key>flags</key>
+					<integer>0</integer>
+					<key>key</key>
+					<string>Install SIMBL</string>
+					<key>localizations</key>
+					<dict>
+						<key>English</key>
+						<string>Install SIMBL</string>
+						<key>de</key>
+						<string></string>
+					</dict>
+				</dict>
+				<dict>
+					<key>changeDone</key>
+					<false/>
+					<key>changed values</key>
+					<array/>
+					<key>class</key>
+					<string>BLStringKeyObject</string>
+					<key>comment</key>
+					<string>Explain about to install SIMBL</string>
+					<key>flags</key>
+					<integer>0</integer>
+					<key>key</key>
+					<string>SIMBL is a library that allows plug-ins, such as Afloat or PithHelmet, to modify other applications. It will be installed in the InputManagers folder of your personal Library.</string>
+					<key>localizations</key>
+					<dict>
+						<key>English</key>
+						<string>SIMBL is a library that allows plug-ins, such as Afloat or PithHelmet, to modify other applications. It will be installed in the InputManagers folder of your personal Library.</string>
+						<key>de</key>
+						<string></string>
+					</dict>
+				</dict>
+				<dict>
+					<key>changeDone</key>
+					<false/>
+					<key>changed values</key>
+					<array/>
+					<key>class</key>
+					<string>BLStringKeyObject</string>
+					<key>comment</key>
+					<string>About to install SIMBL</string>
+					<key>flags</key>
+					<integer>0</integer>
+					<key>key</key>
+					<string>SIMBL is going to be installed. Do you want to continue?</string>
+					<key>localizations</key>
+					<dict>
+						<key>English</key>
+						<string>SIMBL is going to be installed. Do you want to continue?</string>
+						<key>de</key>
+						<string></string>
+					</dict>
+				</dict>
+				<dict>
+					<key>changeDone</key>
+					<false/>
+					<key>changed values</key>
+					<array/>
+					<key>class</key>
+					<string>BLStringKeyObject</string>
+					<key>comment</key>
+					<string>About to install SIMBL: go to web site</string>
+					<key>flags</key>
+					<integer>0</integer>
+					<key>key</key>
+					<string>Visit SIMBL web site</string>
+					<key>localizations</key>
+					<dict>
+						<key>English</key>
+						<string>Visit SIMBL web site</string>
+						<key>de</key>
+						<string></string>
+					</dict>
+				</dict>
+				<dict>
+					<key>changeDone</key>
+					<false/>
+					<key>changed values</key>
+					<array/>
+					<key>class</key>
+					<string>BLStringKeyObject</string>
+					<key>comment</key>
+					<string>Explain did update to newer Afloat</string>
+					<key>flags</key>
+					<integer>1</integer>
+					<key>key</key>
+					<string>New features will only be available to applications you start from now on. If other applications are open, they will not get the new features until you quit them and reopen them.</string>
+					<key>localizations</key>
+					<dict>
+						<key>English</key>
+						<string>New features will only be available to applications you start from now on. If other applications are open, they will not get the new features until you quit them and reopen them.</string>
+						<key>de</key>
+						<string></string>
+					</dict>
+				</dict>
+				<dict>
+					<key>changeDone</key>
+					<false/>
+					<key>changed values</key>
+					<array/>
+					<key>class</key>
+					<string>BLStringKeyObject</string>
+					<key>comment</key>
+					<string>Did update to newer Afloat</string>
+					<key>flags</key>
+					<integer>1</integer>
+					<key>key</key>
+					<string>This version of Afloat upgraded a previous version successfully.</string>
+					<key>localizations</key>
+					<dict>
+						<key>English</key>
+						<string>This version of Afloat upgraded a previous version successfully.</string>
+						<key>de</key>
+						<string></string>
+					</dict>
+				</dict>
+				<dict>
+					<key>changeDone</key>
+					<false/>
+					<key>changed values</key>
+					<array/>
+					<key>class</key>
+					<string>BLStringKeyObject</string>
+					<key>comment</key>
+					<string>Welcome</string>
+					<key>flags</key>
+					<integer>1</integer>
+					<key>key</key>
+					<string>Welcome to Afloat.</string>
+					<key>localizations</key>
+					<dict>
+						<key>English</key>
+						<string>Welcome to Afloat.</string>
+						<key>de</key>
+						<string></string>
+					</dict>
+				</dict>
+				<dict>
+					<key>changeDone</key>
+					<false/>
+					<key>changed values</key>
+					<array/>
+					<key>class</key>
+					<string>BLStringKeyObject</string>
+					<key>comment</key>
+					<string>Explain welcome</string>
+					<key>flags</key>
+					<integer>1</integer>
+					<key>key</key>
+					<string>For safety, Afloat was not enabled automatically for this user when it was installed. Put a checkmark near "Enable Afloat" to start using it!</string>
+					<key>localizations</key>
+					<dict>
+						<key>English</key>
+						<string>For safety, Afloat was not enabled automatically for this user when it was installed. Put a checkmark near "Enable Afloat" to start using it!</string>
+						<key>de</key>
+						<string></string>
+					</dict>
+				</dict>
+			</array>
+		</dict>
+	</array>
+	<key>languages</key>
+	<array>
+		<string>English</string>
+		<string>de</string>
+	</array>
+	<key>reference language</key>
+	<string>English</string>
+	<key>supports preview</key>
+	<true/>
+</dict>
+</plist>
