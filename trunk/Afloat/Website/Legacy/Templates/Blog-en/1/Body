@@ -1,7 +1,0 @@
-<p>Here's a short list of things that are going to be in 1.0b3 (for the simple reason I have them working stably on my development version in front of my eyes):</p>
-<ul>
-	<li>Transparency can be increased or decreased in steps by hitting ctrl-command-page down and ctrl-command-page up;</li>
-	<li>Transparency can be smoothly increased or decreased by holding down ctrl-command and moving the mouse's scroll wheel up or down (works with PowerBook/MacBook trackpads two-finger scrolling!).</li>
-	<li>Most windows can be dragged by holding ctrl-command and dragging them from any point in the window. (I can't begin to count the number of times I wished to do this one!).</li>
-</ul>
-<p>This is going to be an exciting release…</p>

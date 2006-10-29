@@ -1,3 +1,0 @@
-<div class="blogPost">
-<p>(dziennik twórcy dostępny jest jedynie po <a href="?lang=en#devBlog">angielsku</a> i <a href="?lang=it">włosku</a>)</p>
-</div>

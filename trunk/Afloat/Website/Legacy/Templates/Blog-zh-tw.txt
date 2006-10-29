@@ -1,3 +1,0 @@
-<div class="blogPost">
-<p>開發日誌只有 <a href="?lang=en#devBlog">英語</a> 及 <a href="?lang=it#devBlog">意大利語</a> 版本。</p>
-</div>
