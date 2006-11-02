@@ -1,3 +1,12 @@
+
+/*
+ *  This file is part of Afloat and is © Emanuele Vulcano, 2006.
+ *  <afloat@infinite-labs.net>
+ *  
+ *  Afloat's source code is licensed under a BSD license.
+ *  Please see the included LICENSE file for details.
+ */
+
 #import "AfloatCocoa.h"
 
 #import <objc/objc-class.h>
@@ -26,16 +35,51 @@
 	return res;
 }
 
-- (id) init {
-	if (self = [super init]) {
-		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didChangeFocusedWindow:) name:NSWindowDidBecomeMainNotification object:nil];
+- (void) performInstallOnMainThread {
+	[self performSelectorOnMainThread:@selector(install) withObject:nil waitUntilDone:NO];
+}
+
+- (void) install {
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didChangeFocusedWindow:) name:NSWindowDidBecomeMainNotification object:nil];
+	
+	[self bypassSelector:@selector(dealloc) ofClass:[NSWindow class] throughNewSelector:@selector(afloatDealloc) keepOriginalAs:@selector(afloatDeallocOriginal)];
+	
+	[[AfloatHub sharedHub] setFocusedWindow:[[NSApp mainWindow] afloatTopWindow]];	
+	
+	// install menu items
+	
+	NSMenu* mainMenu = [NSApp mainMenu], * items = [[AfloatHub sharedHub] afloatMenu];
+	[self searchAndInstallMenuItems:items inAppropriateMenuIn:mainMenu];
+}
+
+- (BOOL) searchAndInstallMenuItems:(NSMenu*) items inAppropriateMenuIn:(NSMenu*) menu {
+	NSEnumerator* enu = [[menu itemArray] objectEnumerator];
+	int i = -1;
+	NSMenuItem* item;
+	
+	while (item = [enu nextObject]) {
+		i++;
+		if ([item action] == @selector(performMiniaturize:)) {
+			[self installMenuItems:items inMenu:menu index:i];
+			return YES;
+		}
 		
-		[self bypassSelector:@selector(dealloc) ofClass:[NSWindow class] throughNewSelector:@selector(afloatDealloc) keepOriginalAs:@selector(afloatDeallocOriginal)];
-		
-		[[AfloatHub sharedHub] setFocusedWindow:[[NSApp mainWindow] afloatTopWindow]];
+		if ([item hasSubmenu]) {
+			if ([self searchAndInstallMenuItems:items inAppropriateMenuIn:[item submenu]])
+				return YES;
+		}
 	}
 	
-	return self;
+	return NO;
+}
+
+- (void) installMenuItems:(NSMenu*) items inMenu:(NSMenu*) menu index:(int) i {
+	NSMenuItem* newItem = [[NSMenuItem alloc] initWithTitle:@"Afloat" action:nil keyEquivalent:@""];
+	
+	[menu insertItem:newItem atIndex:i];
+	[menu setSubmenu:items forItem:newItem];
+	
+	[newItem release];
 }
 
 - (void) didChangeFocusedWindow:(NSNotification*) notif {
@@ -77,6 +121,14 @@
 		me = [me parentWindow];
 		
 	return me;
+}
+
+- (BOOL) alwaysOnTop {
+	return [self level] == NSFloatingWindowLevel;
+}
+
+- (void) setAlwaysOnTop:(BOOL) onTop {
+	[self setLevel:(onTop? NSFloatingWindowLevel : NSNormalWindowLevel)];
 }
 
 @end
