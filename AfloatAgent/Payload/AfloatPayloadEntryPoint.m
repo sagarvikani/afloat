@@ -1,10 +1,15 @@
 //
 //  AfloatPayloadEntryPoint.m
 //  AfloatAgent
-//
-//  Created by ∞ on 23/10/06.
-//  Copyright 2006 __MyCompanyName__. All rights reserved.
-//
+
+/*
+ *  This file is part of Afloat and is © Emanuele Vulcano, 2006.
+ *  <afloat@infinite-labs.net>
+ *  
+ *  Afloat's source code is licensed under a BSD license.
+ *  Please see the included LICENSE file for details.
+ */
+
 
 #import "AfloatPayloadEntryPoint.h"
 #import <Carbon/Carbon.h>
@@ -20,12 +25,12 @@ void AfloatPayloadEntryPoint() /* __attribute__((constructor)) */ {
 	// to be extra sure, we also wait for the next spin of the
 	// main run loop.
 	
-	if (NSApp != nil) // Cocoa has a nice one-liner for this.
-		[[AfloatCocoa sharedInstance] performSelectorOnMainThread:@selector(install) withObject:nil waitUntilDone:NO];
-	else { // Carbon does NOT have a nice one-liner for this, but anyway...
-		CFRunLoopRef runLoop = (CFRunLoopRef) GetCFRunLoopFromEventLoop(GetMainEventLoop());
-		CFRunLoopObserverRef delayer = CFRunLoopObserverCreate(kCFAllocatorDefault, kCFRunLoopAfterWaiting, NO, 0, &AfloatCarbonInstall, NULL);
-		CFRunLoopAddObserver(runLoop, delayer, kCFRunLoopDefaultMode);
-		CFRelease(delayer);
-	}
+	Class implClass = nil;
+	
+	if (NSApp != nil)
+		implClass = [AfloatCocoa class];
+	else
+		implClass = [AfloatCarbon class];
+	
+	[(AfloatImplementation*)[implClass sharedInstance] performInstallOnMainThread];
 }

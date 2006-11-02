@@ -1,10 +1,15 @@
 //
 //  AfloatHub.m
 //  AfloatAgent
-//
-//  Created by ∞ on 28/10/06.
-//  Copyright 2006 __MyCompanyName__. All rights reserved.
-//
+
+/*
+ *  This file is part of Afloat and is © Emanuele Vulcano, 2006.
+ *  <afloat@infinite-labs.net>
+ *  
+ *  Afloat's source code is licensed under a BSD license.
+ *  Please see the included LICENSE file for details.
+ */
+
 
 #import "AfloatHub.h"
 
@@ -19,8 +24,10 @@
 }
 
 - (id) init {
-	if (self = [super init])
+	if (self = [super init]) {
 		windowData = [NSMutableDictionary new];
+		[NSBundle loadNibNamed:@"Hub" owner:self];
+	}
 	
 	return self;
 }
@@ -59,5 +66,21 @@
 		focusedWindow = [wnd retain];
 	}
 }
+
+- (NSMenu*) afloatMenu {
+	return menuWithModelItems;
+}
+
+- (IBAction) showAdjustEffectsPanel:(id) sender {
+	// I could have connected it in IB;
+	// but Carbon does not support connections
+	// as Cocoa does.
+	
+	[adjustEffectsPanel makeKeyAndOrderFront:self];
+}
+
+#pragma mark ** Features **
+
+
 
 @end

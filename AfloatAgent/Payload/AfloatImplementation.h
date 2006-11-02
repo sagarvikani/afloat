@@ -1,16 +1,22 @@
 //
 //  AfloatImplementation.h
 //  AfloatAgent
-//
-//  Created by ∞ on 24/10/06.
-//  Copyright 2006 __MyCompanyName__. All rights reserved.
-//
+
+/*
+ *  This file is part of Afloat and is © Emanuele Vulcano, 2006.
+ *  <afloat@infinite-labs.net>
+ *  
+ *  Afloat's source code is licensed under a BSD license.
+ *  Please see the included LICENSE file for details.
+ */
+
 
 #import <Cocoa/Cocoa.h>
 
 @interface AfloatImplementation : NSObject {}
 
-- (BOOL) installMenuItems:(NSArray* /* of NSMenuItem* */) modelItems;
+- (BOOL) performInstallOnMainThread;
+
 - (NSArray* /* of id <AfloatWindow> */) windows;
 - (id /* <AfloatWindow> */) focusedWindow;
 

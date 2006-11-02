@@ -10,6 +10,7 @@
 		7E258CA40AF356CD006931A7 /* AfloatHub.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E258CA30AF356CD006931A7 /* AfloatHub.m */; };
 		7E2E64CE0AED2413009AFB28 /* mach_inject_bundle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E2E64CD0AED2413009AFB28 /* mach_inject_bundle.framework */; };
 		7E2E65320AED269B009AFB28 /* mach_inject_bundle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7E2E64CD0AED2413009AFB28 /* mach_inject_bundle.framework */; };
+		7E56E61B0AF9DBBC00F41871 /* Hub.nib in Resources */ = {isa = PBXBuildFile; fileRef = 7E56E6190AF9DBBC00F41871 /* Hub.nib */; };
 		7E578CEF0AEE925C0039B11D /* AfloatImplementation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E578CEE0AEE925C0039B11D /* AfloatImplementation.m */; };
 		7E6204AD0AED3A1C0024513B /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 		7E6204AE0AED3A250024513B /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
@@ -59,6 +60,7 @@
 		7E258CA20AF356CD006931A7 /* AfloatHub.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AfloatHub.h; sourceTree = "<group>"; };
 		7E258CA30AF356CD006931A7 /* AfloatHub.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AfloatHub.m; sourceTree = "<group>"; };
 		7E2E64CD0AED2413009AFB28 /* mach_inject_bundle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = mach_inject_bundle.framework; sourceTree = "<group>"; };
+		7E56E61A0AF9DBBC00F41871 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = Payload/English.lproj/Hub.nib; sourceTree = "<group>"; };
 		7E578CED0AEE925C0039B11D /* AfloatImplementation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AfloatImplementation.h; sourceTree = "<group>"; };
 		7E578CEE0AEE925C0039B11D /* AfloatImplementation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AfloatImplementation.m; sourceTree = "<group>"; };
 		7E6204150AED33AF0024513B /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
@@ -73,7 +75,7 @@
 		7ED280920AED1EC8001D88D9 /* AfloatPayloadEntryPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AfloatPayloadEntryPoint.h; sourceTree = "<group>"; };
 		7ED280930AED1EC8001D88D9 /* AfloatPayloadEntryPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AfloatPayloadEntryPoint.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		8D1107320486CEB800E47090 /* AfloatAgent.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AfloatAgent.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D1107320486CEB800E47090 /* AfloatAgent.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = AfloatAgent.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -177,9 +179,18 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		7E56E5FF0AF9DB5700F41871 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				7E56E6190AF9DBBC00F41871 /* Hub.nib */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		7EBFF9440AEAB2D00067AD4A /* Payload */ = {
 			isa = PBXGroup;
 			children = (
+				7E56E5FF0AF9DB5700F41871 /* Resources */,
 				7EBFF9690AEAB3FF0067AD4A /* Classes */,
 				7EBFF9550AEAB3170067AD4A /* Info.plist */,
 			);
@@ -277,6 +288,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7E56E61B0AF9DBBC00F41871 /* Hub.nib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -370,6 +382,15 @@
 				29B97319FDCFA39411CA2CEA /* English */,
 			);
 			name = MainMenu.nib;
+			sourceTree = "<group>";
+		};
+		7E56E6190AF9DBBC00F41871 /* Hub.nib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7E56E61A0AF9DBBC00F41871 /* English */,
+			);
+			name = Hub.nib;
+			path = ..;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
