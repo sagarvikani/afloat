@@ -7,9 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7E19DFA40AFDF2A6006F3EF9 /* AfloatAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E4F5D180AFD1FDE00102CBA /* AfloatAnimator.m */; };
+		7E19DFB30AFDF2DC006F3EF9 /* main-AfloatAnimationTester.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E19DFAF0AFDF2D2006F3EF9 /* main-AfloatAnimationTester.m */; };
 		7E258CA40AF356CD006931A7 /* AfloatHub.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E258CA30AF356CD006931A7 /* AfloatHub.m */; };
 		7E2E64CE0AED2413009AFB28 /* mach_inject_bundle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E2E64CD0AED2413009AFB28 /* mach_inject_bundle.framework */; };
 		7E2E65320AED269B009AFB28 /* mach_inject_bundle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7E2E64CD0AED2413009AFB28 /* mach_inject_bundle.framework */; };
+		7E4F5D190AFD1FDE00102CBA /* AfloatAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E4F5D180AFD1FDE00102CBA /* AfloatAnimator.m */; };
 		7E56E61B0AF9DBBC00F41871 /* Hub.nib in Resources */ = {isa = PBXBuildFile; fileRef = 7E56E6190AF9DBBC00F41871 /* Hub.nib */; };
 		7E578CEF0AEE925C0039B11D /* AfloatImplementation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E578CEE0AEE925C0039B11D /* AfloatImplementation.m */; };
 		7E6204AD0AED3A1C0024513B /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
@@ -57,9 +60,13 @@
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		32CA4F630368D1EE00C91783 /* AfloatAgent_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AfloatAgent_Prefix.pch; sourceTree = "<group>"; };
+		7E19DFA10AFDF295006F3EF9 /* AfloatAnimationTester */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = AfloatAnimationTester; sourceTree = BUILT_PRODUCTS_DIR; };
+		7E19DFAF0AFDF2D2006F3EF9 /* main-AfloatAnimationTester.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "main-AfloatAnimationTester.m"; sourceTree = "<group>"; };
 		7E258CA20AF356CD006931A7 /* AfloatHub.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AfloatHub.h; sourceTree = "<group>"; };
 		7E258CA30AF356CD006931A7 /* AfloatHub.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AfloatHub.m; sourceTree = "<group>"; };
 		7E2E64CD0AED2413009AFB28 /* mach_inject_bundle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = mach_inject_bundle.framework; sourceTree = "<group>"; };
+		7E4F5D170AFD1FDE00102CBA /* AfloatAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AfloatAnimator.h; sourceTree = "<group>"; };
+		7E4F5D180AFD1FDE00102CBA /* AfloatAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AfloatAnimator.m; sourceTree = "<group>"; };
 		7E56E61A0AF9DBBC00F41871 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = Payload/English.lproj/Hub.nib; sourceTree = "<group>"; };
 		7E578CED0AEE925C0039B11D /* AfloatImplementation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AfloatImplementation.h; sourceTree = "<group>"; };
 		7E578CEE0AEE925C0039B11D /* AfloatImplementation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AfloatImplementation.m; sourceTree = "<group>"; };
@@ -75,10 +82,17 @@
 		7ED280920AED1EC8001D88D9 /* AfloatPayloadEntryPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AfloatPayloadEntryPoint.h; sourceTree = "<group>"; };
 		7ED280930AED1EC8001D88D9 /* AfloatPayloadEntryPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AfloatPayloadEntryPoint.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		8D1107320486CEB800E47090 /* AfloatAgent.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = AfloatAgent.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D1107320486CEB800E47090 /* AfloatAgent.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AfloatAgent.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		7E19DF9F0AFDF295006F3EF9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7EBFF9520AEAB3170067AD4A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -134,6 +148,7 @@
 			children = (
 				8D1107320486CEB800E47090 /* AfloatAgent.app */,
 				7EBFF9540AEAB3170067AD4A /* AfloatPayload.bundle */,
+				7E19DFA10AFDF295006F3EF9 /* AfloatAnimationTester */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -141,6 +156,7 @@
 		29B97314FDCFA39411CA2CEA /* AfloatAgent */ = {
 			isa = PBXGroup;
 			children = (
+				7E19DFAE0AFDF2B3006F3EF9 /* AfloatAnimation Testing Playground */,
 				7EBFF9440AEAB2D00067AD4A /* Payload */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
@@ -179,6 +195,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		7E19DFAE0AFDF2B3006F3EF9 /* AfloatAnimation Testing Playground */ = {
+			isa = PBXGroup;
+			children = (
+				7E19DFAF0AFDF2D2006F3EF9 /* main-AfloatAnimationTester.m */,
+			);
+			name = "AfloatAnimation Testing Playground";
+			sourceTree = "<group>";
+		};
 		7E56E5FF0AF9DB5700F41871 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -210,6 +234,8 @@
 				7E578CEE0AEE925C0039B11D /* AfloatImplementation.m */,
 				7E258CA20AF356CD006931A7 /* AfloatHub.h */,
 				7E258CA30AF356CD006931A7 /* AfloatHub.m */,
+				7E4F5D170AFD1FDE00102CBA /* AfloatAnimator.h */,
+				7E4F5D180AFD1FDE00102CBA /* AfloatAnimator.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -227,6 +253,22 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		7E19DFA00AFDF295006F3EF9 /* AfloatAnimationTester */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7E19DFAB0AFDF2AC006F3EF9 /* Build configuration list for PBXNativeTarget "AfloatAnimationTester" */;
+			buildPhases = (
+				7E19DF9E0AFDF295006F3EF9 /* Sources */,
+				7E19DF9F0AFDF295006F3EF9 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AfloatAnimationTester;
+			productName = AfloatAnimationTester;
+			productReference = 7E19DFA10AFDF295006F3EF9 /* AfloatAnimationTester */;
+			productType = "com.apple.product-type.tool";
+		};
 		7EBFF9530AEAB3170067AD4A /* AfloatPayload */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7EBFF9560AEAB3180067AD4A /* Build configuration list for PBXNativeTarget "AfloatPayload" */;
@@ -279,6 +321,7 @@
 			targets = (
 				8D1107260486CEB800E47090 /* AfloatAgent */,
 				7EBFF9530AEAB3170067AD4A /* AfloatPayload */,
+				7E19DFA00AFDF295006F3EF9 /* AfloatAnimationTester */,
 			);
 		};
 /* End PBXProject section */
@@ -336,6 +379,15 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		7E19DF9E0AFDF295006F3EF9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7E19DFA40AFDF2A6006F3EF9 /* AfloatAnimator.m in Sources */,
+				7E19DFB30AFDF2DC006F3EF9 /* main-AfloatAnimationTester.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7EBFF9510AEAB3170067AD4A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -345,6 +397,7 @@
 				7E6204FC0AED3B2D0024513B /* AfloatCarbon.m in Sources */,
 				7E578CEF0AEE925C0039B11D /* AfloatImplementation.m in Sources */,
 				7E258CA40AF356CD006931A7 /* AfloatHub.m in Sources */,
+				7E4F5D190AFD1FDE00102CBA /* AfloatAnimator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -396,6 +449,52 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		7E19DFAC0AFDF2AC006F3EF9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INSTALL_PATH = "$(HOME)/bin";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = AfloatAnimationTester;
+				ZERO_LINK = YES;
+			};
+			name = Debug;
+		};
+		7E19DFAD0AFDF2AC006F3EF9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INSTALL_PATH = "$(HOME)/bin";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = AfloatAnimationTester;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
 		7EBFF9570AEAB3180067AD4A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -525,6 +624,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		7E19DFAB0AFDF2AC006F3EF9 /* Build configuration list for PBXNativeTarget "AfloatAnimationTester" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7E19DFAC0AFDF2AC006F3EF9 /* Debug */,
+				7E19DFAD0AFDF2AC006F3EF9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		7EBFF9560AEAB3180067AD4A /* Build configuration list for PBXNativeTarget "AfloatPayload" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
