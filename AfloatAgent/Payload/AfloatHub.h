@@ -35,4 +35,7 @@
 - (IBAction) showAdjustEffectsPanel:(id) sender;
 - (NSMenu*) afloatMenu;
 
+- (IBAction) toggleKeepAfloat:(id) sender;
+- (float) mediumTransparencyAlphaValue;
+
 @end

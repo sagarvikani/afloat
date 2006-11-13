@@ -112,6 +112,7 @@
 
 - (void) afloatDealloc {
 	[[AfloatHub sharedHub] willRemoveWindow:self];
+	[self endMouseTracking];
 	[self afloatDeallocOriginal];
 }
 
@@ -129,6 +130,46 @@
 
 - (void) setAlwaysOnTop:(BOOL) onTop {
 	[self setLevel:(onTop? NSFloatingWindowLevel : NSNormalWindowLevel)];
+}
+
+
+- (void) beginMouseTrackingWithOwner:(id) owner {
+	NSMutableDictionary* myInfo = [[AfloatHub sharedHub] infoForWindow:self];
+	if ([[myInfo objectForKey:@"AfloatTrackingRectTagOwner"] nonretainedObjectValue] == owner) return;
+	
+	[self endMouseTracking];
+	
+	NSView* windowView = [[self contentView] superview];
+	NSRect frame = [windowView frame];
+	
+	NSTrackingRectTag tr = [windowView addTrackingRect:frame owner:owner userData:self assumeInside:NO];
+	
+	[myInfo setObject:[NSNumber numberWithInt:tr] forKey:@"AfloatTrackingRectTag"];
+	[myInfo setObject:[NSValue valueWithNonretainedObject:owner] forKey:@"AfloatTrackingRectTagOwner"];
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_afloat_windowViewDidChangeBounds:) name:NSViewBoundsDidChangeNotification object:windowView];
+}
+
+- (void) endMouseTracking {
+	NSMutableDictionary* myInfo = [[AfloatHub sharedHub] infoForWindow:self];
+	NSNumber* n = [myInfo objectForKey:@"AfloatTrackingRectTag"];
+	if (n == nil) return;
+	
+	NSView* windowView = [[self contentView] superview];
+	[windowView removeTrackingRect:[n intValue]];
+	
+	[[NSNotificationCenter defaultCenter] removeObserver:self name:NSViewBoundsDidChangeNotification object:windowView];
+	
+	[myInfo removeObjectForKey:@"AfloatTrackingRectTag"];
+	[myInfo removeObjectForKey:@"AfloatTrackingRectTagOwner"];
+}
+
+- (void) _afloat_windowViewDidChangeBounds:(NSNotification*) notif {
+	NSMutableDictionary* myInfo = [[AfloatHub sharedHub] infoForWindow:self];
+	id theOwner = [[myInfo objectForKey:@"AfloatTrackingRectTagOwner"] nonretainedObjectValue];
+	
+	[self endMouseTracking];
+	[self beginMouseTrackingWithOwner:theOwner];
 }
 
 @end

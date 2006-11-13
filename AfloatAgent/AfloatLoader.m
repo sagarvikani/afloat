@@ -12,11 +12,16 @@
 #import <sys/types.h>
 #import <mach_inject_bundle/mach_inject_bundle.h>
 
+#define kAfloatDebug 1
+
 @implementation AfloatLoader
 
 - (void) applicationDidFinishLaunching:(NSNotification*) notif {
     [[[NSWorkspace sharedWorkspace] notificationCenter]
         addObserver:self selector:@selector(didLaunchApplication:) name:NSWorkspaceDidLaunchApplicationNotification object:nil];
+	
+	if (kAfloatDebug)
+		[[NSWorkspace sharedWorkspace] launchApplication:@"Calculator"];
 }
 
 - (void) dealloc {
