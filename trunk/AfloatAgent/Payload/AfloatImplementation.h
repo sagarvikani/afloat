@@ -13,6 +13,13 @@
 
 #import <Cocoa/Cocoa.h>
 
+@interface NSObject (AfloatWindowObject)
+- (BOOL) alwaysOnTop;
+- (void) setAlwaysOnTop:(BOOL) aot;
+- (void) beginMouseTrackingWithOwner:(id) owner;
+- (void) endMouseTracking;
+@end
+
 @interface AfloatImplementation : NSObject {}
 
 - (BOOL) performInstallOnMainThread;

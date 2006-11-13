@@ -23,6 +23,7 @@
 		7E6204FA0AED3B280024513B /* AfloatCocoa.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E62045B0AED37420024513B /* AfloatCocoa.m */; };
 		7E6204FC0AED3B2D0024513B /* AfloatCarbon.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E6204700AED37FC0024513B /* AfloatCarbon.m */; };
 		7EBFF97C0AEAB4760067AD4A /* AfloatPayload.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7EBFF9540AEAB3170067AD4A /* AfloatPayload.bundle */; };
+		7EE461990B09007A001C629F /* AfloatWindowAlphaAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EE461980B09007A001C629F /* AfloatWindowAlphaAnimation.m */; };
 		8D11072A0486CEB800E47090 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 29B97318FDCFA39411CA2CEA /* MainMenu.nib */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
@@ -81,6 +82,8 @@
 		7EBFF9550AEAB3170067AD4A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Info.plist; sourceTree = "<group>"; };
 		7ED280920AED1EC8001D88D9 /* AfloatPayloadEntryPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AfloatPayloadEntryPoint.h; sourceTree = "<group>"; };
 		7ED280930AED1EC8001D88D9 /* AfloatPayloadEntryPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AfloatPayloadEntryPoint.m; sourceTree = "<group>"; };
+		7EE461970B09007A001C629F /* AfloatWindowAlphaAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AfloatWindowAlphaAnimation.h; sourceTree = "<group>"; };
+		7EE461980B09007A001C629F /* AfloatWindowAlphaAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AfloatWindowAlphaAnimation.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* AfloatAgent.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AfloatAgent.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -224,6 +227,8 @@
 		7EBFF9690AEAB3FF0067AD4A /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				7EE461970B09007A001C629F /* AfloatWindowAlphaAnimation.h */,
+				7EE461980B09007A001C629F /* AfloatWindowAlphaAnimation.m */,
 				7E62046F0AED37FC0024513B /* AfloatCarbon.h */,
 				7E6204700AED37FC0024513B /* AfloatCarbon.m */,
 				7ED280920AED1EC8001D88D9 /* AfloatPayloadEntryPoint.h */,
@@ -276,7 +281,7 @@
 				7EBFF9500AEAB3170067AD4A /* Resources */,
 				7EBFF9510AEAB3170067AD4A /* Sources */,
 				7EBFF9520AEAB3170067AD4A /* Frameworks */,
-				7E5876C20AF4C95700B33D87 /* Set Version from Subversion revision */,
+				7E5876C20AF4C95700B33D87 /* Set Version from Subversion Revision */,
 			);
 			buildRules = (
 			);
@@ -296,7 +301,7 @@
 				8D11072E0486CEB800E47090 /* Frameworks */,
 				7EBFF9180AEAB01C0067AD4A /* CopyFiles */,
 				7EBFF9630AEAB3A60067AD4A /* Headers */,
-				7E5876C00AF4C93C00B33D87 /* Set Version from Subversion revision */,
+				7E5876C00AF4C93C00B33D87 /* Set Version from Subversion Revision */,
 			);
 			buildRules = (
 			);
@@ -348,28 +353,28 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		7E5876C00AF4C93C00B33D87 /* Set Version from Subversion revision */ = {
+		7E5876C00AF4C93C00B33D87 /* Set Version from Subversion Revision */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Set Version from Subversion revision";
+			name = "Set Version from Subversion Revision";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = "/usr/bin/perl -w";
 			shellScript = "# Xcode auto-versioning script for Subversion\n# by Axel Andersson, modified by Daniel Jalkut to add\n# \"--revision HEAD\" to the svn info line, which allows\n# the latest revision to always be used.\n\nuse strict;\n\ndie \"$0: Must be run from Xcode\" unless $ENV{\"BUILT_PRODUCTS_DIR\"};\n\n# Get the current subversion revision number and use it to set the CFBundleVersion value\nmy $REV = `/usr/local/bin/svnversion -n ./`;\nmy $INFO = \"$ENV{BUILT_PRODUCTS_DIR}/$ENV{WRAPPER_NAME}/Contents/Info.plist\";\n\nmy $version = $REV;\n\n# (Match the last group of digits and optional letter M/S):\n\n# ugly yet functional (barely) regex by Daniel Jalkut:\n#$version =~ s/([\\d]*:)(\\d+[M|S]*).*/$2/;\n\n# better yet still functional regex via Kevin \"Regex Nerd\" Ballard\n($version =~ m/\\d+[MS]*$/) && ($version = $&);\n\ndie \"$0: No Subversion revision found\" unless $version;\n\nopen(FH, \"$INFO\") or die \"$0: $INFO: $!\";\nmy $info = join(\"\", <FH>);\nclose(FH);\n\n$info =~ s/([\\t ]+<key>CFBundleVersion<\\/key>\\n[\\t ]+<string>).*?(<\\/string>)/$1$version$2/;\n\nopen(FH, \">$INFO\") or die \"$0: $INFO: $!\";\nprint FH $info;\nclose(FH);";
 		};
-		7E5876C20AF4C95700B33D87 /* Set Version from Subversion revision */ = {
+		7E5876C20AF4C95700B33D87 /* Set Version from Subversion Revision */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Set Version from Subversion revision";
+			name = "Set Version from Subversion Revision";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -398,6 +403,7 @@
 				7E578CEF0AEE925C0039B11D /* AfloatImplementation.m in Sources */,
 				7E258CA40AF356CD006931A7 /* AfloatHub.m in Sources */,
 				7E4F5D190AFD1FDE00102CBA /* AfloatAnimator.m in Sources */,
+				7EE461990B09007A001C629F /* AfloatWindowAlphaAnimation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -502,8 +508,10 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_1)",
+					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_2)",
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_1 = "\"$(SRCROOT)\"";
+				FRAMEWORK_SEARCH_PATHS_QUOTED_2 = "\"$(SRCROOT)/Payload\"";
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
@@ -533,8 +541,10 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_1)",
+					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_2)",
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_1 = "\"$(SRCROOT)\"";
+				FRAMEWORK_SEARCH_PATHS_QUOTED_2 = "\"$(SRCROOT)/Payload\"";
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_MODEL_TUNING = G5;

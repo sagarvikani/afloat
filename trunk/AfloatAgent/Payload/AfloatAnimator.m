@@ -1,10 +1,13 @@
 //
 //  AfloatAnimator.m
-//  AfloatAgent
-//
-//  Created by ∞ on 04/11/06.
-//  Copyright 2006 __MyCompanyName__. All rights reserved.
-//
+
+/*
+ *  This file is part of Afloat and is © Emanuele Vulcano, 2006.
+ *  <afloat@infinite-labs.net>
+ *  
+ *  Afloat's source code is licensed under a BSD license.
+ *  Please see the included LICENSE file for details.
+ */
 
 #import "AfloatAnimator.h"
 #include <unistd.h>
@@ -56,7 +59,7 @@
 		for (j = 0; j < count; j++)
 			// This is actually [[animations objectAtIndex:j] performAnimation:progress];
 			(allPerforms[j])(allAnis[j], theSelector, progress);
-		usleep(delta * 1000000);
+		usleep(delta * 1000000); // does not take drifting (late frames) into account
 	}
 	
 	if (progress < 1.0) {
@@ -68,12 +71,5 @@
 }
 
 - (void) runWithinMainThread { NSAssert(false, @"runWithinMainThread"); }
-
-@end
-
-@implementation AfloatKVCAnimation
-
-- (id) initWithObject:(id) object key:(NSString*) key fromValue:(NSNumber*) value toValue:(NSNumber*) tovalue { NSAssert(false, @"TODO: initWithObject:key:fromValue:toValue:"); [self release]; return false; }
-- (void) performAnimation:(float) progress { NSAssert(false, @"performAnimation:"); }
 
 @end

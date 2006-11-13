@@ -1,7 +1,7 @@
 {
     IBClasses = (
         {
-            ACTIONS = {showAdjustEffectsPanel = id; }; 
+            ACTIONS = {showAdjustEffectsPanel = id; toggleKeepAfloat = id; }; 
             CLASS = AfloatHub; 
             LANGUAGE = ObjC; 
             OUTLETS = {adjustEffectsPanel = NSPanel; menuWithModelItems = NSMenu; }; 
