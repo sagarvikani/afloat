@@ -2,7 +2,7 @@
 //  AfloatWindowAlphaAnimation.m
 //  AfloatAgent
 //
-//  Created by ° on 13/11/06.
+//  Created by âˆž on 13/11/06.
 //  Copyright 2006 __MyCompanyName__. All rights reserved.
 //
 
@@ -31,7 +31,7 @@
 }
 
 - (void) performAnimation:(float) progress {
-	[animatedWindow setAlphaValue:(to - from) * progress];
+	[animatedWindow setAlphaValue:from - ((from - to) * progress)];
 }
 
 @end

@@ -17,6 +17,7 @@
 @interface AfloatHub : NSObject {
 	NSMutableDictionary* windowData;
 	id focusedWindow;
+	BOOL animating;
 	
 	IBOutlet NSMenu* menuWithModelItems;
 	IBOutlet NSPanel* adjustEffectsPanel;
