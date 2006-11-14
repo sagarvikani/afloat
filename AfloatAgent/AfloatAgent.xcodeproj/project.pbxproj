@@ -22,7 +22,13 @@
 		7E6204F80AED3B1B0024513B /* AfloatPayloadEntryPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ED280930AED1EC8001D88D9 /* AfloatPayloadEntryPoint.m */; };
 		7E6204FA0AED3B280024513B /* AfloatCocoa.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E62045B0AED37420024513B /* AfloatCocoa.m */; };
 		7E6204FC0AED3B2D0024513B /* AfloatCarbon.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E6204700AED37FC0024513B /* AfloatCarbon.m */; };
+		7E643F510B0A3E1E00192BFB /* Banner.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E643F500B0A3E1E00192BFB /* Banner.png */; };
 		7EBFF97C0AEAB4760067AD4A /* AfloatPayload.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7EBFF9540AEAB3170067AD4A /* AfloatPayload.bundle */; };
+		7EDFF0970B09CB670009C47F /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+		7EDFF0AB0B09CBD90009C47F /* AfloatAgent.app in Resources */ = {isa = PBXBuildFile; fileRef = 8D1107320486CEB800E47090 /* AfloatAgent.app */; };
+		7EDFF0B20B09CBF30009C47F /* AfloatPrefPane.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EDFF0B10B09CBF30009C47F /* AfloatPrefPane.m */; };
+		7EDFF0BE0B09CC540009C47F /* PreferencePanes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EDFF0BB0B09CC540009C47F /* PreferencePanes.framework */; };
+		7EDFF0C70B09CCBF0009C47F /* PrefPane.nib in Resources */ = {isa = PBXBuildFile; fileRef = 7EDFF0C50B09CCBF0009C47F /* PrefPane.nib */; };
 		7EE461990B09007A001C629F /* AfloatWindowAlphaAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EE461980B09007A001C629F /* AfloatWindowAlphaAnimation.m */; };
 		8D11072A0486CEB800E47090 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 29B97318FDCFA39411CA2CEA /* MainMenu.nib */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
@@ -36,6 +42,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 7EBFF9530AEAB3170067AD4A;
 			remoteInfo = AfloatPayload;
+		};
+		7EDFF0AE0B09CBE20009C47F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8D1107260486CEB800E47090;
+			remoteInfo = AfloatAgent;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -76,12 +89,19 @@
 		7E62045B0AED37420024513B /* AfloatCocoa.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AfloatCocoa.m; sourceTree = "<group>"; };
 		7E62046F0AED37FC0024513B /* AfloatCarbon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AfloatCarbon.h; sourceTree = "<group>"; };
 		7E6204700AED37FC0024513B /* AfloatCarbon.m */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; fileEncoding = 4; path = AfloatCarbon.m; sourceTree = "<group>"; };
+		7E643F500B0A3E1E00192BFB /* Banner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Banner.png; sourceTree = "<group>"; };
 		7EBFF9200AEAB04F0067AD4A /* AfloatLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AfloatLoader.m; sourceTree = "<group>"; };
 		7EBFF9210AEAB04F0067AD4A /* AfloatLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AfloatLoader.h; sourceTree = "<group>"; };
 		7EBFF9540AEAB3170067AD4A /* AfloatPayload.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AfloatPayload.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EBFF9550AEAB3170067AD4A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Info.plist; sourceTree = "<group>"; };
 		7ED280920AED1EC8001D88D9 /* AfloatPayloadEntryPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AfloatPayloadEntryPoint.h; sourceTree = "<group>"; };
 		7ED280930AED1EC8001D88D9 /* AfloatPayloadEntryPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AfloatPayloadEntryPoint.m; sourceTree = "<group>"; };
+		7EDFF0850B09CB000009C47F /* Afloat.prefPane */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Afloat.prefPane; sourceTree = BUILT_PRODUCTS_DIR; };
+		7EDFF0A60B09CBBA0009C47F /* Afloat-Info.plist */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.xml; path = "Afloat-Info.plist"; sourceTree = "<group>"; };
+		7EDFF0B00B09CBF30009C47F /* AfloatPrefPane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AfloatPrefPane.h; sourceTree = "<group>"; };
+		7EDFF0B10B09CBF30009C47F /* AfloatPrefPane.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AfloatPrefPane.m; sourceTree = "<group>"; };
+		7EDFF0BB0B09CC540009C47F /* PreferencePanes.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PreferencePanes.framework; path = /System/Library/Frameworks/PreferencePanes.framework; sourceTree = "<absolute>"; };
+		7EDFF0C60B09CCBF0009C47F /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = PrefPane/English.lproj/PrefPane.nib; sourceTree = "<group>"; };
 		7EE461970B09007A001C629F /* AfloatWindowAlphaAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AfloatWindowAlphaAnimation.h; sourceTree = "<group>"; };
 		7EE461980B09007A001C629F /* AfloatWindowAlphaAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AfloatWindowAlphaAnimation.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -102,6 +122,15 @@
 			files = (
 				7E6204AF0AED3A2B0024513B /* Carbon.framework in Frameworks */,
 				7E6204AE0AED3A250024513B /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7EDFF0830B09CB000009C47F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7EDFF0970B09CB670009C47F /* Cocoa.framework in Frameworks */,
+				7EDFF0BE0B09CC540009C47F /* PreferencePanes.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -129,6 +158,7 @@
 		1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7EDFF0BB0B09CC540009C47F /* PreferencePanes.framework */,
 				7E6204150AED33AF0024513B /* Carbon.framework */,
 				7E2E64CD0AED2413009AFB28 /* mach_inject_bundle.framework */,
 				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
@@ -152,6 +182,7 @@
 				8D1107320486CEB800E47090 /* AfloatAgent.app */,
 				7EBFF9540AEAB3170067AD4A /* AfloatPayload.bundle */,
 				7E19DFA10AFDF295006F3EF9 /* AfloatAnimationTester */,
+				7EDFF0850B09CB000009C47F /* Afloat.prefPane */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -159,11 +190,10 @@
 		29B97314FDCFA39411CA2CEA /* AfloatAgent */ = {
 			isa = PBXGroup;
 			children = (
+				7EDFF0800B09CAD90009C47F /* PrefPane */,
+				7EDFF0780B09CA140009C47F /* Agent */,
 				7E19DFAE0AFDF2B3006F3EF9 /* AfloatAnimation Testing Playground */,
 				7EBFF9440AEAB2D00067AD4A /* Payload */,
-				080E96DDFE201D6D7F000001 /* Classes */,
-				29B97315FDCFA39411CA2CEA /* Other Sources */,
-				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 			);
@@ -245,6 +275,44 @@
 			name = Classes;
 			sourceTree = "<group>";
 		};
+		7EDFF0780B09CA140009C47F /* Agent */ = {
+			isa = PBXGroup;
+			children = (
+				29B97317FDCFA39411CA2CEA /* Resources */,
+				29B97315FDCFA39411CA2CEA /* Other Sources */,
+				080E96DDFE201D6D7F000001 /* Classes */,
+			);
+			name = Agent;
+			sourceTree = "<group>";
+		};
+		7EDFF0800B09CAD90009C47F /* PrefPane */ = {
+			isa = PBXGroup;
+			children = (
+				7EDFF0B80B09CC350009C47F /* Classes */,
+				7EDFF0A30B09CBA20009C47F /* Resources */,
+			);
+			path = PrefPane;
+			sourceTree = "<group>";
+		};
+		7EDFF0A30B09CBA20009C47F /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				7E643F500B0A3E1E00192BFB /* Banner.png */,
+				7EDFF0C50B09CCBF0009C47F /* PrefPane.nib */,
+				7EDFF0A60B09CBBA0009C47F /* Afloat-Info.plist */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		7EDFF0B80B09CC350009C47F /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				7EDFF0B00B09CBF30009C47F /* AfloatPrefPane.h */,
+				7EDFF0B10B09CBF30009C47F /* AfloatPrefPane.m */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -292,6 +360,25 @@
 			productReference = 7EBFF9540AEAB3170067AD4A /* AfloatPayload.bundle */;
 			productType = "com.apple.product-type.bundle";
 		};
+		7EDFF0840B09CB000009C47F /* Afloat */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7EDFF0870B09CB010009C47F /* Build configuration list for PBXNativeTarget "Afloat" */;
+			buildPhases = (
+				7EDFF0810B09CB000009C47F /* Resources */,
+				7EDFF0820B09CB000009C47F /* Sources */,
+				7EDFF0830B09CB000009C47F /* Frameworks */,
+				7EDFF08D0B09CB480009C47F /* Set Version from Subversion Revision */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7EDFF0AF0B09CBE20009C47F /* PBXTargetDependency */,
+			);
+			name = Afloat;
+			productName = Afloat;
+			productReference = 7EDFF0850B09CB000009C47F /* Afloat.prefPane */;
+			productType = "com.apple.product-type.bundle";
+		};
 		8D1107260486CEB800E47090 /* AfloatAgent */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "AfloatAgent" */;
@@ -327,6 +414,7 @@
 				8D1107260486CEB800E47090 /* AfloatAgent */,
 				7EBFF9530AEAB3170067AD4A /* AfloatPayload */,
 				7E19DFA00AFDF295006F3EF9 /* AfloatAnimationTester */,
+				7EDFF0840B09CB000009C47F /* Afloat */,
 			);
 		};
 /* End PBXProject section */
@@ -337,6 +425,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				7E56E61B0AF9DBBC00F41871 /* Hub.nib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7EDFF0810B09CB000009C47F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7EDFF0AB0B09CBD90009C47F /* AfloatAgent.app in Resources */,
+				7EDFF0C70B09CCBF0009C47F /* PrefPane.nib in Resources */,
+				7E643F510B0A3E1E00192BFB /* Banner.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -381,6 +479,20 @@
 			shellPath = "/usr/bin/perl -w";
 			shellScript = "# Xcode auto-versioning script for Subversion\n# by Axel Andersson, modified by Daniel Jalkut to add\n# \"--revision HEAD\" to the svn info line, which allows\n# the latest revision to always be used.\n\nuse strict;\n\ndie \"$0: Must be run from Xcode\" unless $ENV{\"BUILT_PRODUCTS_DIR\"};\n\n# Get the current subversion revision number and use it to set the CFBundleVersion value\nmy $REV = `/usr/local/bin/svnversion -n ./`;\nmy $INFO = \"$ENV{BUILT_PRODUCTS_DIR}/$ENV{WRAPPER_NAME}/Contents/Info.plist\";\n\nmy $version = $REV;\n\n# (Match the last group of digits and optional letter M/S):\n\n# ugly yet functional (barely) regex by Daniel Jalkut:\n#$version =~ s/([\\d]*:)(\\d+[M|S]*).*/$2/;\n\n# better yet still functional regex via Kevin \"Regex Nerd\" Ballard\n($version =~ m/\\d+[MS]*$/) && ($version = $&);\n\ndie \"$0: No Subversion revision found\" unless $version;\n\nopen(FH, \"$INFO\") or die \"$0: $INFO: $!\";\nmy $info = join(\"\", <FH>);\nclose(FH);\n\n$info =~ s/([\\t ]+<key>CFBundleVersion<\\/key>\\n[\\t ]+<string>).*?(<\\/string>)/$1$version$2/;\n\nopen(FH, \">$INFO\") or die \"$0: $INFO: $!\";\nprint FH $info;\nclose(FH);";
 		};
+		7EDFF08D0B09CB480009C47F /* Set Version from Subversion Revision */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Set Version from Subversion Revision";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = "/usr/bin/perl -w";
+			shellScript = "# Xcode auto-versioning script for Subversion\n# by Axel Andersson, modified by Daniel Jalkut to add\n# \"--revision HEAD\" to the svn info line, which allows\n# the latest revision to always be used.\n\nuse strict;\n\ndie \"$0: Must be run from Xcode\" unless $ENV{\"BUILT_PRODUCTS_DIR\"};\n\n# Get the current subversion revision number and use it to set the CFBundleVersion value\nmy $REV = `/usr/local/bin/svnversion -n ./`;\nmy $INFO = \"$ENV{BUILT_PRODUCTS_DIR}/$ENV{WRAPPER_NAME}/Contents/Info.plist\";\n\nmy $version = $REV;\n\n# (Match the last group of digits and optional letter M/S):\n\n# ugly yet functional (barely) regex by Daniel Jalkut:\n#$version =~ s/([\\d]*:)(\\d+[M|S]*).*/$2/;\n\n# better yet still functional regex via Kevin \"Regex Nerd\" Ballard\n($version =~ m/\\d+[MS]*$/) && ($version = $&);\n\ndie \"$0: No Subversion revision found\" unless $version;\n\nopen(FH, \"$INFO\") or die \"$0: $INFO: $!\";\nmy $info = join(\"\", <FH>);\nclose(FH);\n\n$info =~ s/([\\t ]+<key>CFBundleVersion<\\/key>\\n[\\t ]+<string>).*?(<\\/string>)/$1$version$2/;\n\nopen(FH, \">$INFO\") or die \"$0: $INFO: $!\";\nprint FH $info;\nclose(FH);";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -407,6 +519,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		7EDFF0820B09CB000009C47F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7EDFF0B20B09CBF30009C47F /* AfloatPrefPane.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8D11072C0486CEB800E47090 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -423,6 +543,11 @@
 			isa = PBXTargetDependency;
 			target = 7EBFF9530AEAB3170067AD4A /* AfloatPayload */;
 			targetProxy = 7EBFF9780AEAB4660067AD4A /* PBXContainerItemProxy */;
+		};
+		7EDFF0AF0B09CBE20009C47F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8D1107260486CEB800E47090 /* AfloatAgent */;
+			targetProxy = 7EDFF0AE0B09CBE20009C47F /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -449,6 +574,15 @@
 				7E56E61A0AF9DBBC00F41871 /* English */,
 			);
 			name = Hub.nib;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		7EDFF0C50B09CCBF0009C47F /* PrefPane.nib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7EDFF0C60B09CCBF0009C47F /* English */,
+			);
+			name = PrefPane.nib;
 			path = ..;
 			sourceTree = "<group>";
 		};
@@ -565,6 +699,56 @@
 			};
 			name = Release;
 		};
+		7EDFF0880B09CB010009C47F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INFOPLIST_FILE = "PrefPane/Afloat-Info.plist";
+				INSTALL_PATH = "$(HOME)/Library/Bundles";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = Afloat;
+				WRAPPER_EXTENSION = prefPane;
+				ZERO_LINK = YES;
+			};
+			name = Debug;
+		};
+		7EDFF0890B09CB010009C47F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INFOPLIST_FILE = "PrefPane/Afloat-Info.plist";
+				INSTALL_PATH = "$(HOME)/Library/Bundles";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = Afloat;
+				WRAPPER_EXTENSION = prefPane;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
 		C01FCF4B08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -648,6 +832,15 @@
 			buildConfigurations = (
 				7EBFF9570AEAB3180067AD4A /* Debug */,
 				7EBFF9580AEAB3180067AD4A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7EDFF0870B09CB010009C47F /* Build configuration list for PBXNativeTarget "Afloat" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7EDFF0880B09CB010009C47F /* Debug */,
+				7EDFF0890B09CB010009C47F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

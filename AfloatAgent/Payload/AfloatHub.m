@@ -31,6 +31,7 @@
 		[NSBundle loadNibNamed:@"Hub" owner:self];
 		
 		[self addObserver:self forKeyPath:@"focusedWindow.alphaValue" options:0 context:nil];
+		animating = NO;
 	}
 	
 	return self;
@@ -42,8 +43,10 @@
 	[super dealloc];
 }
 
-- (void)observeValueForKeyPath:(NSString*) keyPath ofObject:(id)object change:(NSDictionary*) change context:(void*) context {
+- (void)observeValueForKeyPath:(NSString*) keyPath ofObject:(id)object change:(NSDictionary*) change context:(void*) context {	
 	if ([keyPath isEqualToString:@"focusedWindow.alphaValue"]) {
+		if (animating) return;
+		
 		[[self infoForWindow:[self focusedWindow]] setObject:[NSNumber numberWithFloat:[[self focusedWindow] alphaValue]] forKey:@"AfloatLastAlphaValue"];
 		
 		if ([[self focusedWindow] alphaValue] >= 0.95)
@@ -119,11 +122,15 @@
 
 - (void) mouseEntered:(NSEvent*) theEvent {
 	[[self infoForWindow:[theEvent window]] setObject:[NSNumber numberWithFloat:[[theEvent window] alphaValue]] forKey:@"AfloatLastAlphaValue"];
+
+	NSLog(@"entered: %f", [[theEvent window] alphaValue]);
 	
+	animating = YES;
 	AfloatAnimator* ani = [[AfloatAnimator alloc] initWithApproximateDuration:0.75];
 	[ani addAnimation:[AfloatWindowAlphaAnimation animationForWindow:[theEvent window] fromAlpha:[[theEvent window] alphaValue] toAlpha:1.0]];
 	[ani run];
 	[ani release];
+	animating = NO;
 }
 
 - (void) mouseExited:(NSEvent*) theEvent {
@@ -131,10 +138,14 @@
 	if (num == nil) return;
 	float oldAlpha = [num floatValue];
 	
+	NSLog(@"exited: %@", num);
+	
+	animating = YES;
 	AfloatAnimator* ani = [[AfloatAnimator alloc] initWithApproximateDuration:0.75];
 	[ani addAnimation:[AfloatWindowAlphaAnimation animationForWindow:[theEvent window] fromAlpha:[[theEvent window] alphaValue] toAlpha:oldAlpha]];
 	[ani run];
 	[ani release];	
+	animating = NO;
 }
 
 @end
