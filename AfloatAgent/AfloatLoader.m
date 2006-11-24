@@ -12,6 +12,9 @@
 #import <sys/types.h>
 #import <mach_inject_bundle/mach_inject_bundle.h>
 
+#define kAfloatDidRequestDisablingNotification @"AfloatDidRequestDisablingNotification"
+#define kAfloatDistributedObjectIdentifier @"net.infinite-labs.Afloat"
+
 #define kAfloatDebug 1
 
 @implementation AfloatLoader
@@ -20,12 +23,20 @@
     [[[NSWorkspace sharedWorkspace] notificationCenter]
         addObserver:self selector:@selector(didLaunchApplication:) name:NSWorkspaceDidLaunchApplicationNotification object:nil];
 	
+	[[NSDistributedNotificationCenter defaultCenter] addObserver:self selector:@selector(didRequestDisabling:) name:kAfloatDidRequestDisablingNotification object:kAfloatDistributedObjectIdentifier];
+	
 	if (kAfloatDebug)
 		[[NSWorkspace sharedWorkspace] launchApplication:@"Calculator"];
 }
 
+- (void) didRequestDisabling:(NSNotification*) notif {
+	[[NSApplication sharedApplication] terminate:self];
+}
+
 - (void) dealloc {
     [[[NSWorkspace sharedWorkspace] notificationCenter] removeObserver:self];
+	[[NSDistributedNotificationCenter defaultCenter] removeObserver:self];
+	
     [super dealloc];
 }
 
