@@ -12,7 +12,11 @@
 #define AfloatPrefPane NetInfinite_LabsAfloatPrefPane
 
 @interface AfloatPrefPane : NSPreferencePane {
-
 }
+
+- (NSDictionary*) currentInfoForAfloatAgent;
+
+- (BOOL) afloatEnabled;
+- (void) setAfloatEnabled:(BOOL) isOn;
 
 @end

@@ -14,7 +14,7 @@
 
 @implementation AfloatCocoa
 
-// From SIMBL creator, ...
+// From SIMBL's creator, ...
 - (BOOL) renameSelector:(SEL) select ofClass:(Class) cls toNewSelector:(SEL) newSel {
     Method method = nil;
 	
