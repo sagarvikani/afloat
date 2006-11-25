@@ -120,6 +120,31 @@
 	return 0.8;
 }
 
+- (float) normalizedAlphaValueForValue:(float) val {
+    if (val > 1.0) return 1.0;
+    if (val < 0.1) return 0.1;
+    
+    return val;
+}
+
+- (IBAction) makeOpaque:(id) sender {
+    [[self focusedWindow] setAlphaValue:1.0];
+}
+
+- (IBAction) makeMediumTransparency:(id) sender {
+    [[self focusedWindow] setAlphaValue:[self mediumTransparencyAlphaValue]];
+}
+
+- (IBAction) lessTransparent:(id) sender {
+    float newVal = [[self focusedWindow] alphaValue] - 0.15;
+    [[self focusedWindow] setAlphaValue:[self normalizedAlphaValueForValue:newVal]];
+}
+
+- (IBAction) moreTransparent:(id) sender {
+    float newVal = [[self focusedWindow] alphaValue] + 0.15;
+    [[self focusedWindow] setAlphaValue:[self normalizedAlphaValueForValue:newVal]];
+}
+
 - (void) mouseEntered:(NSEvent*) theEvent {
 	[[self infoForWindow:[theEvent window]] setObject:[NSNumber numberWithFloat:[[theEvent window] alphaValue]] forKey:@"AfloatLastAlphaValue"];
 
