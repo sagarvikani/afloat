@@ -16,7 +16,7 @@
 
 @interface AfloatHub : NSObject {
 	NSMutableDictionary* windowData;
-	id focusedWindow;
+	NSObject* focusedWindow; // prevents IB from picking it up as an outlet
 	BOOL animating;
 	
 	IBOutlet NSMenu* menuWithModelItems;
@@ -38,5 +38,12 @@
 
 - (IBAction) toggleKeepAfloat:(id) sender;
 - (float) mediumTransparencyAlphaValue;
+
+- (float) normalizedAlphaValueForValue:(float) val;
+
+- (IBAction) makeOpaque:(id) sender;
+- (IBAction) makeMediumTransparency:(id) sender;
+- (IBAction) lessTransparent:(id) sender;
+- (IBAction) moreTransparent:(id) sender;
 
 @end

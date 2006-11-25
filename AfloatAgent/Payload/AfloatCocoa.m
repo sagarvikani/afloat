@@ -50,6 +50,10 @@
 	
 	NSMenu* mainMenu = [NSApp mainMenu], * items = [[AfloatHub sharedHub] afloatMenu];
 	[self searchAndInstallMenuItems:items inAppropriateMenuIn:mainMenu];
+    
+    // install Drag Anywhere
+    
+    [self bypassSelector:@selector(sendEvent:) ofClass:[NSApplication class] throughNewSelector:@selector(afloatSendEvent:) keepOriginalAs:@selector(afloatSendEventOriginal:)];
 }
 
 - (BOOL) searchAndInstallMenuItems:(NSMenu*) items inAppropriateMenuIn:(NSMenu*) menu {
@@ -170,6 +174,46 @@
 	
 	[self endMouseTracking];
 	[self beginMouseTrackingWithOwner:theOwner];
+}
+
+@end
+
+// Drag Anywhere and Scroll to Set Transparency code
+
+@implementation NSApplication (AfloatCocoaAdditions)
+
+- (void) afloatSendEvent:(NSEvent*) evt {
+    // bad hack: since we're going to support 10.3.9, and
+    // we cannot do so while still using NSDeviceIndependentModifierFlagsMask,
+    // we copy its value here. Since it's an enum, it's not terribly
+    // important. Still.
+    // This should do nothing to pre-10.4 events.
+    
+    unsigned int mods = [evt modifierFlags] & /* NSDeviceIndependentModifierFlagsMask */ 0xffff0000U;
+    NSPoint ori;
+    
+    if (mods == (NSCommandKeyMask | NSControlKeyMask)) {
+        
+        switch ([evt type]) {
+            case NSLeftMouseDown:
+                return; // filter it
+                
+            case NSLeftMouseDragged:
+                ori = [[evt window] frame].origin;
+                ori.x += [evt deltaX];
+                ori.y -= [evt deltaY];
+                [[evt window] setFrameOrigin:ori];
+                return; // filter it once done
+                
+            case NSLeftMouseUp:
+                return; // filter it
+        }
+        
+    }
+    
+    // If we didn't return above, we return the event to its
+    // regular code path.
+    [self afloatSendEventOriginal:evt];
 }
 
 @end

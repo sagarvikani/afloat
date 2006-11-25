@@ -26,9 +26,14 @@
 
 @interface NSObject (AfloatCocoaAdditions)
 - (void) afloatDeallocOriginal;
+- (void) afloatSendEventOriginal:(NSEvent*) evt;
 @end
 
 @interface NSWindow (AfloatCocoaAdditions)
 - (void) afloatDealloc;
 - (id) afloatTopWindow;
+@end
+
+@interface NSApplication (AfloatCocoaAdditions)
+- (void) afloatSendEvent:(NSEvent*) evt;
 @end
