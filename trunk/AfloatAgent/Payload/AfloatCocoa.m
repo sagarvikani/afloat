@@ -191,6 +191,7 @@
     
     unsigned int mods = [evt modifierFlags] & /* NSDeviceIndependentModifierFlagsMask */ 0xffff0000U;
     NSPoint ori;
+    AfloatHub* hub; id wnd;
     
     if (mods == (NSCommandKeyMask | NSControlKeyMask)) {
         
@@ -199,13 +200,24 @@
                 return; // filter it
                 
             case NSLeftMouseDragged:
-                ori = [[evt window] frame].origin;
+                hub = [AfloatHub sharedHub];
+                if (!(wnd = [hub focusedWindow])) return;
+                    
+                ori = [[hub focusedWindow] frame].origin;
                 ori.x += [evt deltaX];
                 ori.y -= [evt deltaY];
-                [[evt window] setFrameOrigin:ori];
+                [[hub focusedWindow] setFrameOrigin:ori];
                 return; // filter it once done
                 
             case NSLeftMouseUp:
+                return; // filter it
+                
+            case NSScrollWheel:
+                hub = [AfloatHub sharedHub];
+                float oldAlpha = [[hub focusedWindow] alphaValue];
+                [[hub focusedWindow] setAlphaValue:
+                    [hub normalizedAlphaValueForValue:oldAlpha + [evt deltaY] * 0.10]];
+                //NSRunAlertPanel(@"Opacita'",[NSString stringWithFormat:@"%f", [evt deltaY]],nil,nil,nil);
                 return; // filter it
         }
         
