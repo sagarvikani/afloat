@@ -37,7 +37,8 @@
 - (NSMenu*) afloatMenu;
 
 - (IBAction) toggleKeepAfloat:(id) sender;
-- (float) mediumTransparencyAlphaValue;
+- (float) mediumAlphaValue;
+- (float) adequateOverlayAlphaValue;
 
 - (float) normalizedAlphaValueForValue:(float) val;
 
@@ -45,5 +46,6 @@
 - (IBAction) makeMediumTransparency:(id) sender;
 - (IBAction) lessTransparent:(id) sender;
 - (IBAction) moreTransparent:(id) sender;
+- (IBAction) resetAllOverlays:(id) sender;
 
 @end

@@ -18,6 +18,9 @@
 - (void) setAlwaysOnTop:(BOOL) aot;
 - (void) beginMouseTrackingWithOwner:(id) owner;
 - (void) endMouseTracking;
+
+- (void) setOverlayWindow:(BOOL) ov;
+- (BOOL) overlayWindow;
 @end
 
 @interface AfloatImplementation : NSObject {}

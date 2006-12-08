@@ -6,6 +6,7 @@
                 makeMediumTransparency = id; 
                 makeOpaque = id; 
                 moreTransparent = id; 
+                resetAllOverlays = id; 
                 showAdjustEffectsPanel = id; 
                 toggleKeepAfloat = id; 
             }; 

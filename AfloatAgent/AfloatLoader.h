@@ -9,9 +9,16 @@
 
 
 #import <Cocoa/Cocoa.h>
+#import "AfloatAgentCommunication.h"
 
-@interface AfloatLoader : NSObject {}
+@interface AfloatLoader : NSObject <AfloatAgent> {
+	NSTimer* waitTimer;
+	NSMutableArray* doNotLoadList;
+}
 
 - (NSString*) pathToAfloatBundle;
+- (void) injectInAllApps;
+
+- (void) loadAfloatInApplicationWithPID:(NSNumber*) pidNumber bundleID:(NSString*) bundleID;
 
 @end

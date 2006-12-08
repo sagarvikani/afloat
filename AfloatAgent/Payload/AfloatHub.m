@@ -112,12 +112,16 @@
 		[win setAlphaValue:1.0];
 	} else {
 		[win setAlwaysOnTop:YES];
-		[win setAlphaValue:[self mediumTransparencyAlphaValue]];
+		[win setAlphaValue:[self mediumAlphaValue]];
 	}
 }
 
-- (float) mediumTransparencyAlphaValue {
+- (float) mediumAlphaValue {
 	return 0.8;
+}
+
+- (float) adequateOverlayAlphaValue {
+	return 0.4;
 }
 
 - (float) normalizedAlphaValueForValue:(float) val {
@@ -132,7 +136,7 @@
 }
 
 - (IBAction) makeMediumTransparency:(id) sender {
-    [[self focusedWindow] setAlphaValue:[self mediumTransparencyAlphaValue]];
+    [[self focusedWindow] setAlphaValue:[self mediumAlphaValue]];
 }
 
 - (IBAction) lessTransparent:(id) sender {
@@ -171,6 +175,19 @@
 	[ani run];
 	[ani release];	
 	animating = NO;
+}
+
+- (IBAction) resetAllOverlays:(id) sender {
+	NSEnumerator* enu = [[[AfloatImplementation sharedInstance] windows] objectEnumerator];
+	id window;
+	
+	while (window = [enu nextObject]) {
+		if (![window overlayWindow]) continue;
+		
+		[window setOverlayWindow:NO];
+		[window setAlwaysOnTop:NO];
+		[window setAlphaValue:1.0];
+	}
 }
 
 @end
