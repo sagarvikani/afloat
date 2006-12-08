@@ -114,6 +114,22 @@
 
 @implementation NSWindow (AfloatCocoaAdditions)
 
+- (BOOL) overlayWindow {
+	return [self ignoresMouseEvents];
+}
+
+- (void) setOverlayWindow:(BOOL) overlay {
+	if (overlay) {
+		[self setIgnoresMouseEvents:YES];
+		if ([self alphaValue] == 1.0) [self setAlphaValue:[[AfloatHub sharedHub] adequateOverlayAlphaValue]];
+		[self setAlwaysOnTop:YES];
+	} else {
+		[self setIgnoresMouseEvents:NO];
+		if ([self alphaValue] == [[AfloatHub sharedHub] adequateOverlayAlphaValue]) [self setAlphaValue:1.0];
+		[self setAlwaysOnTop:NO];
+	}
+}
+
 - (void) afloatDealloc {
 	[[AfloatHub sharedHub] willRemoveWindow:self];
 	[self endMouseTracking];
@@ -138,6 +154,8 @@
 
 
 - (void) beginMouseTrackingWithOwner:(id) owner {
+	if ([self overlayWindow]) return;
+	
 	NSMutableDictionary* myInfo = [[AfloatHub sharedHub] infoForWindow:self];
 	if ([[myInfo objectForKey:@"AfloatTrackingRectTagOwner"] nonretainedObjectValue] == owner) return;
 	

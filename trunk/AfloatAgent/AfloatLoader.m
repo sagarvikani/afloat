@@ -12,53 +12,73 @@
 #import <sys/types.h>
 #import <mach_inject_bundle/mach_inject_bundle.h>
 
-#define kAfloatDidRequestDisablingNotification @"AfloatDidRequestDisablingNotification"
-#define kAfloatDistributedObjectIdentifier @"net.infinite-labs.Afloat"
-
-#define kAfloatDebug 1
-
 @implementation AfloatLoader
 
 - (void) applicationDidFinishLaunching:(NSNotification*) notif {
     [[[NSWorkspace sharedWorkspace] notificationCenter]
         addObserver:self selector:@selector(didLaunchApplication:) name:NSWorkspaceDidLaunchApplicationNotification object:nil];
 	
-	[[NSDistributedNotificationCenter defaultCenter] addObserver:self selector:@selector(didRequestDisabling:) name:kAfloatDidRequestDisablingNotification object:kAfloatDistributedObjectIdentifier];
+	[[NSDistributedNotificationCenter defaultCenter] addObserver:self selector:@selector(ignoreApplicationWhenInjecting:) name:kAfloatAlreadyLoadedNotification object:nil];
 	
-	if (kAfloatDebug)
-		[[NSWorkspace sharedWorkspace] launchApplication:@"Calculator"];
-}
-
-- (void) didRequestDisabling:(NSNotification*) notif {
-	[[NSApplication sharedApplication] terminate:self];
-}
-
-- (void) dealloc {
-    [[[NSWorkspace sharedWorkspace] notificationCenter] removeObserver:self];
-	[[NSDistributedNotificationCenter defaultCenter] removeObserver:self];
+	NSConnection* con = [NSConnection defaultConnection];
+	[con setRootObject:self];
+	if (![con registerName:kAfloatDistributedObjectIdentifier])
+		[NSApp terminate:self];
 	
-    [super dealloc];
+	[self injectInAllApps];
 }
 
-- (NSString*) pathToAfloatBundle {
-    return [[NSBundle mainBundle] pathForResource:@"AfloatPayload" ofType:@"bundle"];
+// -----
+
+- (void) injectInAllApps {
+	waitTimer = [[NSTimer scheduledTimerWithTimeInterval:0.75 target:self selector:@selector(injectPhaseTwo:) userInfo:nil repeats:NO] retain];
+	doNotLoadList = [[NSMutableArray alloc] init];
 }
 
-- (void) didLaunchApplication:(NSNotification*) notif {
-    NSString* bundleIdentifier = [[notif userInfo] objectForKey:@"NSApplicationBundleIdentifier"];
+- (void) ignoreApplicationWhenInjecting:(NSNotification*) notif {
+	if (!waitTimer) return;
+	
+	NSString* s = [[notif userInfo] objectForKey:kAfloatApplicationBundleID];
+	if (s != nil) {
+		[doNotLoadList addObject:s];
+		[waitTimer invalidate];
+		[waitTimer release];
+		waitTimer = [[NSTimer scheduledTimerWithTimeInterval:0.75 target:self selector:@selector(injectPhaseTwo:) userInfo:nil repeats:NO] retain];
+	}
+}
 
-    if ([bundleIdentifier isEqual:@"com.apple.Xcode"] ||
-        [bundleIdentifier isEqual:@"com.apple.dock"] ||
-        [bundleIdentifier isEqual:@"com.apple.systempreferences"])
+- (void) injectPhaseTwo:(NSTimer*) timer {
+	[waitTimer release]; waitTimer = nil;
+	
+	NSEnumerator* enu = [[[NSWorkspace sharedWorkspace] launchedApplications] objectEnumerator];
+	NSDictionary* appData;
+	
+	while (appData = [enu nextObject]) {
+		NSString* bundleID = [appData objectForKey:@"NSApplicationBundleIdentifier"];
+		
+		if ([doNotLoadList containsObject:bundleID])
+			continue;
+		
+		[self loadAfloatInApplicationWithPID:[appData objectForKey:@"NSApplicationProcessIdentifier"] bundleID:bundleID];
+	}
+}
+
+- (void) loadAfloatInApplicationWithPID:(NSNumber*) pidNumber bundleID:(NSString*) bundleID {
+
+	// standard blacklist -- we NEVER load in these apps!
+	if ([bundleID isEqual:@"com.apple.Xcode"] ||
+        [bundleID isEqual:@"com.apple.dock"] ||
+        [bundleID isEqual:@"com.apple.systempreferences"])
         return;
-    
-    const char* fsRepToAfloatBundle = [[NSFileManager defaultManager] fileSystemRepresentationWithPath:[self pathToAfloatBundle]];
-
-    NSNumber* pidNumber = [[notif userInfo] objectForKey:@"NSApplicationProcessIdentifier"];
-        
-    pid_t pid = (pid_t) [pidNumber intValue];
+	
+	// get the native rep to the path to Afloat's bundle
+	const char* fsRepToAfloatBundle = [[NSFileManager defaultManager] fileSystemRepresentationWithPath:[self pathToAfloatBundle]];
+	
+	// grab the app's pid from the NSNumber*
+	pid_t pid = (pid_t) [pidNumber intValue];
     mach_error_t err = mach_inject_bundle_pid(fsRepToAfloatBundle, pid);
 	
+	// TODO remove logging from the shipping version
 	switch (err) {
 		case err_mach_inject_bundle_couldnt_find_inject_entry_symbol:
 			NSLog(@"err_mach_inject_bundle_couldnt_find_inject_entry_symbol");
@@ -76,12 +96,42 @@
 			NSLog(@"err_mach_inject_bundle_couldnt_load_injection_bundle");
 			break;
 		
+		case 0:
+			NSLog(@"Loaded without error");
+			break;
+			
 		default:
-			NSLog(@"altro errore o tutto ok: %d", err);
+			NSLog(@"error from mach_inject that I don't know: %d", err);
 			break;
 	}
-    
-    NSLog(@"%@", [[notif userInfo] descriptionInStringsFileFormat]);
+	
+	NSLog(@"Loaded in %@, with PID %@", bundleID, pidNumber);
+}
+
+// -----
+
+- (oneway void) disable {
+	[NSApp terminate:self];
+}
+
+- (void) dealloc {
+    [[[NSWorkspace sharedWorkspace] notificationCenter] removeObserver:self];
+	[[NSDistributedNotificationCenter defaultCenter] removeObserver:self];
+	[waitTimer release];
+	[doNotLoadList release];
+	
+    [super dealloc];
+}
+
+- (NSString*) pathToAfloatBundle {
+    return [[NSBundle mainBundle] pathForResource:@"AfloatPayload" ofType:@"bundle"];
+}
+
+- (void) didLaunchApplication:(NSNotification*) notif {
+    NSString* bundleIdentifier = [[notif userInfo] objectForKey:@"NSApplicationBundleIdentifier"];
+	NSNumber* pidNumber = [[notif userInfo] objectForKey:@"NSApplicationProcessIdentifier"];
+	
+	[self loadAfloatInApplicationWithPID:pidNumber bundleID:bundleIdentifier];
 }
 
 @end

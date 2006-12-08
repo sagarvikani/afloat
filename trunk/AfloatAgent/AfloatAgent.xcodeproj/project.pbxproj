@@ -91,6 +91,7 @@
 		7E62046F0AED37FC0024513B /* AfloatCarbon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AfloatCarbon.h; sourceTree = "<group>"; };
 		7E6204700AED37FC0024513B /* AfloatCarbon.m */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; fileEncoding = 4; path = AfloatCarbon.m; sourceTree = "<group>"; };
 		7E643F500B0A3E1E00192BFB /* Banner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Banner.png; sourceTree = "<group>"; };
+		7EA7E6EC0B295E7300D94E74 /* AfloatAgentCommunication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AfloatAgentCommunication.h; sourceTree = "<group>"; };
 		7EBFF9200AEAB04F0067AD4A /* AfloatLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AfloatLoader.m; sourceTree = "<group>"; };
 		7EBFF9210AEAB04F0067AD4A /* AfloatLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AfloatLoader.h; sourceTree = "<group>"; };
 		7EBFF9540AEAB3170067AD4A /* AfloatPayload.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AfloatPayload.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -152,8 +153,8 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				7EBFF9200AEAB04F0067AD4A /* AfloatLoader.m */,
 				7EBFF9210AEAB04F0067AD4A /* AfloatLoader.h */,
+				7EBFF9200AEAB04F0067AD4A /* AfloatLoader.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -194,6 +195,7 @@
 		29B97314FDCFA39411CA2CEA /* AfloatAgent */ = {
 			isa = PBXGroup;
 			children = (
+				7EA7E6EC0B295E7300D94E74 /* AfloatAgentCommunication.h */,
 				7EDFF0800B09CAD90009C47F /* PrefPane */,
 				7EDFF0780B09CA140009C47F /* Agent */,
 				7E19DFAE0AFDF2B3006F3EF9 /* AfloatAnimation Testing Playground */,
