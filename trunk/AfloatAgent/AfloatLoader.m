@@ -18,7 +18,7 @@
     [[[NSWorkspace sharedWorkspace] notificationCenter]
         addObserver:self selector:@selector(didLaunchApplication:) name:NSWorkspaceDidLaunchApplicationNotification object:nil];
 	
-	[[NSDistributedNotificationCenter defaultCenter] addObserver:self selector:@selector(ignoreApplicationWhenInjecting:) name:kAfloatAlreadyLoadedNotification object:nil];
+	[[NSDistributedNotificationCenter defaultCenter] addObserver:self selector:@selector(ignoreApplicationWhenInjecting:) name:kAfloatAlreadyLoadedNotification object:kAfloatDistributedObjectIdentifier];
 	
 	NSConnection* con = [NSConnection defaultConnection];
 	[con setRootObject:self];
@@ -31,6 +31,8 @@
 // -----
 
 - (void) injectInAllApps {
+	[[NSDistributedNotificationCenter defaultCenter] postNotificationName:kAfloatRollCallNotification object:kAfloatDistributedObjectIdentifier userInfo:nil deliverImmediately:YES];
+	
 	waitTimer = [[NSTimer scheduledTimerWithTimeInterval:0.75 target:self selector:@selector(injectPhaseTwo:) userInfo:nil repeats:NO] retain];
 	doNotLoadList = [[NSMutableArray alloc] init];
 }
@@ -61,6 +63,8 @@
 		
 		[self loadAfloatInApplicationWithPID:[appData objectForKey:@"NSApplicationProcessIdentifier"] bundleID:bundleID];
 	}
+	
+	[doNotLoadList release]; doNotLoadList = nil;
 }
 
 - (void) loadAfloatInApplicationWithPID:(NSNumber*) pidNumber bundleID:(NSString*) bundleID {

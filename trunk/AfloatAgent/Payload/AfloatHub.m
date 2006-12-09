@@ -10,7 +10,7 @@
  *  Please see the included LICENSE file for details.
  */
 
-
+#import "../AfloatAgentCommunication.h"
 #import "AfloatHub.h"
 
 #import "AfloatAnimator.h"
@@ -32,13 +32,24 @@
 		
 		[self addObserver:self forKeyPath:@"focusedWindow.alphaValue" options:0 context:nil];
 		animating = NO;
+		
+		[[NSDistributedNotificationCenter defaultCenter] addObserver:self selector:@selector(respondToRollCall:) name:kAfloatRollCallNotification object:kAfloatDistributedObjectIdentifier];
 	}
 	
 	return self;
 }
 
+- (void) respondToRollCall:(NSNotification*) notif {
+	NSDictionary* info = [NSDictionary dictionaryWithObject:[[NSBundle mainBundle] bundleIdentifier] forKey:kAfloatApplicationBundleID];
+	
+	[[NSDistributedNotificationCenter defaultCenter] 
+		postNotificationName:kAfloatAlreadyLoadedNotification object:kAfloatDistributedObjectIdentifier userInfo:info deliverImmediately:YES];
+}
+
 - (void) dealloc {
 	[self removeObserver:self forKeyPath:@"focusedWindow.alphaValue"];
+	[[NSDistributedNotificationCenter defaultCenter] removeObserver:self];
+	
 	[windowData release];
 	[super dealloc];
 }
@@ -150,13 +161,16 @@
 }
 
 - (void) mouseEntered:(NSEvent*) theEvent {
-	[[self infoForWindow:[theEvent window]] setObject:[NSNumber numberWithFloat:[[theEvent window] alphaValue]] forKey:@"AfloatLastAlphaValue"];
+	id window = [theEvent window];
+	if ([window overlayWindow] && !temporarilyTrackingOverlays) return;
+	
+	[[self infoForWindow:window] setObject:[NSNumber numberWithFloat:[window alphaValue]] forKey:@"AfloatLastAlphaValue"];
 
-	NSLog(@"entered: %f", [[theEvent window] alphaValue]);
+	// NSLog(@"entered: %f", [[theEvent window] alphaValue]);
 	
 	animating = YES;
-	AfloatAnimator* ani = [[AfloatAnimator alloc] initWithApproximateDuration:0.75];
-	[ani addAnimation:[AfloatWindowAlphaAnimation animationForWindow:[theEvent window] fromAlpha:[[theEvent window] alphaValue] toAlpha:1.0]];
+	AfloatAnimator* ani = [[AfloatAnimator alloc] initWithApproximateDuration:0.35];
+	[ani addAnimation:[AfloatWindowAlphaAnimation animationForWindow:window fromAlpha:[window alphaValue] toAlpha:1.0]];
 	[ani run];
 	[ani release];
 	animating = NO;
@@ -170,7 +184,7 @@
 	NSLog(@"exited: %@", num);
 	
 	animating = YES;
-	AfloatAnimator* ani = [[AfloatAnimator alloc] initWithApproximateDuration:0.75];
+	AfloatAnimator* ani = [[AfloatAnimator alloc] initWithApproximateDuration:0.35];
 	[ani addAnimation:[AfloatWindowAlphaAnimation animationForWindow:[theEvent window] fromAlpha:[[theEvent window] alphaValue] toAlpha:oldAlpha]];
 	[ani run];
 	[ani release];	
@@ -188,6 +202,42 @@
 		[window setAlwaysOnTop:NO];
 		[window setAlphaValue:1.0];
 	}
+}
+
+- (void) beginTemporaryTrackingOfOverlays {
+	temporarilyTrackingOverlays = YES;
+	
+	NSEnumerator* enu = [[[AfloatImplementation sharedInstance] windows] objectEnumerator];
+	id wnd;
+	
+	while (wnd = [enu nextObject]) {
+		if (![wnd overlayWindow])
+			continue;
+		
+		[[self infoForWindow:wnd] setObject:[NSNumber numberWithBool:YES] forKey:@"AfloatIsTemporarilyTracked"];
+		[wnd setOverlayWindow:NO];
+	}
+}
+
+- (void) endTemporaryTrackingOfOverlays {
+	if (!temporarilyTrackingOverlays) return;
+	temporarilyTrackingOverlays = NO;
+	
+	NSEnumerator* enu = [[[AfloatImplementation sharedInstance] windows] objectEnumerator];
+	id wnd;
+	
+	while (wnd = [enu nextObject]) {
+		NSMutableDictionary* d = [self infoForWindow:wnd];
+		if (![d objectForKey:@"AfloatIsTemporarilyTracked"])
+			continue;
+		
+		[d removeObjectForKey:@"AfloatIsTemporarilyTracked"];
+		[wnd setOverlayWindow:YES];
+	}
+}
+
+- (BOOL) isTemporarilyTrackingOverlays {
+	return temporarilyTrackingOverlays;
 }
 
 @end

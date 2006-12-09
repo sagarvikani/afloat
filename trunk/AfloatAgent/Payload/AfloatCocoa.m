@@ -7,6 +7,7 @@
  *  Please see the included LICENSE file for details.
  */
 
+#import "../AfloatAgentCommunication.h"
 #import "AfloatCocoa.h"
 
 #import <objc/objc-class.h>
@@ -28,7 +29,6 @@
 
 - (BOOL) bypassSelector:(SEL) original ofClass:(Class) cls throughNewSelector:(SEL) newSel keepOriginalAs:(SEL) kept {
 	BOOL res = [self renameSelector:original ofClass:cls toNewSelector:kept];
-
 	if (res)
 		res = [self renameSelector:newSel ofClass:cls toNewSelector:original];
 	
@@ -42,7 +42,7 @@
 - (void) install {
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didChangeFocusedWindow:) name:NSWindowDidBecomeMainNotification object:nil];
 	
-	[self bypassSelector:@selector(dealloc) ofClass:[NSWindow class] throughNewSelector:@selector(afloatDealloc) keepOriginalAs:@selector(afloatDeallocOriginal)];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willCloseWindow:) name:NSWindowWillCloseNotification object:nil];
 	
 	[[AfloatHub sharedHub] setFocusedWindow:[[NSApp mainWindow] afloatTopWindow]];	
 	
@@ -90,6 +90,10 @@
 	[[AfloatHub sharedHub] setFocusedWindow:[notif object]];
 }
 
+- (void) willCloseWindow:(NSNotification*) notif {
+	[[AfloatHub sharedHub] willRemoveWindow:[notif object]];
+}
+
 - (void) dealloc {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[super dealloc];
@@ -130,12 +134,6 @@
 	}
 }
 
-- (void) afloatDealloc {
-	[[AfloatHub sharedHub] willRemoveWindow:self];
-	[self endMouseTracking];
-	[self afloatDeallocOriginal];
-}
-
 - (id) afloatTopWindow {
 	NSWindow* me = self;
 	while ([me parentWindow])
@@ -154,8 +152,6 @@
 
 
 - (void) beginMouseTrackingWithOwner:(id) owner {
-	if ([self overlayWindow]) return;
-	
 	NSMutableDictionary* myInfo = [[AfloatHub sharedHub] infoForWindow:self];
 	if ([[myInfo objectForKey:@"AfloatTrackingRectTagOwner"] nonretainedObjectValue] == owner) return;
 	
@@ -209,7 +205,7 @@
     
     unsigned int mods = [evt modifierFlags] & /* NSDeviceIndependentModifierFlagsMask */ 0xffff0000U;
     NSPoint ori;
-    AfloatHub* hub; id wnd;
+    AfloatHub* hub = [AfloatHub sharedHub]; id wnd; float oldAlpha;
     
     if (mods == (NSCommandKeyMask | NSControlKeyMask)) {
         
@@ -218,7 +214,6 @@
                 return; // filter it
                 
             case NSLeftMouseDragged:
-                hub = [AfloatHub sharedHub];
                 if (!(wnd = [hub focusedWindow])) return;
                     
                 ori = [[hub focusedWindow] frame].origin;
@@ -231,15 +226,22 @@
                 return; // filter it
                 
             case NSScrollWheel:
-                hub = [AfloatHub sharedHub];
-                float oldAlpha = [[hub focusedWindow] alphaValue];
+                oldAlpha = [[hub focusedWindow] alphaValue];
                 [[hub focusedWindow] setAlphaValue:
                     [hub normalizedAlphaValueForValue:oldAlpha + [evt deltaY] * 0.10]];
                 //NSRunAlertPanel(@"Opacita'",[NSString stringWithFormat:@"%f", [evt deltaY]],nil,nil,nil);
                 return; // filter it
+				
+			// command-click to allow overlay window manipulation.
+			case NSFlagsChanged:
+				[hub beginTemporaryTrackingOfOverlays];
+				break; // we don't filter this event, merely add to it.
         }
         
-    }
+    } else if ([hub isTemporarilyTrackingOverlays] && [evt type] == NSFlagsChanged) {
+		[hub endTemporaryTrackingOfOverlays];
+		// we don't filter this event, merely add to it.
+	}
     
     // If we didn't return above, we return the event to its
     // regular code path.

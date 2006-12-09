@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7E06E8320B2A0048000A3440 /* GetApplicationFlavor.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E06E8310B2A0048000A3440 /* GetApplicationFlavor.m */; };
 		7E19DFA40AFDF2A6006F3EF9 /* AfloatAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E4F5D180AFD1FDE00102CBA /* AfloatAnimator.m */; };
 		7E19DFB30AFDF2DC006F3EF9 /* main-AfloatAnimationTester.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E19DFAF0AFDF2D2006F3EF9 /* main-AfloatAnimationTester.m */; };
 		7E258CA40AF356CD006931A7 /* AfloatHub.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E258CA30AF356CD006931A7 /* AfloatHub.m */; };
@@ -75,6 +76,8 @@
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		32CA4F630368D1EE00C91783 /* AfloatAgent_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AfloatAgent_Prefix.pch; sourceTree = "<group>"; };
+		7E06E8300B2A0048000A3440 /* GetApplicationFlavor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetApplicationFlavor.h; sourceTree = "<group>"; };
+		7E06E8310B2A0048000A3440 /* GetApplicationFlavor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetApplicationFlavor.m; sourceTree = "<group>"; };
 		7E19DFA10AFDF295006F3EF9 /* AfloatAnimationTester */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = AfloatAnimationTester; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E19DFAF0AFDF2D2006F3EF9 /* main-AfloatAnimationTester.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "main-AfloatAnimationTester.m"; sourceTree = "<group>"; };
 		7E258CA20AF356CD006931A7 /* AfloatHub.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AfloatHub.h; sourceTree = "<group>"; };
@@ -277,6 +280,8 @@
 				7E258CA30AF356CD006931A7 /* AfloatHub.m */,
 				7E4F5D170AFD1FDE00102CBA /* AfloatAnimator.h */,
 				7E4F5D180AFD1FDE00102CBA /* AfloatAnimator.m */,
+				7E06E8300B2A0048000A3440 /* GetApplicationFlavor.h */,
+				7E06E8310B2A0048000A3440 /* GetApplicationFlavor.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -522,6 +527,7 @@
 				7E258CA40AF356CD006931A7 /* AfloatHub.m in Sources */,
 				7E4F5D190AFD1FDE00102CBA /* AfloatAnimator.m in Sources */,
 				7EE461990B09007A001C629F /* AfloatWindowAlphaAnimation.m in Sources */,
+				7E06E8320B2A0048000A3440 /* GetApplicationFlavor.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,6 +9,8 @@
 
 #define kAfloatDistributedObjectIdentifier @"net.infinite-labs.Afloat.Agent.DO"
 
+#define kAfloatRollCallNotification @"AfloatRollCallNotification"
+
 #define kAfloatAlreadyLoadedNotification @"AfloatAlreadyLoadedNotification"
 #define kAfloatApplicationBundleID @"AfloatApplicationBundleID"
 

@@ -6,6 +6,8 @@
 //  Copyright 2006 __MyCompanyName__. All rights reserved.
 //
 
+#import "../AfloatAgentCommunication.h"
+
 #import "AfloatPrefPane.h"
 #import <unistd.h>
 #import <signal.h>
@@ -17,7 +19,7 @@
 
 - (void) didSelect {
 	[super didSelect];
-	
+	[self willChangeValueForKey:@"afloatEnabled"]; [self didChangeValueForKey:@"afloatEnabled"];
 }
 
 - (BOOL) afloatEnabled {
@@ -37,11 +39,17 @@
 	return nil;
 }
 
+- (id <AfloatAgent>) afloatAgent {
+	id x = [NSConnection rootProxyForConnectionWithRegisteredName:kAfloatDistributedObjectIdentifier host:nil];
+	[x setProtocolForProxy:@protocol(AfloatAgent)];
+	return x;
+}
+
 - (void) setAfloatEnabled:(BOOL) enabled {
 	if (enabled == NO) {
 		if (![self afloatEnabled]) return;
 		
-		[[NSDistributedNotificationCenter defaultCenter] postNotificationName:@"AfloatDidRequestDisablingNotification" object:@"net.infinite-labs.Afloat" userInfo:nil deliverImmediately:YES];
+		[[self afloatAgent] disable];
 	
 		sleep(1); // we give it time to die gracefully
 
