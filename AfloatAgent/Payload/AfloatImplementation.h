@@ -21,6 +21,9 @@
 
 - (void) setOverlayWindow:(BOOL) ov;
 - (BOOL) overlayWindow;
+
+- (void) setIgnoresMouseEvents:(BOOL) ime;
+- (BOOL) ignoresMouseEvents;
 @end
 
 @interface AfloatImplementation : NSObject {}

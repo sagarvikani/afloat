@@ -21,6 +21,8 @@
 	
 	IBOutlet NSMenu* menuWithModelItems;
 	IBOutlet NSPanel* adjustEffectsPanel;
+	
+	BOOL temporarilyTrackingOverlays;
 }
 
 + (id) sharedHub;
@@ -47,5 +49,9 @@
 - (IBAction) lessTransparent:(id) sender;
 - (IBAction) moreTransparent:(id) sender;
 - (IBAction) resetAllOverlays:(id) sender;
+
+- (void) beginTemporaryTrackingOfOverlays;
+- (void) endTemporaryTrackingOfOverlays;
+- (BOOL) isTemporarilyTrackingOverlays;
 
 @end

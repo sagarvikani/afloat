@@ -18,6 +18,8 @@
 #import "AfloatCarbon.h"
 #import "AfloatCocoa.h"
 
+#import "GetApplicationFlavor.h"
+
 void AfloatPayloadEntryPoint() /* __attribute__((constructor)) */ {	
 	// we ensure that Afloat gets installed in the main thread of the
 	// app. NSApp == nil might not work, but is a good indicator of
@@ -27,7 +29,7 @@ void AfloatPayloadEntryPoint() /* __attribute__((constructor)) */ {
 	
 	Class implClass = nil;
 	
-	if (NSApp != nil)
+	if (GetApplicationFlavor() == kCocoaApplicationFlavor)
 		implClass = [AfloatCocoa class];
 	else
 		implClass = [AfloatCarbon class];
