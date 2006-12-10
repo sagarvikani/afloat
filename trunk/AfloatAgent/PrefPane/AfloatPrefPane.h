@@ -1,10 +1,15 @@
 //
 //  AfloatPrefPane.h
 //  AfloatAgent
-//
-//  Created by ∞ on 14/11/06.
-//  Copyright 2006 __MyCompanyName__. All rights reserved.
-//
+
+/*
+ *  This file is part of Afloat and is © Emanuele Vulcano, 2006.
+ *  <afloat@infinite-labs.net>
+ *  
+ *  Afloat's source code is licensed under a BSD license.
+ *  Please see the included LICENSE file for details.
+ */
+
 
 #import <Cocoa/Cocoa.h>
 #import <PreferencePanes/PreferencePanes.h>
@@ -14,7 +19,8 @@
 @interface AfloatPrefPane : NSPreferencePane {
 }
 
-- (NSDictionary*) currentInfoForAfloatAgent;
+- (pid_t) processIDForAfloatAgent;
+- (id <AfloatAgent>) afloatAgent;
 
 - (BOOL) afloatEnabled;
 - (void) setAfloatEnabled:(BOOL) isOn;

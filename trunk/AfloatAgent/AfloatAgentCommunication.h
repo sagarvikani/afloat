@@ -7,6 +7,8 @@
  *  Please see the included LICENSE file for details.
  */
 
+#import <sys/types.h>
+
 #define kAfloatDistributedObjectIdentifier @"net.infinite-labs.Afloat.Agent.DO"
 
 #define kAfloatRollCallNotification @"AfloatRollCallNotification"
@@ -17,5 +19,6 @@
 @protocol AfloatAgent
 
 - (oneway void) disable;
+- (pid_t) processID;
 
 @end
