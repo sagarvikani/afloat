@@ -1,10 +1,15 @@
 //
 //  AfloatPrefPane.m
 //  AfloatAgent
-//
-//  Created by ∞ on 14/11/06.
-//  Copyright 2006 __MyCompanyName__. All rights reserved.
-//
+
+/*
+ *  This file is part of Afloat and is © Emanuele Vulcano, 2006.
+ *  <afloat@infinite-labs.net>
+ *  
+ *  Afloat's source code is licensed under a BSD license.
+ *  Please see the included LICENSE file for details.
+ */
+
 
 #import "../AfloatAgentCommunication.h"
 
@@ -23,20 +28,17 @@
 }
 
 - (BOOL) afloatEnabled {
-	return [self currentInfoForAfloatAgent] != nil;
+	return [self processIDForAfloatAgent] != 0;
 }
 
-- (NSDictionary*) currentInfoForAfloatAgent {
-	NSArray* runningApps = [[NSWorkspace sharedWorkspace] launchedApplications];
-	NSEnumerator* enu = [runningApps objectEnumerator];
-	NSDictionary* it;
-	
-	while (it = [enu nextObject]) {
-		if ([[it objectForKey:@"NSApplicationBundleIdentifier"] isEqualToString:kAfloatAgentBundleIdentifier])
-			return it;
+- (pid_t) processIDForAfloatAgent {
+	@try {
+		id <AfloatAgent> agent = [self afloatAgent];
+		return [agent processID];
+	} @catch (NSException* ex) {
 	}
 	
-	return nil;
+	return (pid_t)0;
 }
 
 - (id <AfloatAgent>) afloatAgent {
@@ -53,13 +55,8 @@
 	
 		sleep(1); // we give it time to die gracefully
 
-		NSDictionary* info;
-		if (info = [self currentInfoForAfloatAgent]) {
-			pid_t agentPID;
-			NSNumber* n = [info objectForKey:@"NSApplicationProcessIdentifier"];
-			if (!n) return;
-			
-			agentPID = [n longValue];
+		pid_t agentPID = [self processIDForAfloatAgent];
+		if (agentPID != 0) {
 			kill(agentPID, SIGKILL);
 			
 			NSAlert* agentWasKilled = [[NSAlert new] autorelease];

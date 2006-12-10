@@ -118,6 +118,12 @@
 	[NSApp terminate:self];
 }
 
+- (pid_t) processID {
+	return getpid();
+}
+
+// -----
+
 - (void) dealloc {
     [[[NSWorkspace sharedWorkspace] notificationCenter] removeObserver:self];
 	[[NSDistributedNotificationCenter defaultCenter] removeObserver:self];
