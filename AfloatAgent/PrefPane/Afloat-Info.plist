@@ -6,10 +6,14 @@
 	<string>English</string>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
+	<key>NSPrefPaneIconFile</key>
+	<string>Afloat.png</string>
 	<key>CFBundleIdentifier</key>
 	<string>net.infinite-labs.Afloat</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>Afloat</string>
 	<key>CFBundlePackageType</key>
 	<string>BNDL</string>
 	<key>CFBundleSignature</key>
@@ -20,9 +24,5 @@
 	<string>PrefPane</string>
 	<key>NSPrincipalClass</key>
 	<string>NetInfinite_LabsAfloatPrefPane</string>
-	
-	<key>CFBundleName</key>
-	<string>Afloat</string>
-	
 </dict>
 </plist>

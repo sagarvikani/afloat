@@ -14,6 +14,8 @@
 #import <Cocoa/Cocoa.h>
 #import <PreferencePanes/PreferencePanes.h>
 
+#import "../AfloatAgentCommunication.h"
+
 #define AfloatPrefPane NetInfinite_LabsAfloatPrefPane
 
 @interface AfloatPrefPane : NSPreferencePane {
@@ -24,5 +26,9 @@
 
 - (BOOL) afloatEnabled;
 - (void) setAfloatEnabled:(BOOL) isOn;
+
+- (BOOL) requiresAuthorization;
+- (BOOL) canProceedWithEnablingWithUIAllowed:(BOOL) canAsk;
+- (BOOL) authorize;
 
 @end
