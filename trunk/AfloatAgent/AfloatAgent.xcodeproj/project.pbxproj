@@ -14,6 +14,8 @@
 		7E27317E0B2E0C8B007ED7AD /* Afloat.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E27317D0B2E0C8B007ED7AD /* Afloat.png */; };
 		7E2E64CE0AED2413009AFB28 /* mach_inject_bundle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E2E64CD0AED2413009AFB28 /* mach_inject_bundle.framework */; };
 		7E2E65320AED269B009AFB28 /* mach_inject_bundle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7E2E64CD0AED2413009AFB28 /* mach_inject_bundle.framework */; };
+		7E4B9F660B2E982100DD20D9 /* AfloatPaneIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 7E4B9F650B2E982100DD20D9 /* AfloatPaneIcon.icns */; };
+		7E4B9F720B2E9B3000DD20D9 /* AfloatAgentIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 7E4B9F710B2E9B3000DD20D9 /* AfloatAgentIcon.icns */; };
 		7E4F5D190AFD1FDE00102CBA /* AfloatAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E4F5D180AFD1FDE00102CBA /* AfloatAnimator.m */; };
 		7E56E61B0AF9DBBC00F41871 /* Hub.nib in Resources */ = {isa = PBXBuildFile; fileRef = 7E56E6190AF9DBBC00F41871 /* Hub.nib */; };
 		7E578CEF0AEE925C0039B11D /* AfloatImplementation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E578CEE0AEE925C0039B11D /* AfloatImplementation.m */; };
@@ -87,6 +89,8 @@
 		7E258CA30AF356CD006931A7 /* AfloatHub.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AfloatHub.m; sourceTree = "<group>"; };
 		7E27317D0B2E0C8B007ED7AD /* Afloat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Afloat.png; sourceTree = "<group>"; };
 		7E2E64CD0AED2413009AFB28 /* mach_inject_bundle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = mach_inject_bundle.framework; sourceTree = "<group>"; };
+		7E4B9F650B2E982100DD20D9 /* AfloatPaneIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = AfloatPaneIcon.icns; sourceTree = "<group>"; };
+		7E4B9F710B2E9B3000DD20D9 /* AfloatAgentIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = AfloatAgentIcon.icns; sourceTree = "<group>"; };
 		7E4F5D170AFD1FDE00102CBA /* AfloatAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AfloatAnimator.h; sourceTree = "<group>"; };
 		7E4F5D180AFD1FDE00102CBA /* AfloatAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AfloatAnimator.m; sourceTree = "<group>"; };
 		7E56E61A0AF9DBBC00F41871 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = Payload/English.lproj/Hub.nib; sourceTree = "<group>"; };
@@ -228,6 +232,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				7E4B9F710B2E9B3000DD20D9 /* AfloatAgentIcon.icns */,
 				8D1107310486CEB800E47090 /* Info.plist */,
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
 				29B97318FDCFA39411CA2CEA /* MainMenu.nib */,
@@ -315,6 +320,7 @@
 		7EDFF0A30B09CBA20009C47F /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				7E4B9F650B2E982100DD20D9 /* AfloatPaneIcon.icns */,
 				7E27317D0B2E0C8B007ED7AD /* Afloat.png */,
 				7E643F500B0A3E1E00192BFB /* Banner.png */,
 				7EDFF0C50B09CCBF0009C47F /* PrefPane.nib */,
@@ -457,6 +463,7 @@
 				7EDFF0AB0B09CBD90009C47F /* Afloat Agent.app in Resources */,
 				7EDFF0C70B09CCBF0009C47F /* PrefPane.nib in Resources */,
 				7E643F510B0A3E1E00192BFB /* Banner.png in Resources */,
+				7E4B9F660B2E982100DD20D9 /* AfloatPaneIcon.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -467,6 +474,7 @@
 				7EBFF97C0AEAB4760067AD4A /* AfloatPayload.bundle in Resources */,
 				8D11072A0486CEB800E47090 /* MainMenu.nib in Resources */,
 				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
+				7E4B9F720B2E9B3000DD20D9 /* AfloatAgentIcon.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -833,6 +841,10 @@
 		C01FCF5008A954540054247B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = (
+					ppc,
+					i386,
+				);
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
