@@ -81,7 +81,7 @@ This file is part of Afloat.
 		return NO;
 	}
 	
-	return (minor >= 4 && build >= 6); // i386 10.4.6 and later.
+	return (minor >= 4 && build >= 4); // i386 10.4.4 and later.
 #else
 	return NO; // no need to check this on PPC
 #endif
