@@ -68,7 +68,7 @@ static BOOL AfloatApplicationIsNative(pid_t pid)
         return NO;
     }
 	
-    return ret == 0;
+    return ret != 0;
 #else
 	return YES;
 #endif
