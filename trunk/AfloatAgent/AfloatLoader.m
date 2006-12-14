@@ -15,8 +15,64 @@ This file is part of Afloat.
 
 #import "AfloatLoader.h"
 
+#import <sys/sysctl.h>
 #import <sys/types.h>
 #import <mach_inject_bundle/mach_inject_bundle.h>
+
+// From the Rosetta article in Apple's Universal Binary
+// Programming Guidelines, second edition.
+static int sysctlbyname_with_pid (const char *name, pid_t pid, 
+								  void *oldp, size_t *oldlenp, 
+								  void *newp, size_t newlen)
+{
+    if (pid == 0) {
+        if (sysctlbyname(name, oldp, oldlenp, newp, newlen) == -1)  {
+            fprintf(stderr, "sysctlbyname_with_pid(0): sysctlbyname  failed:"
+					"%s\n", strerror(errno));
+            return -1;
+        }
+    } else {
+        int mib[CTL_MAXNAME];
+        size_t len = CTL_MAXNAME;
+        if (sysctlnametomib(name, mib, &len) == -1) {
+            fprintf(stderr, "sysctlbyname_with_pid: sysctlnametomib  failed:"
+					"%s\n", strerror(errno));
+            return -1;
+        }
+        mib[len] = pid;
+        len++;
+        if (sysctl(mib, len, oldp, oldlenp, newp, newlen) == -1)  {
+            fprintf(stderr, "sysctlbyname_with_pid: sysctl  failed:"
+                    "%s\n", strerror(errno));
+            return -1;
+        }
+    }
+    return 0;
+}
+
+static BOOL AfloatApplicationIsNative(pid_t pid)
+{
+#if defined(__i386__)
+    int ret = 0;
+    size_t sz = sizeof(ret);
+	
+    if (sysctlbyname_with_pid("sysctl.proc_native", pid, 
+							  &ret, &sz, NULL, 0) == -1) {
+		if (errno == ENOENT) {
+            // sysctl doesn't exist, which means that this version of Mac OS 
+            // pre-dates Rosetta, so the application must be native.
+            return YES;
+        }
+        fprintf(stderr, "(is_pid_native) AfloatApplicationIsNative: sysctlbyname_with_pid  failed:" 
+                "%s\n", strerror(errno));
+        return NO;
+    }
+	
+    return ret == 0;
+#else
+	return YES;
+#endif
+}
 
 @implementation AfloatLoader
 
@@ -80,13 +136,20 @@ This file is part of Afloat.
         [bundleID isEqual:@"com.apple.dock"] ||
         [bundleID isEqual:@"com.apple.systempreferences"])
         return;
-	
-	// get the native rep to the path to Afloat's bundle
-	const char* fsRepToAfloatBundle = [[NSFileManager defaultManager] fileSystemRepresentationWithPath:[self pathToAfloatBundle]];
-	
+		
 	// grab the app's pid from the NSNumber*
 	pid_t pid = (pid_t) [pidNumber intValue];
-    mach_error_t err = mach_inject_bundle_pid(fsRepToAfloatBundle, pid);
+
+	// fix -- Rosetta and Afloat don't mix well, so we do nothing on nonnative apps
+	if (!AfloatApplicationIsNative(pid))
+		return;
+		
+	// get the native rep to the path to Afloat's bundle
+	const char* fsRepToAfloatBundle = [[NSFileManager defaultManager] fileSystemRepresentationWithPath:[self pathToAfloatBundle]];		
+
+	// do it!
+	mach_error_t err = mach_inject_bundle_pid(fsRepToAfloatBundle, pid);
+
 	
 	// TODO remove logging from the shipping version
 	switch (err) {
