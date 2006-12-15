@@ -59,4 +59,6 @@ This file is part of Afloat.
 - (void) endTemporaryTrackingOfOverlays;
 - (BOOL) isTemporarilyTrackingOverlays;
 
+- (IBAction) toggleAlwaysOnTop:(id) sender;
+
 @end

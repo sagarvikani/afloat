@@ -8,6 +8,7 @@
                 moreTransparent = id; 
                 resetAllOverlays = id; 
                 showAdjustEffectsPanel = id; 
+                toggleAlwaysOnTop = id; 
                 toggleKeepAfloat = id; 
             }; 
             CLASS = AfloatHub; 

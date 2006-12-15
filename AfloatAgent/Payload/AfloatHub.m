@@ -246,4 +246,9 @@ This file is part of Afloat.
 	return temporarilyTrackingOverlays;
 }
 
+- (IBAction) toggleAlwaysOnTop:(id) sender {
+	id w = [self focusedWindow];
+	[w setAlwaysOnTop:![w alwaysOnTop]];
+}
+
 @end
