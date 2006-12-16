@@ -14,8 +14,8 @@ the ''payload''.
 The preference pane is Afloat's most visible UI. The two other components are found inside its bundle and therefore 
 are removed when the bundle is removed (usually by the built-in "Remove Preference Pane" option of System 
 Preferences). The prefpane's responsibilites include the starting up and closing of the agent, and ensuring the agent 
-starts up (or not) when the user logs in by modifying the Login Items list for that user (this is done via the AELI* 
-functions found inside LoginItemsAE at http://developer.apple.com/samplecode/LoginItemsAE/index.html  * by 
+starts up (or not) when the user logs in by modifying the Login Items list for that user (this is done via the AELI... 
+functions found inside LoginItemsAE at http://developer.apple.com/samplecode/LoginItemsAE/index.html by 
 Apple).
 
 The agent is an application built around mach_inject and specifically mach_inject_bundle. To ensure some degree of 
