@@ -18,8 +18,9 @@ starts up (or not) when the user logs in by modifying the Login Items list for t
 functions found inside LoginItemsAE at http://developer.apple.com/samplecode/LoginItemsAE/index.html by 
 Apple).
 
-The agent is an application built around mach_inject and specifically mach_inject_bundle. To ensure some degree of 
-stability, a precompiled Universal (ppc+i386) version of mach_inject_bundle.framework is included into the SVN 
+The agent is an application built around {{{mach_inject}}} and specifically {{{mach_inject_bundle}}}. To ensure some 
+degree of 
+stability, a precompiled Universal (ppc+i386) version of {{{mach_inject_bundle.framework}}} is included into the SVN 
 repository. At runtime, the agent observes NSWorkspace notifications about new applications being launched and 
 will then retrieve their PID and inject the payload into them. The agent also injects the payload in all running 
 applications when it first starts up, but uses a slightly more complex procedure to do so:
