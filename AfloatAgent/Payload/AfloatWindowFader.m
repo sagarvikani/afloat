@@ -44,8 +44,8 @@
 		return;
 	}
 	
-	NSLog(@"Scheduling a mouse position test in 0.2s for fader %@ for window %@", self, window);
-	timer = [[NSTimer scheduledTimerWithTimeInterval:0.2 target:self selector:@selector(performMousePositionTest:) userInfo:nil repeats:NO] retain];
+	NSLog(@"Scheduling a mouse position test in 0.3s for fader %@ for window %@", self, window);
+	timer = [[NSTimer scheduledTimerWithTimeInterval:0.3 target:self selector:@selector(performMousePositionTest:) userInfo:nil repeats:NO] retain];
 }
 
 - (void) performMousePositionTest:(NSTimer*) theTimer {

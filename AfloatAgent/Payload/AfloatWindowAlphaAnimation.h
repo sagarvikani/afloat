@@ -24,6 +24,8 @@ This file is part of Afloat.
 	id animatedWindow;
 	float from;
 	float to;
+	
+	float lastProgress;
 }
 
 + (id) animationForWindow:(id) wnd fromAlpha:(float) fa toAlpha:(float) ta;

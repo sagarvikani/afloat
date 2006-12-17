@@ -42,6 +42,10 @@ This file is part of Afloat.
 
 - (void) performAnimation:(float) progress {
 	[animatedWindow setAlphaValue:from - ((from - to) * progress)];
+
+/*	// flicker cure?
+	[animatedWindow display];
+	[animatedWindow flushWindow]; */
 }
 
 @end

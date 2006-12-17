@@ -77,6 +77,9 @@ This file is part of Afloat.
 }
 
 - (NSMutableDictionary*) infoForWindow:(id /* AfloatWindow */) wnd {
+	if (wnd == windowBeingCleared)
+		return temporaryCopyOfInfoOfWindowBeingCleared;
+	
 	id data = [windowData objectForKey:[NSValue valueWithNonretainedObject:wnd]];
 	
 	if (!data) {
@@ -88,7 +91,36 @@ This file is part of Afloat.
 }
 
 - (void) clearInfoForWindow:(id) wnd {
+	// The following ballet is done to create a deterministic order
+	// in which we clear the info for a window.
+	// All NSValue objects are removed LAST.
+	// This allows objects that are dealloc'ing to access infoForWindow:
+	// with meaningful content.
+	// This mess is required to allow AfloatWindowFader to dealloc correctly.
+	
+	id oldWBC = windowBeingCleared;
+	NSMutableDictionary* oldTCetcetc = temporaryCopyOfInfoOfWindowBeingCleared;
+	
+	// We make a temporary copy that retains all NSValue objects.
+	// -infoForWindow: will return the copy while we clear, and nil after we return.
+	windowBeingCleared = wnd;
+	temporaryCopyOfInfoOfWindowBeingCleared = [NSMutableDictionary dictionaryWithDictionary:[windowData objectForKey:[NSValue valueWithNonretainedObject:wnd]]];
+	NSEnumerator* enu = [[temporaryCopyOfInfoOfWindowBeingCleared allKeys] objectEnumerator];
+	id key;
+	
+	while (key = [enu nextObject]) {
+		if (![key isKindOfClass:[NSValue class]])
+			[temporaryCopyOfInfoOfWindowBeingCleared removeObjectForKey:key];
+	}
+	
+	// Clear the original data. This deallocs all non-NSValue objects.
 	[windowData removeObjectForKey:[NSValue valueWithNonretainedObject:wnd]];
+	
+	// When the copy will be released by the autorel pool,
+	// NSValue objects will be dealloc'd.
+	
+	windowBeingCleared = oldWBC;
+	temporaryCopyOfInfoOfWindowBeingCleared = oldTCetcetc;
 }
 
 - (void) willRemoveWindow:(id) wnd {
@@ -171,20 +203,31 @@ This file is part of Afloat.
 
 - (void) fadeInWindow:(id) window {
 	if ([window overlayWindow] && !temporarilyTrackingOverlays) return;
+	if ([[[self infoForWindow:window] objectForKey:@"AfloatWindowIsFadedIn"] boolValue])
+		return;	
 	
 	[[self infoForWindow:window] setObject:[NSNumber numberWithFloat:[window alphaValue]] forKey:@"AfloatLastAlphaValue"];
+	[[self infoForWindow:window] setObject:[NSNumber numberWithBool:YES] forKey:@"AfloatWindowIsFadedIn"];
 
+	
 	// NSLog(@"entered: %f", [[theEvent window] alphaValue]);
 	
 	animating = YES;
+#if defined(__i386__)
+	[window setAlphaValue:1.0];
+#else
 	AfloatAnimator* ani = [[AfloatAnimator alloc] initWithApproximateDuration:0.35];
 	[ani addAnimation:[AfloatWindowAlphaAnimation animationForWindow:window fromAlpha:[window alphaValue] toAlpha:1.0]];
 	[ani run];
 	[ani release];
+#endif
 	animating = NO;
 }
 
 - (void) fadeOutWindow:(id) window {
+	if (![[[self infoForWindow:window] objectForKey:@"AfloatWindowIsFadedIn"] boolValue])
+		return;
+	
 	NSNumber* num = [[self infoForWindow:window] objectForKey:@"AfloatLastAlphaValue"];
 	if (num == nil) return;
 	float oldAlpha = [num floatValue];
@@ -192,11 +235,16 @@ This file is part of Afloat.
 	NSLog(@"exited: %@", num);
 	
 	animating = YES;
+#if defined(__i386__)
+	[window setAlphaValue:oldAlpha];
+#else
 	AfloatAnimator* ani = [[AfloatAnimator alloc] initWithApproximateDuration:0.35];
 	[ani addAnimation:[AfloatWindowAlphaAnimation animationForWindow:window fromAlpha:[window alphaValue] toAlpha:oldAlpha]];
 	[ani run];
 	[ani release];
 	[window setAlphaValue:oldAlpha];
+#endif
+	[[self infoForWindow:window] removeObjectForKey:@"AfloatWindowIsFadedIn"];
 	animating = NO;
 }
 
