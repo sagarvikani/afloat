@@ -61,4 +61,7 @@ This file is part of Afloat.
 
 - (IBAction) toggleAlwaysOnTop:(id) sender;
 
+- (void) fadeInWindow:(id) wnd;
+- (void) fadeOutWindow:(id) wnd;
+
 @end
