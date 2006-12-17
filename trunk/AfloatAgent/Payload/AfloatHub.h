@@ -28,6 +28,9 @@ This file is part of Afloat.
 	IBOutlet NSPanel* adjustEffectsPanel;
 	
 	BOOL temporarilyTrackingOverlays;
+	
+	id windowBeingCleared;
+	NSMutableDictionary* temporaryCopyOfInfoOfWindowBeingCleared;
 }
 
 + (id) sharedHub;

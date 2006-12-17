@@ -17,7 +17,7 @@ This file is part of Afloat.
 
 #import "AfloatAnimator.h"
 #include <unistd.h>
-#define kAfloatAnimatorFramesPerSecond 25
+#define kAfloatAnimatorFramesPerSecond 15
 
 @implementation AfloatAnimator
 
