@@ -23,6 +23,7 @@ This file is part of Afloat.
 - (void) setAlwaysOnTop:(BOOL) aot;
 - (void) beginMouseTrackingWithOwner:(id) owner;
 - (void) endMouseTracking;
+- (void) endMouseTrackingIfOwner:(id) owner;
 
 - (void) setOverlayWindow:(BOOL) ov;
 - (BOOL) overlayWindow;

@@ -21,6 +21,7 @@ This file is part of Afloat.
 
 #import "AfloatAnimator.h"
 #import "AfloatWindowAlphaAnimation.h"
+#import "AfloatWindowFader.h"
 
 @implementation AfloatHub
 
@@ -62,14 +63,16 @@ This file is part of Afloat.
 
 - (void)observeValueForKeyPath:(NSString*) keyPath ofObject:(id)object change:(NSDictionary*) change context:(void*) context {	
 	if ([keyPath isEqualToString:@"focusedWindow.alphaValue"]) {
-		if (animating) return;
+		id focus = [self focusedWindow];
+		if (animating || !focus) return;
 		
-		[[self infoForWindow:[self focusedWindow]] setObject:[NSNumber numberWithFloat:[[self focusedWindow] alphaValue]] forKey:@"AfloatLastAlphaValue"];
+		NSMutableDictionary* info = [self infoForWindow:focus];
+		[info setObject:[NSNumber numberWithFloat:[focus alphaValue]] forKey:@"AfloatLastAlphaValue"];
 		
-		if ([[self focusedWindow] alphaValue] >= 0.95)
-			[[self focusedWindow] endMouseTracking];
+		if ([focus alphaValue] >= 0.95)
+			[info removeObjectForKey:kAfloatWindowFaderKey];
 		else
-			[[self focusedWindow] beginMouseTrackingWithOwner:self];
+			[info setObject:[[[AfloatWindowFader alloc] initForWindow:focus] autorelease] forKey:kAfloatWindowFaderKey];
 	}
 }
 
@@ -166,8 +169,7 @@ This file is part of Afloat.
     [[self focusedWindow] setAlphaValue:[self normalizedAlphaValueForValue:newVal]];
 }
 
-- (void) mouseEntered:(NSEvent*) theEvent {
-	id window = [theEvent window];
+- (void) fadeInWindow:(id) window {
 	if ([window overlayWindow] && !temporarilyTrackingOverlays) return;
 	
 	[[self infoForWindow:window] setObject:[NSNumber numberWithFloat:[window alphaValue]] forKey:@"AfloatLastAlphaValue"];
@@ -182,8 +184,8 @@ This file is part of Afloat.
 	animating = NO;
 }
 
-- (void) mouseExited:(NSEvent*) theEvent {
-	NSNumber* num = [[self infoForWindow:[theEvent window]] objectForKey:@"AfloatLastAlphaValue"];
+- (void) fadeOutWindow:(id) window {
+	NSNumber* num = [[self infoForWindow:window] objectForKey:@"AfloatLastAlphaValue"];
 	if (num == nil) return;
 	float oldAlpha = [num floatValue];
 	
@@ -191,9 +193,10 @@ This file is part of Afloat.
 	
 	animating = YES;
 	AfloatAnimator* ani = [[AfloatAnimator alloc] initWithApproximateDuration:0.35];
-	[ani addAnimation:[AfloatWindowAlphaAnimation animationForWindow:[theEvent window] fromAlpha:[[theEvent window] alphaValue] toAlpha:oldAlpha]];
+	[ani addAnimation:[AfloatWindowAlphaAnimation animationForWindow:window fromAlpha:[window alphaValue] toAlpha:oldAlpha]];
 	[ani run];
-	[ani release];	
+	[ani release];
+	[window setAlphaValue:oldAlpha];
 	animating = NO;
 }
 

@@ -187,6 +187,14 @@ This file is part of Afloat.
 	[myInfo removeObjectForKey:@"AfloatTrackingRectTagOwner"];
 }
 
+- (void) endMouseTrackingIfOwner:(id) owner {
+	NSMutableDictionary* myInfo = [[AfloatHub sharedHub] infoForWindow:self];
+	NSValue* v = [myInfo objectForKey:@"AfloatTrackingRectTagOwner"];
+	
+	if (v && [v nonretainedObjectValue] == owner)
+		[self endMouseTracking];
+}
+
 - (void) _afloat_windowViewDidChangeBounds:(NSNotification*) notif {
 	NSMutableDictionary* myInfo = [[AfloatHub sharedHub] infoForWindow:self];
 	id theOwner = [[myInfo objectForKey:@"AfloatTrackingRectTagOwner"] nonretainedObjectValue];

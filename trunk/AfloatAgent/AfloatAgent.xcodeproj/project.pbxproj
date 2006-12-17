@@ -19,6 +19,7 @@
 		7E4F5D190AFD1FDE00102CBA /* AfloatAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E4F5D180AFD1FDE00102CBA /* AfloatAnimator.m */; };
 		7E56E61B0AF9DBBC00F41871 /* Hub.nib in Resources */ = {isa = PBXBuildFile; fileRef = 7E56E6190AF9DBBC00F41871 /* Hub.nib */; };
 		7E578CEF0AEE925C0039B11D /* AfloatImplementation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E578CEE0AEE925C0039B11D /* AfloatImplementation.m */; };
+		7E6179DA0B354509003E7E34 /* AfloatWindowFader.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E6179970B3541B3003E7E34 /* AfloatWindowFader.m */; };
 		7E6204AD0AED3A1C0024513B /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 		7E6204AE0AED3A250024513B /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 		7E6204AF0AED3A2B0024513B /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E6204150AED33AF0024513B /* Carbon.framework */; };
@@ -96,6 +97,8 @@
 		7E56E61A0AF9DBBC00F41871 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = Payload/English.lproj/Hub.nib; sourceTree = "<group>"; };
 		7E578CED0AEE925C0039B11D /* AfloatImplementation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AfloatImplementation.h; sourceTree = "<group>"; };
 		7E578CEE0AEE925C0039B11D /* AfloatImplementation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AfloatImplementation.m; sourceTree = "<group>"; };
+		7E6179960B3541B3003E7E34 /* AfloatWindowFader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AfloatWindowFader.h; sourceTree = "<group>"; };
+		7E6179970B3541B3003E7E34 /* AfloatWindowFader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AfloatWindowFader.m; sourceTree = "<group>"; };
 		7E6204150AED33AF0024513B /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
 		7E62045A0AED37420024513B /* AfloatCocoa.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AfloatCocoa.h; sourceTree = "<group>"; };
 		7E62045B0AED37420024513B /* AfloatCocoa.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AfloatCocoa.m; sourceTree = "<group>"; };
@@ -278,6 +281,8 @@
 		7EBFF9690AEAB3FF0067AD4A /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				7E6179960B3541B3003E7E34 /* AfloatWindowFader.h */,
+				7E6179970B3541B3003E7E34 /* AfloatWindowFader.m */,
 				7EE461970B09007A001C629F /* AfloatWindowAlphaAnimation.h */,
 				7EE461980B09007A001C629F /* AfloatWindowAlphaAnimation.m */,
 				7E62046F0AED37FC0024513B /* AfloatCarbon.h */,
@@ -544,6 +549,7 @@
 				7E6204FC0AED3B2D0024513B /* AfloatCarbon.m in Sources */,
 				7E578CEF0AEE925C0039B11D /* AfloatImplementation.m in Sources */,
 				7E258CA40AF356CD006931A7 /* AfloatHub.m in Sources */,
+				7E6179DA0B354509003E7E34 /* AfloatWindowFader.m in Sources */,
 				7E4F5D190AFD1FDE00102CBA /* AfloatAnimator.m in Sources */,
 				7EE461990B09007A001C629F /* AfloatWindowAlphaAnimation.m in Sources */,
 				7E06E8320B2A0048000A3440 /* GetApplicationFlavor.m in Sources */,
