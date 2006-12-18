@@ -31,6 +31,9 @@ This file is part of Afloat.
 	
 	id windowBeingCleared;
 	NSMutableDictionary* temporaryCopyOfInfoOfWindowBeingCleared;
+	
+	BOOL doingSeethru;
+	NSAppleScript* reactivationScript;
 }
 
 + (id) sharedHub;
@@ -58,6 +61,9 @@ This file is part of Afloat.
 - (IBAction) moreTransparent:(id) sender;
 - (IBAction) resetAllOverlays:(id) sender;
 
+- (void) fadeWindow:(id) window toAlpha:(float) alpha duration:(NSTimeInterval) duration;
+- (void) fadeWindow:(id) window toAlpha:(float) alpha;
+
 - (void) beginTemporaryTrackingOfOverlays;
 - (void) endTemporaryTrackingOfOverlays;
 - (BOOL) isTemporarilyTrackingOverlays;
@@ -66,5 +72,10 @@ This file is part of Afloat.
 
 - (void) fadeInWindow:(id) wnd;
 - (void) fadeOutWindow:(id) wnd;
+
+- (IBAction) performSeethru:(id) sender;
+- (void) beginSeethru;
+- (void) endSeethru;
+- (void) notifyApplicationWillResignActive;
 
 @end

@@ -30,6 +30,9 @@ This file is part of Afloat.
 
 - (void) setIgnoresMouseEvents:(BOOL) ime;
 - (BOOL) ignoresMouseEvents;
+
+- (BOOL) isVisible;
+
 @end
 
 @interface AfloatImplementation : NSObject {}
