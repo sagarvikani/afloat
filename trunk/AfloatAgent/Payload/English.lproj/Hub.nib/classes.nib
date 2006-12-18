@@ -6,6 +6,7 @@
                 makeMediumTransparency = id; 
                 makeOpaque = id; 
                 moreTransparent = id; 
+                performSeethru = id; 
                 resetAllOverlays = id; 
                 showAdjustEffectsPanel = id; 
                 toggleAlwaysOnTop = id; 

@@ -64,7 +64,7 @@ This file is part of Afloat.
 - (void)observeValueForKeyPath:(NSString*) keyPath ofObject:(id)object change:(NSDictionary*) change context:(void*) context {	
 	if ([keyPath isEqualToString:@"focusedWindow.alphaValue"]) {
 		id focus = [self focusedWindow];
-		if (animating || !focus) return;
+		if (animating || doingSeethru || !focus) return;
 		
 		NSMutableDictionary* info = [self infoForWindow:focus];
 		[info setObject:[NSNumber numberWithFloat:[focus alphaValue]] forKey:@"AfloatLastAlphaValue"];
@@ -201,6 +201,23 @@ This file is part of Afloat.
     [[self focusedWindow] setAlphaValue:[self normalizedAlphaValueForValue:newVal]];
 }
 
+- (void) fadeWindow:(id) window toAlpha:(float) alpha duration:(NSTimeInterval) duration {
+	animating = YES;
+#if defined(__i386__)
+	[window setAlphaValue:alpha];
+#else
+	AfloatAnimator* ani = [[AfloatAnimator alloc] initWithApproximateDuration:duration];
+	[ani addAnimation:[AfloatWindowAlphaAnimation animationForWindow:window fromAlpha:[window alphaValue] toAlpha:alpha]];
+	[ani run];
+	[ani release];
+#endif
+	animating = NO;
+}
+
+- (void) fadeWindow:(id) window toAlpha:(float) alpha {
+	[self fadeWindow:window toAlpha:alpha duration:0.35];
+}
+
 - (void) fadeInWindow:(id) window {
 	if ([window overlayWindow] && !temporarilyTrackingOverlays) return;
 	if ([[[self infoForWindow:window] objectForKey:@"AfloatWindowIsFadedIn"] boolValue])
@@ -212,16 +229,7 @@ This file is part of Afloat.
 	
 	// NSLog(@"entered: %f", [[theEvent window] alphaValue]);
 	
-	animating = YES;
-#if defined(__i386__)
-	[window setAlphaValue:1.0];
-#else
-	AfloatAnimator* ani = [[AfloatAnimator alloc] initWithApproximateDuration:0.35];
-	[ani addAnimation:[AfloatWindowAlphaAnimation animationForWindow:window fromAlpha:[window alphaValue] toAlpha:1.0]];
-	[ani run];
-	[ani release];
-#endif
-	animating = NO;
+	[self fadeWindow:window toAlpha:1.0];
 }
 
 - (void) fadeOutWindow:(id) window {
@@ -232,20 +240,10 @@ This file is part of Afloat.
 	if (num == nil) return;
 	float oldAlpha = [num floatValue];
 	
-	NSLog(@"exited: %@", num);
+	//NSLog(@"exited: %@", num);
 	
-	animating = YES;
-#if defined(__i386__)
-	[window setAlphaValue:oldAlpha];
-#else
-	AfloatAnimator* ani = [[AfloatAnimator alloc] initWithApproximateDuration:0.35];
-	[ani addAnimation:[AfloatWindowAlphaAnimation animationForWindow:window fromAlpha:[window alphaValue] toAlpha:oldAlpha]];
-	[ani run];
-	[ani release];
-	[window setAlphaValue:oldAlpha];
-#endif
+	[self fadeWindow:window toAlpha:oldAlpha];
 	[[self infoForWindow:window] removeObjectForKey:@"AfloatWindowIsFadedIn"];
-	animating = NO;
 }
 
 - (IBAction) resetAllOverlays:(id) sender {
@@ -300,6 +298,68 @@ This file is part of Afloat.
 - (IBAction) toggleAlwaysOnTop:(id) sender {
 	id w = [self focusedWindow];
 	[w setAlwaysOnTop:![w alwaysOnTop]];
+}
+
+- (IBAction) performSeethru:(id) sender {
+	if (!doingSeethru)
+		[self beginSeethru];
+	else
+		[self endSeethru];
+}
+
+- (void) beginSeethru {
+	if (doingSeethru) return;
+	
+	doingSeethru = YES;
+	
+	NSEnumerator* enu = [[[AfloatImplementation sharedInstance] windows] objectEnumerator];
+	id window;
+	
+	while (window = [enu nextObject]) {
+		if (![window isVisible])
+			continue;
+		
+		NSMutableDictionary* info = [self infoForWindow:window];
+		// for some reason, [window alphaValue] returns self.
+		[info setObject:[window valueForKey:@"alphaValue"] forKey:@"AfloatSeethruOldAlphaValue"];
+		[info setObject:[NSNumber numberWithBool:[window ignoresMouseEvents]] forKey:@"AfloatSeethruOldIgnoreMouseEvents"];
+		[info setObject:[NSNumber numberWithBool:[window alwaysOnTop]] forKey:@"AfloatSeethruOldAlwaysOnTop"];
+				
+		[window setOverlayWindow:YES];
+	}
+}
+
+- (void) endSeethru {
+	if (!doingSeethru) return;
+	
+	NSEnumerator* enu = [[[AfloatImplementation sharedInstance] windows] objectEnumerator];
+	id window;
+	
+	
+	while (window = [enu nextObject]) {
+		if ([window isVisible])
+			[window orderBack:nil];
+		
+		NSMutableDictionary* info = [self infoForWindow:window];
+		if (![info objectForKey:@"AfloatSeethruOldAlphaValue"] || 
+			![info objectForKey:@"AfloatSeethruOldIgnoreMouseEvents"] ||
+			![info objectForKey:@"AfloatSeethruOldAlwaysOnTop"])
+			continue;
+		
+		[window setAlwaysOnTop:[[info objectForKey:@"AfloatSeethruOldAlwaysOnTop"] boolValue]];
+		[window setIgnoresMouseEvents:[[info objectForKey:@"AfloatSeethruOldIgnoreMouseEvents"] boolValue]];
+		[window setAlphaValue:[[info objectForKey:@"AfloatSeethruOldAlphaValue"] floatValue]];
+		
+		[info removeObjectForKey:@"AfloatSeethruOldAlphaValue"];
+		[info removeObjectForKey:@"AfloatSeethruOldIgnoreMouseEvents"];
+		[info removeObjectForKey:@"AfloatSeethruOldAlwaysOnTop"];
+	}
+	
+	doingSeethru = NO;
+}
+
+- (void) notifyApplicationWillResignActive {
+	[self endSeethru];
 }
 
 @end
