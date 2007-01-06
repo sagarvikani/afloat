@@ -18,6 +18,7 @@ This file is part of Afloat.
 
 #import "../AfloatAgentCommunication.h"
 #import "AfloatHub.h"
+#import "AfloatLogging.h"
 
 #import "AfloatAnimator.h"
 #import "AfloatWindowAlphaAnimation.h"
@@ -215,7 +216,7 @@ This file is part of Afloat.
 	[[self infoForWindow:window] setObject:[NSNumber numberWithBool:YES] forKey:@"AfloatWindowIsFadedIn"];
 
 	
-	// NSLog(@"entered: %f", [[theEvent window] alphaValue]);
+	// AfloatLog(@"entered: %f", [[theEvent window] alphaValue]);
 	
 	[self fadeWindow:window toAlpha:1.0];
 }
@@ -224,7 +225,7 @@ This file is part of Afloat.
 	if (![[[self infoForWindow:window] objectForKey:@"AfloatWindowIsFadedIn"] boolValue])
 		return;
 	
-	//NSLog(@"exited: %@", num);
+	//AfloatLog(@"exited: %@", num);
 	
 	[self fadeWindow:window toAlpha:[window userAlphaValue]];
 	[[self infoForWindow:window] removeObjectForKey:@"AfloatWindowIsFadedIn"];

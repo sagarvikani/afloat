@@ -96,6 +96,8 @@ This file is part of Afloat.
 }
 
 - (void) _runSingleFrame:(NSTimer*) timer {
+    NSDisableScreenUpdates();
+    
     NSTimeInterval elapsed = -[startDate timeIntervalSinceNow];
     float ratio = elapsed / duration;
     
@@ -104,6 +106,8 @@ This file is part of Afloat.
     int i, aniCount = [animations count];
     for (i = 0; i < aniCount; i++)
         [[animations objectAtIndex:i] performAnimation:ratio];
+    
+    NSEnableScreenUpdates();
     
     if (ratio == 1.0) {
         [startDate release];

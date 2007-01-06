@@ -85,10 +85,6 @@ This file is part of Afloat.
 	return NO;
 }
 
-- (void) willResignActive:(NSNotification*) notif {
-	[[AfloatHub sharedHub] notifyApplicationWillResignActive];
-}
-
 - (void) installMenuItems:(NSMenu*) items inMenu:(NSMenu*) menu index:(int) i {
 	NSMenuItem* newItem = [[NSMenuItem alloc] initWithTitle:@"Afloat" action:nil keyEquivalent:@""];
 	

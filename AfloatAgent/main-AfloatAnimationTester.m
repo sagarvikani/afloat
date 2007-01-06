@@ -14,6 +14,7 @@ This file is part of Afloat.
 
 #import <Cocoa/Cocoa.h>
 #import "AfloatAnimator.h"
+#import "AfloatLogging.h"
 
 @interface AfloatTestAni : NSObject <AfloatAnimation>
 @end

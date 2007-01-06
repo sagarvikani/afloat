@@ -8,6 +8,7 @@
 
 #import "AfloatWindowFader.h"
 #import "AfloatHub.h"
+#import "AfloatLogging.h"
 
 @implementation AfloatWindowFader
 
@@ -17,14 +18,14 @@
 		[window beginMouseTrackingWithOwner:self];
 	}
 	
-	NSLog(@"Fader created for window %@", w);
+	AfloatLog(@"Fader created for window %@", w);
 	
 	return self;
 }
 
 - (void) dealloc {
 	[window endMouseTrackingIfOwner:self];
-	NSLog(@"Fader removed for window %@", window);
+	AfloatLog(@"Fader removed for window %@", window);
 
 	[super dealloc];
 }
@@ -40,26 +41,26 @@
 
 - (void) scheduleMousePositionTest {
 	if (timer) {
-		NSLog(@"Coalesced an additional mouse event for fader %@ for window %@", self, window);
+		AfloatLog(@"Coalesced an additional mouse event for fader %@ for window %@", self, window);
 		return;
 	}
 	
-	NSLog(@"Scheduling a mouse position test in 0.3s for fader %@ for window %@", self, window);
+	AfloatLog(@"Scheduling a mouse position test in 0.3s for fader %@ for window %@", self, window);
 	timer = [[NSTimer scheduledTimerWithTimeInterval:0.3 target:self selector:@selector(performMousePositionTest:) userInfo:nil repeats:NO] retain];
 }
 
 - (void) performMousePositionTest:(NSTimer*) theTimer {
-	NSLog(@"Performing scheduled position test for fader %@ for window %@", self, window);
+	AfloatLog(@"Performing scheduled position test for fader %@ for window %@", self, window);
 	[timer release]; timer = nil;
 	
 	NSPoint p = [NSEvent mouseLocation];
 	NSRect frame = [window frame];
 	
 	if (NSPointInRect(p, frame)) {
-		NSLog(@"Fading in.");
+		AfloatLog(@"Fading in.");
 		[[AfloatHub sharedHub] fadeInWindow:window];
 	} else {
-		NSLog(@"Fading out.");
+		AfloatLog(@"Fading out.");
 		[[AfloatHub sharedHub] fadeOutWindow:window];
 	}
 }

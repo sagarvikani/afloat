@@ -75,9 +75,4 @@ This file is part of Afloat.
 - (void) fadeInWindow:(id) wnd;
 - (void) fadeOutWindow:(id) wnd;
 
-- (IBAction) performSeethru:(id) sender;
-- (void) beginSeethru;
-- (void) endSeethru;
-- (void) notifyApplicationWillResignActive;
-
 @end

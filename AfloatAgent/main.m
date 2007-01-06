@@ -22,6 +22,8 @@ This file is part of Afloat.
 #include <sys/types.h>
 #include <sys/stat.h>
 
+#import "AfloatLogging.h"
+
 int main(int argc, char *argv[]) {
 	if (argc == 2 && strcmp(argv[1], "--Afloat-RepairPrivileges") == 0) {
 		if (geteuid() != 0) // we are not root.
