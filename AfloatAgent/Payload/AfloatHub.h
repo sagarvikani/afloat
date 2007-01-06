@@ -38,6 +38,8 @@ This file is part of Afloat.
 
 + (id) sharedHub;
 
+- (void) changedUserAlpha:(float) ua forWindow:(NSWindow*) wnd;
+
 - (NSMutableDictionary*) infoForWindow:(id /* AfloatWindow */) wnd;
 - (void) clearInfoForWindow:(id) wnd;
 

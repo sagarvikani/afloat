@@ -527,7 +527,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Sets HFS bundle, custom icon and hidden extension\n# bits upon Afloat.prefPane.\n\n/Developer/Tools/SetFile -a BCE \"$BUILT_PRODUCTS_DIR/$WRAPPER_NAME\"\necho \"I was working on the proof of one of my poems all the morning, and took out a comma. In the afternoon I put it back again. -- Oscar Wilde.\" > \"$BUILT_PRODUCTS_DIR/$WRAPPER_NAME/Contents/Resources/Quote.txt\"\n";
+			shellScript = "# Sets HFS bundle, custom icon and hidden extension\n# bits upon Afloat.prefPane.\n\n/Developer/Tools/SetFile -a BCE \"$BUILT_PRODUCTS_DIR/$WRAPPER_NAME\"\necho \"Let's think the unthinkable, let's do the undoable, let's prepare to grapple with the ineffable itself, and see if we may not eff it after all. -- Dirk Gently's Holistic Detective Agency, Douglas Noel Adams\" > \"$BUILT_PRODUCTS_DIR/$WRAPPER_NAME/Contents/Resources/Quote.txt\"\n";
 		};
 		7EDFF08D0B09CB480009C47F /* Set Version from Subversion Revision */ = {
 			isa = PBXShellScriptBuildPhase;

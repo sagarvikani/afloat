@@ -36,8 +36,6 @@ This file is part of Afloat.
 	if (self = [super init]) {
 		windowData = [NSMutableDictionary new];
 		[NSBundle loadNibNamed:@"Hub" owner:self];
-		
-		[self addObserver:self forKeyPath:@"focusedWindow.alphaValue" options:0 context:nil];
 		animating = NO;
 		
 		[[NSDistributedNotificationCenter defaultCenter] addObserver:self selector:@selector(respondToRollCall:) name:kAfloatRollCallNotification object:kAfloatDistributedObjectIdentifier];
@@ -54,26 +52,19 @@ This file is part of Afloat.
 }
 
 - (void) dealloc {
-	[self removeObserver:self forKeyPath:@"focusedWindow.alphaValue"];
 	[[NSDistributedNotificationCenter defaultCenter] removeObserver:self];
 	
 	[windowData release];
 	[super dealloc];
 }
 
-- (void)observeValueForKeyPath:(NSString*) keyPath ofObject:(id)object change:(NSDictionary*) change context:(void*) context {	
-	if ([keyPath isEqualToString:@"focusedWindow.alphaValue"]) {
-		id focus = [self focusedWindow];
-		if (animating || !focus) return;
-		
-		NSMutableDictionary* info = [self infoForWindow:focus];
-		[info setObject:[NSNumber numberWithFloat:[focus alphaValue]] forKey:@"AfloatLastAlphaValue"];
-		
-		if ([focus alphaValue] >= 0.95)
-			[info removeObjectForKey:kAfloatWindowFaderKey];
-		else
-			[info setObject:[[[AfloatWindowFader alloc] initForWindow:focus] autorelease] forKey:kAfloatWindowFaderKey];
-	}
+- (void) changedUserAlpha:(float) ua forWindow:(NSWindow*) wnd {        
+    NSMutableDictionary* info = [self infoForWindow:wnd];
+    
+    if (ua >= 0.95)
+        [info removeObjectForKey:kAfloatWindowFaderKey];
+    else if (![info objectForKey:kAfloatWindowFaderKey])
+        [info setObject:[[[AfloatWindowFader alloc] initForWindow:wnd] autorelease] forKey:kAfloatWindowFaderKey];
 }
 
 - (NSMutableDictionary*) infoForWindow:(id /* AfloatWindow */) wnd {
@@ -221,7 +212,6 @@ This file is part of Afloat.
 	if ([[[self infoForWindow:window] objectForKey:@"AfloatWindowIsFadedIn"] boolValue])
 		return;	
 	
-	[[self infoForWindow:window] setObject:[NSNumber numberWithFloat:[window alphaValue]] forKey:@"AfloatLastAlphaValue"];
 	[[self infoForWindow:window] setObject:[NSNumber numberWithBool:YES] forKey:@"AfloatWindowIsFadedIn"];
 
 	
@@ -234,13 +224,9 @@ This file is part of Afloat.
 	if (![[[self infoForWindow:window] objectForKey:@"AfloatWindowIsFadedIn"] boolValue])
 		return;
 	
-	NSNumber* num = [[self infoForWindow:window] objectForKey:@"AfloatLastAlphaValue"];
-	if (num == nil) return;
-	float oldAlpha = [num floatValue];
-	
 	//NSLog(@"exited: %@", num);
 	
-	[self fadeWindow:window toAlpha:oldAlpha];
+	[self fadeWindow:window toAlpha:[window userAlphaValue]];
 	[[self infoForWindow:window] removeObjectForKey:@"AfloatWindowIsFadedIn"];
 }
 

@@ -31,7 +31,10 @@ This file is part of Afloat.
 }
 
 - (void) dealloc {
+    [drawingTimer release];
+    [startDate release];
 	[animations release];
+    
 	[super dealloc];
 }
 
@@ -39,7 +42,7 @@ This file is part of Afloat.
 	[animations addObject:target];
 }
 
-- (void) run {
+- (void) runImmediatly {
 	int frames = kAfloatAnimatorFramesPerSecond / duration;
 	NSTimeInterval delta = duration / frames;
 	
@@ -80,6 +83,34 @@ This file is part of Afloat.
 	
 }
 
-- (void) runWithinMainThread { NSAssert(false, @"runWithinMainThread"); }
+- (void) run { 
+    if (drawingTimer) {
+        if (![drawingTimer isValid])
+            [drawingTimer release];
+        else
+            return;
+    }
+    
+    drawingTimer = [[NSTimer scheduledTimerWithTimeInterval:0.05 target:self selector:@selector(_runSingleFrame:) userInfo:nil repeats:YES] retain];
+    startDate = [[NSDate alloc] init];
+}
+
+- (void) _runSingleFrame:(NSTimer*) timer {
+    NSTimeInterval elapsed = -[startDate timeIntervalSinceNow];
+    float ratio = elapsed / duration;
+    
+    if (ratio > 1.0) ratio = 1.0;
+    
+    int i, aniCount = [animations count];
+    for (i = 0; i < aniCount; i++)
+        [[animations objectAtIndex:i] performAnimation:ratio];
+    
+    if (ratio == 1.0) {
+        [startDate release];
+        startDate = nil;
+
+        [drawingTimer invalidate];
+    }
+}
 
 @end
