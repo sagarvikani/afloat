@@ -203,14 +203,12 @@ This file is part of Afloat.
 
 - (void) fadeWindow:(id) window toAlpha:(float) alpha duration:(NSTimeInterval) duration {
 	animating = YES;
-#if defined(__i386__)
-	[window setAlphaValue:alpha];
-#else
-	AfloatAnimator* ani = [[AfloatAnimator alloc] initWithApproximateDuration:duration];
+	
+    AfloatAnimator* ani = [[AfloatAnimator alloc] initWithApproximateDuration:duration];
 	[ani addAnimation:[AfloatWindowAlphaAnimation animationForWindow:window fromAlpha:[window alphaValue] toAlpha:alpha]];
 	[ani run];
 	[ani release];
-#endif
+
 	animating = NO;
 }
 
