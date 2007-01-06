@@ -64,7 +64,7 @@ This file is part of Afloat.
 - (void)observeValueForKeyPath:(NSString*) keyPath ofObject:(id)object change:(NSDictionary*) change context:(void*) context {	
 	if ([keyPath isEqualToString:@"focusedWindow.alphaValue"]) {
 		id focus = [self focusedWindow];
-		if (animating || doingSeethru || !focus) return;
+		if (animating || !focus) return;
 		
 		NSMutableDictionary* info = [self infoForWindow:focus];
 		[info setObject:[NSNumber numberWithFloat:[focus alphaValue]] forKey:@"AfloatLastAlphaValue"];
@@ -296,68 +296,6 @@ This file is part of Afloat.
 - (IBAction) toggleAlwaysOnTop:(id) sender {
 	id w = [self focusedWindow];
 	[w setAlwaysOnTop:![w alwaysOnTop]];
-}
-
-- (IBAction) performSeethru:(id) sender {
-	if (!doingSeethru)
-		[self beginSeethru];
-	else
-		[self endSeethru];
-}
-
-- (void) beginSeethru {
-	if (doingSeethru) return;
-	
-	doingSeethru = YES;
-	
-	NSEnumerator* enu = [[[AfloatImplementation sharedInstance] windows] objectEnumerator];
-	id window;
-	
-	while (window = [enu nextObject]) {
-		if (![window isVisible])
-			continue;
-		
-		NSMutableDictionary* info = [self infoForWindow:window];
-		// for some reason, [window alphaValue] returns self.
-		[info setObject:[window valueForKey:@"alphaValue"] forKey:@"AfloatSeethruOldAlphaValue"];
-		[info setObject:[NSNumber numberWithBool:[window ignoresMouseEvents]] forKey:@"AfloatSeethruOldIgnoreMouseEvents"];
-		[info setObject:[NSNumber numberWithBool:[window alwaysOnTop]] forKey:@"AfloatSeethruOldAlwaysOnTop"];
-				
-		[window setOverlayWindow:YES];
-	}
-}
-
-- (void) endSeethru {
-	if (!doingSeethru) return;
-	
-	NSEnumerator* enu = [[[AfloatImplementation sharedInstance] windows] objectEnumerator];
-	id window;
-	
-	
-	while (window = [enu nextObject]) {
-		if ([window isVisible])
-			[window orderBack:nil];
-		
-		NSMutableDictionary* info = [self infoForWindow:window];
-		if (![info objectForKey:@"AfloatSeethruOldAlphaValue"] || 
-			![info objectForKey:@"AfloatSeethruOldIgnoreMouseEvents"] ||
-			![info objectForKey:@"AfloatSeethruOldAlwaysOnTop"])
-			continue;
-		
-		[window setAlwaysOnTop:[[info objectForKey:@"AfloatSeethruOldAlwaysOnTop"] boolValue]];
-		[window setIgnoresMouseEvents:[[info objectForKey:@"AfloatSeethruOldIgnoreMouseEvents"] boolValue]];
-		[window setAlphaValue:[[info objectForKey:@"AfloatSeethruOldAlphaValue"] floatValue]];
-		
-		[info removeObjectForKey:@"AfloatSeethruOldAlphaValue"];
-		[info removeObjectForKey:@"AfloatSeethruOldIgnoreMouseEvents"];
-		[info removeObjectForKey:@"AfloatSeethruOldAlwaysOnTop"];
-	}
-	
-	doingSeethru = NO;
-}
-
-- (void) notifyApplicationWillResignActive {
-	[self endSeethru];
 }
 
 @end
