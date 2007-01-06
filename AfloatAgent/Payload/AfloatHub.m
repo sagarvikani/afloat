@@ -176,21 +176,21 @@ This file is part of Afloat.
 }
 
 - (IBAction) makeOpaque:(id) sender {
-    [[self focusedWindow] setAlphaValue:1.0];
+    [[self focusedWindow] setUserAlphaValue:1.0];
 }
 
 - (IBAction) makeMediumTransparency:(id) sender {
-    [[self focusedWindow] setAlphaValue:[self mediumAlphaValue]];
+    [[self focusedWindow] setUserAlphaValue:[self mediumAlphaValue]];
 }
 
 - (IBAction) lessTransparent:(id) sender {
-    float newVal = [[self focusedWindow] alphaValue] - 0.15;
-    [[self focusedWindow] setAlphaValue:[self normalizedAlphaValueForValue:newVal]];
+    float newVal = [[self focusedWindow] userAlphaValue] - 0.15;
+    [[self focusedWindow] setUserAlphaValue:[self normalizedAlphaValueForValue:newVal]];
 }
 
 - (IBAction) moreTransparent:(id) sender {
-    float newVal = [[self focusedWindow] alphaValue] + 0.15;
-    [[self focusedWindow] setAlphaValue:[self normalizedAlphaValueForValue:newVal]];
+    float newVal = [[self focusedWindow] userAlphaValue] + 0.15;
+    [[self focusedWindow] setUserAlphaValue:[self normalizedAlphaValueForValue:newVal]];
 }
 
 - (void) fadeWindow:(id) window toAlpha:(float) alpha duration:(NSTimeInterval) duration {
