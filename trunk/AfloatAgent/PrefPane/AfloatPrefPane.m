@@ -17,6 +17,7 @@ This file is part of Afloat.
 */
 
 #import "AfloatPrefPane.h"
+#import "AfloatLogging.h"
 
 #import "LoginItemsAE.h"
 

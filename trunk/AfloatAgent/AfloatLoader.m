@@ -14,6 +14,7 @@ This file is part of Afloat.
 */
 
 #import "AfloatLoader.h"
+#import "AfloatLogging.h"
 
 #import <sys/sysctl.h>
 #import <sys/types.h>

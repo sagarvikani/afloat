@@ -105,6 +105,7 @@
 		7E62046F0AED37FC0024513B /* AfloatCarbon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AfloatCarbon.h; sourceTree = "<group>"; };
 		7E6204700AED37FC0024513B /* AfloatCarbon.m */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; fileEncoding = 4; path = AfloatCarbon.m; sourceTree = "<group>"; };
 		7E643F500B0A3E1E00192BFB /* Banner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Banner.png; sourceTree = "<group>"; };
+		7E80FDB20B50333E006D02C1 /* AfloatLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AfloatLogging.h; sourceTree = "<group>"; };
 		7E832B0E0B2E06F80024E307 /* LoginItemsAE.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LoginItemsAE.m; sourceTree = "<group>"; };
 		7E832B0F0B2E06F80024E307 /* LoginItemsAE.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = LoginItemsAE.h; sourceTree = "<group>"; };
 		7EA7E6EC0B295E7300D94E74 /* AfloatAgentCommunication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AfloatAgentCommunication.h; sourceTree = "<group>"; };
@@ -212,6 +213,7 @@
 		29B97314FDCFA39411CA2CEA /* AfloatAgent */ = {
 			isa = PBXGroup;
 			children = (
+				7E80FDB20B50333E006D02C1 /* AfloatLogging.h */,
 				7EA7E6EC0B295E7300D94E74 /* AfloatAgentCommunication.h */,
 				7EDFF0800B09CAD90009C47F /* PrefPane */,
 				7EDFF0780B09CA140009C47F /* Agent */,
@@ -804,6 +806,7 @@
 					i386,
 				);
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = AfloatDebugging;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PREBINDING = NO;
@@ -979,6 +982,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = AfloatDebugging;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PREBINDING = NO;
