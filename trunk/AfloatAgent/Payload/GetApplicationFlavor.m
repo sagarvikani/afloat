@@ -18,6 +18,7 @@ This file is part of Afloat.
 */
 
 #include "GetApplicationFlavor.h"
+#include <stdint.h>
 
 // This code from:
 // http://developer.apple.com/qa/qa2006/qa1372.html
@@ -29,12 +30,12 @@ int GetApplicationFlavor()
 	//      2 if the application is a Carbon application
 	//      3 if the application is a Cocoa application
 	
-	static int flavor = -1;
+	static int32_t flavor = -2;
 	OSStatus status;
 	CFDictionaryRef processInfoDict = NULL;
 	CFNumberRef processInfoFlavor = NULL;
 	
-	if (flavor == -1)
+	if (flavor == -2)
 	{
 		ProcessSerialNumber psn;
 		status = GetCurrentProcess(&psn);
@@ -46,17 +47,17 @@ int GetApplicationFlavor()
 		processInfoFlavor = CFDictionaryGetValue(processInfoDict, CFSTR("Flavor"));
 		require(processInfoFlavor != NULL, CFDictionaryGetValue);
 		
-		CFNumberGetValue(processInfoFlavor, kCFNumberIntType, &flavor);
+		CFNumberGetValue(processInfoFlavor, kCFNumberSInt32Type, &flavor);
 	}
 	
 CFDictionaryGetValue:
 ProcessInformationCopyDictionary:
 GetCurrentProcess:
 		
-		if (processInfoFlavor != NULL)
-			CFRelease(processInfoFlavor);
+    if (processInfoFlavor != NULL)
+        CFRelease(processInfoFlavor);
 	if (processInfoDict != NULL)
 		CFRelease(processInfoDict);
 	
-	return flavor;
+	return flavor == -2? -1 : flavor;
 }

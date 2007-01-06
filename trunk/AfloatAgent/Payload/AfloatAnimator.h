@@ -28,12 +28,15 @@ This file is part of Afloat.
 @interface AfloatAnimator : NSObject {
 	NSMutableArray* animations;
 	NSTimeInterval duration;
+    
+    NSTimer* drawingTimer;
+    NSDate* startDate;
 }
 
 - (id) initWithApproximateDuration:(NSTimeInterval) duration;
 
 - (void) addAnimation:(id) target;
 - (void) run;
-// - (void) runWithinMainThread;
+// - (void) runImmediatly;
 
 @end

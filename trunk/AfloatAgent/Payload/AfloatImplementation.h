@@ -31,6 +31,12 @@ This file is part of Afloat.
 - (void) setIgnoresMouseEvents:(BOOL) ime;
 - (BOOL) ignoresMouseEvents;
 
+- (float) userAlphaValue;
+- (void) setUserAlphaValue:(float) uav;
+
+- (float) alphaValue;
+- (void) setAlphaValue:(float) alpha;
+
 - (BOOL) isVisible;
 
 @end

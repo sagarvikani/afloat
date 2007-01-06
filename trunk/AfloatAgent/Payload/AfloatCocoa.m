@@ -18,6 +18,8 @@ This file is part of Afloat.
 #import <objc/objc-class.h>
 #import "AfloatHub.h"
 
+#define kAfloatCocoaUserAlphaValue @"AfloatCocoaUserAlphaValue"
+
 @implementation AfloatCocoa
 
 // From SIMBL's creator, ...
@@ -127,6 +129,19 @@ This file is part of Afloat.
 @end
 
 @implementation NSWindow (AfloatCocoaAdditions)
+
+- (float) userAlphaValue {
+    NSNumber* n = [[[AfloatHub sharedHub] infoForWindow:self] objectForKey:kAfloatCocoaUserAlphaValue];
+    if (n) return [n floatValue];
+    
+    return [self alphaValue];
+}
+
+- (void) setUserAlphaValue:(float) uav {
+    [[[AfloatHub sharedHub] infoForWindow:self] setObject:[NSNumber numberWithFloat:uav] forKey:kAfloatCocoaUserAlphaValue];
+    [self setAlphaValue:uav];
+    [[AfloatHub sharedHub] changedUserAlpha:uav forWindow:self];
+}
 
 - (BOOL) overlayWindow {
 	return [self ignoresMouseEvents];
