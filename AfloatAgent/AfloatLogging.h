@@ -17,7 +17,7 @@
  */
 
 #ifndef AfloatDebugging
-#define AfloatLogging(x, ...)
+#define AfloatLog(x, ...)
 #else
-#define AfloatLogging NSLog
+#define AfloatLog NSLog
 #endif
