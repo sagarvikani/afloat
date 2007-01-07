@@ -63,7 +63,6 @@ This file is part of Afloat.
 	// from this moment on, we must be as quick as possible for each
 	// animation step (for j = 0...).
 	
-    NSDisableScreenUpdates();
 	for (i = 0; i < frames; i++) {
 		progress = (float) i / (float) frames;
 		for (j = 0; j < count; j++)
@@ -71,19 +70,18 @@ This file is part of Afloat.
 			(allPerforms[j])(allAnis[j], theSelector, progress);
 		usleep(delta * 1000000); // does not take drifting (late frames) into account
 	}
-    NSEnableScreenUpdates();
 	
-    NSDisableScreenUpdates();
-	if (progress < 1.0) {
+    if (progress < 1.0) {
 		for (j = 0; j < count; j++)
 			// This is actually [[animations objectAtIndex:j] performAnimation:1.0];
 			(allPerforms[j])(allAnis[j], theSelector, 1.0);
 	}
-    NSEnableScreenUpdates();
-	
+    
 }
 
-- (void) run { 
+- (void) run {
+    [self retain];
+    
     if (drawingTimer) {
         if (![drawingTimer isValid])
             [drawingTimer release];
@@ -114,6 +112,7 @@ This file is part of Afloat.
         startDate = nil;
 
         [drawingTimer invalidate];
+        [self autorelease];
     }
 }
 

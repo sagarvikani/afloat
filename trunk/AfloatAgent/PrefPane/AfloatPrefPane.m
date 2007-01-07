@@ -29,11 +29,63 @@ This file is part of Afloat.
 
 #define kAfloatAgentBundleIdentifier @"net.infinite-labs.Afloat.Agent"
 
+static AuthorizationRef authorization = NULL;
+
+static AuthorizationRef AfloatPrefPaneGetAuthorization() {
+    if (authorization)
+        return authorization;
+    
+    if (AuthorizationCreate(NULL, kAuthorizationEmptyEnvironment, kAuthorizationFlagDefaults, &authorization) == noErr) {
+        AuthorizationItem authItems[1];
+        authItems[0].name = kAuthorizationRightExecute;
+        authItems[0].valueLength = 0;
+        authItems[0].value = NULL;
+        authItems[0].flags = 0;
+        
+        AuthorizationRights executionRights;
+        executionRights.count = 1;
+        executionRights.items = authItems;
+        
+        if (AuthorizationCopyRights(authorization, &executionRights, kAuthorizationEmptyEnvironment, kAuthorizationFlagPreAuthorize | kAuthorizationFlagExtendRights | kAuthorizationFlagInteractionAllowed, NULL) == noErr)
+            return authorization;
+        
+        AuthorizationFree(authorization, kAuthorizationFlagDestroyRights);
+    }
+    
+    return NULL;
+}
+
+static void AfloatPrefPaneClearAuthorization() {
+    if (authorization) {
+        AuthorizationFree(authorization, kAuthorizationFlagDestroyRights);
+        authorization = NULL;
+    }
+}
+
 @implementation AfloatPrefPane
 
 - (void) didSelect {
 	[super didSelect];
 	[self willChangeValueForKey:@"afloatEnabled"]; [self didChangeValueForKey:@"afloatEnabled"];
+}
+
+- (void) willUnselect {
+    [aboutPanel orderOut:self];
+    AfloatPrefPaneClearAuthorization();
+    [super willUnselect];
+}
+
+- (IBAction) showAboutPanel:(id) sender {
+    [aboutPanel center];
+    [aboutPanel makeKeyAndOrderFront:self];
+}
+
+- (IBAction) openLicense:(id) sender {
+    NSString* path = [[self bundle] pathForResource:@"License" ofType:@"pdf"];
+    if (path)
+        [[NSWorkspace sharedWorkspace] openFile:path];
+    else
+        NSBeep();
 }
 
 - (BOOL) afloatEnabled {
@@ -57,11 +109,11 @@ This file is part of Afloat.
 }
 
 - (BOOL) requiresAuthorization {
-	//#define kAfloatDebugAuthorization 1
+//#define AfloatDebugAuthorization 1
 	// please note: Afloat is meant to be built as a 32-bit binary thingy, hence the i386.
 	// who knows what tricks can x86_64 play with mach_*?
 	// I don't want to be the one who finds out.
-#if defined(__i386__) || defined(kAfloatDebugAuthorization)
+#if defined(__i386__) || defined(AfloatDebugAuthorization)
 	
 	NSString* pathToAgentBundle = [[NSBundle bundleForClass:[self class]] pathForResource:@"Afloat Agent" ofType:@"app"];
 	NSBundle* agentBundle = [[[NSBundle alloc] initWithPath:pathToAgentBundle] autorelease];
@@ -89,10 +141,9 @@ This file is part of Afloat.
 }
 
 - (BOOL) authorize {
-	OSStatus err;
 	AuthorizationRef auth;
 	
-	if ((err = AuthorizationCreate(NULL, kAuthorizationEmptyEnvironment, kAuthorizationFlagDefaults, &auth)) == noErr) {
+	if (auth = AfloatPrefPaneGetAuthorization()) {
 		NSLog(@"Afloat preference pane: Authorizing the Agent.");
 		
 		NSString* pathToAgentBundle = [[NSBundle bundleForClass:[self class]] pathForResource:@"Afloat Agent" ofType:@"app"];
@@ -105,8 +156,6 @@ This file is part of Afloat.
 		};
 		
 		AuthorizationExecuteWithPrivileges(auth, pathToAgentExecC, kAuthorizationFlagDefaults, args, NULL);
-		
-		AuthorizationFree(auth, kAuthorizationFlagDestroyRights);
 		
 		usleep(500000);
 	} else
@@ -207,6 +256,14 @@ This file is part of Afloat.
 	
 AfloatEnabledCleanup:
 		[self performSelector:@selector(didChangeValueForKey:) withObject:@"afloatEnabled" afterDelay:0.1];
+}
+
+- (id) visibleVersion {
+    return [[self bundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
+}
+
+- (id) internalVersion {
+    return [[self bundle] objectForInfoDictionaryKey:@"CFBundleVersion"];    
 }
 
 @end

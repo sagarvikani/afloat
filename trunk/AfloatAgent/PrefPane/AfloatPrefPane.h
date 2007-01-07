@@ -24,6 +24,7 @@ This file is part of Afloat.
 #define AfloatPrefPane NetInfinite_LabsAfloatPrefPane
 
 @interface AfloatPrefPane : NSPreferencePane {
+    IBOutlet NSPanel* aboutPanel;
 }
 
 - (pid_t) processIDForAfloatAgent;
@@ -35,5 +36,11 @@ This file is part of Afloat.
 - (BOOL) requiresAuthorization;
 - (BOOL) canProceedWithEnablingWithUIAllowed:(BOOL) canAsk;
 - (BOOL) authorize;
+
+- (id) visibleVersion;
+- (id) internalVersion;
+
+- (IBAction) showAboutPanel:(id) sender;
+- (IBAction) openLicense:(id) sender;
 
 @end
