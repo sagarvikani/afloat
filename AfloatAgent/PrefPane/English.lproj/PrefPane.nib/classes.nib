@@ -1,6 +1,12 @@
 {
     IBClasses = (
-        {CLASS = AfloatPrefPane; LANGUAGE = ObjC; SUPERCLASS = NSPreferencePane; }, 
+        {
+            ACTIONS = {openLicense = id; showAboutPanel = id; }; 
+            CLASS = AfloatPrefPane; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {aboutPanel = NSPanel; }; 
+            SUPERCLASS = NSPreferencePane; 
+        }, 
         {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
         {
             CLASS = NSPreferencePane; 
