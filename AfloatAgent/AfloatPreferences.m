@@ -8,6 +8,7 @@
 
 #import "AfloatPreferences.h"
 #import <Carbon/Carbon.h>
+#import <string.h>
 
 #define kAfloatPreferencesIdentifier ((CFStringRef)@"net.infinite-labs.Afloat")
 
@@ -34,13 +35,43 @@
     BOOL ret = def;
     if (CFGetTypeID(ref) == CFBooleanGetTypeID())
         ret = CFBooleanGetValue((CFBooleanRef)ref)? YES : NO;
+    else if (CFGetTypeID(ref) == CFNumberGetTypeID()) {
+        int i = def;
+        CFNumberGetValue((CFNumberRef)ref, kCFNumberIntType, &i);
+        ret = (i != 0)? YES : NO;
+    }
     
     CFRelease(ref);
     return ret;
 }
 
+- (void) setBool:(BOOL) val forKey:(NSString*) key {
+    CFBoolean ref = val? kCFBooleanTrue : kCFBooleanFalse;
+    CFPreferencesSetAppValue((CFStringRef)key, val, kAfloatPreferencesIdentifier);
+    CFPreferencesAppSynchronize(kAfloatPreferencesIdentifier);
+}
+
 - (id) objectForKey:(NSString*) key {
     return [(id)[self copyPropertyListRefForKey:key] autorelease]; // thanks for bridging, Apple :)
+}
+
+- (void) setObject:(id) object forKey:(NSString*) key {
+    if (!([object isKindOfClass:[NSDictionary class]] ||
+          [object isKindOfClass:[NSArray class]] ||
+          [object isKindOfClass:[NSData class]] ||
+          [object isKindOfClass:[NSString class]] ||
+          [object isKindOfClass:[NSNumber class]] ||
+          [object isKindOfClass:[NSDate class]]))
+        return;
+    
+    if ([object isKindOfClass:[NSNumber class]] &&
+        strcmp([(NSNumber*)object objCType], @encode(BOOL)) == 0) {
+        [self setBool:[(NSNumber*)object boolValue] forKey:key];
+        return;
+    }
+    
+    CFPreferencesSetAppValue((CFStringRef)key, (CFPropertyListRef)object, kAfloatPreferencesIdentifier);
+    CFPreferencesAppSynchronize(kAfloatPreferencesIdentifier);
 }
 
 @end
