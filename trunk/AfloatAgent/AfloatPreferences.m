@@ -46,8 +46,8 @@
 }
 
 - (void) setBool:(BOOL) val forKey:(NSString*) key {
-    CFBoolean ref = val? kCFBooleanTrue : kCFBooleanFalse;
-    CFPreferencesSetAppValue((CFStringRef)key, val, kAfloatPreferencesIdentifier);
+    CFBooleanRef ref = val? kCFBooleanTrue : kCFBooleanFalse;
+    CFPreferencesSetAppValue((CFStringRef)key, ref, kAfloatPreferencesIdentifier);
     CFPreferencesAppSynchronize(kAfloatPreferencesIdentifier);
 }
 
