@@ -43,5 +43,18 @@ This file is part of Afloat.
 	<string>Afloat.png</string>
 	<key>NSPrincipalClass</key>
 	<string>NetInfinite_LabsAfloatPrefPane</string>
+    
+    <key>L0ClaimInformation</key>
+    <dict>
+        <key>L0Claims</key>
+        <array>
+            <dict>
+                <key>L0ClaimType</key>
+                <string>preferences</string>
+                <key>L0Identifier</key>
+                <string>net.infinite-labs.Afloat</string>
+            </dict>
+        </array>
+    </dict>
 </dict>
 </plist>
