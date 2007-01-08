@@ -24,6 +24,8 @@ This file is part of Afloat.
 #import "AfloatWindowAlphaAnimation.h"
 #import "AfloatWindowFader.h"
 
+#import "AfloatPreferences.h"
+
 @implementation AfloatHub
 
 + (id) sharedHub {
@@ -163,11 +165,11 @@ This file is part of Afloat.
 }
 
 - (float) mediumAlphaValue {
-	return 0.8;
+	return [self normalizedAlphaValueForValue:[[AfloatPreferences sharedInstance] defaultTransparency]];
 }
 
 - (float) adequateOverlayAlphaValue {
-	return 0.4;
+	return [self mediumAlphaValue] / 2;
 }
 
 - (float) normalizedAlphaValueForValue:(float) val {

@@ -34,6 +34,7 @@
 		7EA9A1210B519388004C7977 /* AfloatPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EA9A1200B519388004C7977 /* AfloatPreferences.m */; };
 		7EA9A1450B519A09004C7977 /* AfloatPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EA9A1200B519388004C7977 /* AfloatPreferences.m */; };
 		7EAA48D20B52860700131991 /* MiddleButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EAA48D10B52860700131991 /* MiddleButton.png */; };
+		7EAA492B0B529A8A00131991 /* AfloatPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EA9A1200B519388004C7977 /* AfloatPreferences.m */; };
 		7EBFF97C0AEAB4760067AD4A /* AfloatPayload.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7EBFF9540AEAB3170067AD4A /* AfloatPayload.bundle */; };
 		7EDFF0970B09CB670009C47F /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 		7EDFF0AB0B09CBD90009C47F /* Afloat Agent.app in Resources */ = {isa = PBXBuildFile; fileRef = 8D1107320486CEB800E47090 /* Afloat Agent.app */; };
@@ -583,6 +584,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7EAA492B0B529A8A00131991 /* AfloatPreferences.m in Sources */,
 				7E6204F80AED3B1B0024513B /* AfloatPayloadEntryPoint.m in Sources */,
 				7E6204FA0AED3B280024513B /* AfloatCocoa.m in Sources */,
 				7E6204FC0AED3B2D0024513B /* AfloatCarbon.m in Sources */,

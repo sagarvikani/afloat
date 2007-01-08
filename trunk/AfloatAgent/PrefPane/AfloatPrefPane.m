@@ -29,6 +29,8 @@ This file is part of Afloat.
 
 #define kAfloatAgentBundleIdentifier @"net.infinite-labs.Afloat.Agent"
 
+#import "AfloatPreferences.h"
+
 static AuthorizationRef authorization = NULL;
 
 static AuthorizationRef AfloatPrefPaneGetAuthorization() {
@@ -251,11 +253,10 @@ static void AfloatPrefPaneClearAuthorization() {
 		[[NSWorkspace sharedWorkspace] openFile:pathToAgent withApplication:nil andDeactivate:NO];
 		
 		LIAEAddURLAtEnd((CFURLRef) URLToAgentBundle, false);
-		sleep(1); // to give it time to start
 	}
 	
 AfloatEnabledCleanup:
-		[self performSelector:@selector(didChangeValueForKey:) withObject:@"afloatEnabled" afterDelay:0.1];
+		[self performSelector:@selector(didChangeValueForKey:) withObject:@"afloatEnabled" afterDelay:0.5];
 }
 
 - (id) visibleVersion {
@@ -264,6 +265,10 @@ AfloatEnabledCleanup:
 
 - (id) internalVersion {
     return [[self bundle] objectForInfoDictionaryKey:@"CFBundleVersion"];    
+}
+
+- (id) preferences {
+    return [AfloatPreferences sharedInstance];
 }
 
 @end
