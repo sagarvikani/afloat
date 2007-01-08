@@ -33,6 +33,7 @@
 		7E832B100B2E06F80024E307 /* LoginItemsAE.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E832B0E0B2E06F80024E307 /* LoginItemsAE.m */; };
 		7EA9A1210B519388004C7977 /* AfloatPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EA9A1200B519388004C7977 /* AfloatPreferences.m */; };
 		7EA9A1450B519A09004C7977 /* AfloatPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EA9A1200B519388004C7977 /* AfloatPreferences.m */; };
+		7EAA48D20B52860700131991 /* MiddleButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EAA48D10B52860700131991 /* MiddleButton.png */; };
 		7EBFF97C0AEAB4760067AD4A /* AfloatPayload.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7EBFF9540AEAB3170067AD4A /* AfloatPayload.bundle */; };
 		7EDFF0970B09CB670009C47F /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 		7EDFF0AB0B09CBD90009C47F /* Afloat Agent.app in Resources */ = {isa = PBXBuildFile; fileRef = 8D1107320486CEB800E47090 /* Afloat Agent.app */; };
@@ -115,6 +116,7 @@
 		7EA7E6EC0B295E7300D94E74 /* AfloatAgentCommunication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AfloatAgentCommunication.h; sourceTree = "<group>"; };
 		7EA9A11F0B519388004C7977 /* AfloatPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AfloatPreferences.h; sourceTree = "<group>"; };
 		7EA9A1200B519388004C7977 /* AfloatPreferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AfloatPreferences.m; sourceTree = "<group>"; };
+		7EAA48D10B52860700131991 /* MiddleButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MiddleButton.png; sourceTree = "<group>"; };
 		7EBFF9200AEAB04F0067AD4A /* AfloatLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AfloatLoader.m; sourceTree = "<group>"; };
 		7EBFF9210AEAB04F0067AD4A /* AfloatLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AfloatLoader.h; sourceTree = "<group>"; };
 		7EBFF9540AEAB3170067AD4A /* AfloatPayload.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AfloatPayload.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -343,6 +345,7 @@
 		7EDFF0A30B09CBA20009C47F /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				7EAA48D10B52860700131991 /* MiddleButton.png */,
 				7E5029830B51739700E5FBB7 /* AfloatAboutIcon.png */,
 				7E4B9F650B2E982100DD20D9 /* AfloatPaneIcon.icns */,
 				7E27317D0B2E0C8B007ED7AD /* Afloat.png */,
@@ -490,6 +493,7 @@
 				7EDFF0C70B09CCBF0009C47F /* PrefPane.nib in Resources */,
 				7E643F510B0A3E1E00192BFB /* Banner.png in Resources */,
 				7E5029840B51739700E5FBB7 /* AfloatAboutIcon.png in Resources */,
+				7EAA48D20B52860700131991 /* MiddleButton.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
