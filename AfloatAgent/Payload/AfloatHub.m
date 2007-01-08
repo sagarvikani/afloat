@@ -59,12 +59,14 @@ This file is part of Afloat.
 	[super dealloc];
 }
 
-- (void) changedUserAlpha:(float) ua forWindow:(NSWindow*) wnd {        
+- (void) changedUserAlpha:(float) ua forWindow:(NSWindow*) wnd {
+    AfloatLog(@"changedUserAlpha:%f forWindow:%@", ua, wnd);
+    
     NSMutableDictionary* info = [self infoForWindow:wnd];
     
     if (ua >= 0.95)
         [info removeObjectForKey:kAfloatWindowFaderKey];
-    else if (![info objectForKey:kAfloatWindowFaderKey])
+    else
         [info setObject:[[[AfloatWindowFader alloc] initForWindow:wnd] autorelease] forKey:kAfloatWindowFaderKey];
 }
 
