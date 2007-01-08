@@ -50,8 +50,7 @@ This file is part of Afloat.
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didChangeFocusedWindow:) name:NSWindowDidBecomeMainNotification object:nil];
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willCloseWindow:) name:NSWindowWillCloseNotification object:nil];
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willResignActive:) name:NSApplicationWillResignActiveNotification object:NSApp];
-	
+    
 	[[AfloatHub sharedHub] setFocusedWindow:[[NSApp mainWindow] afloatTopWindow]];	
 	
 	// install menu items
