@@ -68,7 +68,7 @@ This file is part of Afloat.
     
     if (ua >= 0.95)
         [info removeObjectForKey:kAfloatWindowFaderKey];
-    else
+    else if (![info objectForKey:kAfloatWindowFaderKey])
         [info setObject:[[[AfloatWindowFader alloc] initForWindow:wnd] autorelease] forKey:kAfloatWindowFaderKey];
 }
 
