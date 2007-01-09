@@ -157,10 +157,10 @@ This file is part of Afloat.
 	
 	if ([win alwaysOnTop]) {
 		[win setAlwaysOnTop:NO];
-		[win setAlphaValue:1.0];
+		[win setUserAlphaValue:1.0];
 	} else {
 		[win setAlwaysOnTop:YES];
-		[win setAlphaValue:[self mediumAlphaValue]];
+		[win setUserAlphaValue:[self mediumAlphaValue]];
 	}
 }
 
