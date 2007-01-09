@@ -32,10 +32,12 @@ This file is part of Afloat.
 
 @interface NSObject (AfloatCocoaAdditions)
 - (void) afloatSendEventOriginal:(NSEvent*) evt;
+- (void) afloatMiniaturizeOriginal:(id) sender;
 @end
 
 @interface NSWindow (AfloatCocoaAdditions)
 - (id) afloatTopWindow;
+- (void) afloatMiniaturize:(id) sender;
 @end
 
 @interface NSApplication (AfloatCocoaAdditions)

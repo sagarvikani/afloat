@@ -18,6 +18,8 @@ This file is part of Afloat.
 #import <objc/objc-class.h>
 #import "AfloatHub.h"
 
+#import "AfloatPreferences.h"
+
 #define kAfloatCocoaUserAlphaValue @"AfloatCocoaUserAlphaValue"
 
 @implementation AfloatCocoa
@@ -61,6 +63,10 @@ This file is part of Afloat.
     // install Drag Anywhere
     
     [self bypassSelector:@selector(sendEvent:) ofClass:[NSApplication class] throughNewSelector:@selector(afloatSendEvent:) keepOriginalAs:@selector(afloatSendEventOriginal:)];
+    
+    // sink with "-"
+    
+    [self bypassSelector:@selector(miniaturize:) ofClass:[NSWindow class] throughNewSelector:@selector(afloatMiniaturize:) keepOriginalAs:@selector(afloatMiniaturizeOriginal:)];
 }
 
 - (BOOL) searchAndInstallMenuItems:(NSMenu*) items inAppropriateMenuIn:(NSMenu*) menu {
@@ -124,6 +130,13 @@ This file is part of Afloat.
 @end
 
 @implementation NSWindow (AfloatCocoaAdditions)
+
+- (void) afloatMiniaturize:(id) sender {
+    if ([[AfloatPreferences sharedInstance] shouldUseSinkRatherThanMinimize])
+        [[AfloatHub sharedHub] sinkWindow:self];
+    else
+        [self afloatMiniaturizeOriginal:sender];
+}
 
 - (float) userAlphaValue {
     NSNumber* n = [[[AfloatHub sharedHub] infoForWindow:self] objectForKey:kAfloatCocoaUserAlphaValue];

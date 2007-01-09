@@ -10,13 +10,16 @@
 
 
 @interface AfloatPreferences : NSObject {
-    NSNumber* defaultTransparencyCached;
+
 }
 
 + (id) sharedInstance;
 
 - (float) defaultTransparency;
 - (void) setDefaultTransparency:(float) t;
+
+- (BOOL) shouldUseSinkRatherThanMinimize;
+- (void) setShouldUseSinkRatherThanMinimize:(BOOL) useSink;
 
 - (BOOL) boolForKey:(NSString*) key withDefault:(BOOL) def;
 - (void) setBool:(BOOL) val forKey:(NSString*) key;

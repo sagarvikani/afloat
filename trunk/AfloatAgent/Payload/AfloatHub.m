@@ -16,7 +16,7 @@ This file is part of Afloat.
 
 */
 
-#import "../AfloatAgentCommunication.h"
+#import "AfloatAgentCommunication.h"
 #import "AfloatHub.h"
 #import "AfloatLogging.h"
 
@@ -66,6 +66,7 @@ This file is part of Afloat.
     
     NSMutableDictionary* info = [self infoForWindow:wnd];
     
+    [info removeObjectForKey:@"AfloatIsSunk"];    
     if (ua >= 0.95)
         [info removeObjectForKey:kAfloatWindowFaderKey];
     else if (![info objectForKey:kAfloatWindowFaderKey])
@@ -131,6 +132,12 @@ This file is part of Afloat.
 	if (wnd != focusedWindow) {
 		[focusedWindow release];
 		focusedWindow = [wnd retain];
+        
+        NSMutableDictionary* info = [self infoForWindow:wnd];
+        if ([info objectForKey:@"AfloatIsSunk"]) {
+            [info removeObjectForKey:@"AfloatIsSunk"];
+            [self fadeWindow:wnd toAlpha:1.0];
+        }
 	}
 }
 
@@ -287,6 +294,30 @@ This file is part of Afloat.
 - (IBAction) toggleAlwaysOnTop:(id) sender {
 	id w = [self focusedWindow];
 	[w setAlwaysOnTop:![w alwaysOnTop]];
+}
+
+- (IBAction) sinkFocusedWindow:(id) sender {
+    [self sinkWindow:[self focusedWindow]];
+}
+
+- (void) sinkWindow:(id) wnd {
+    [self fadeWindow:wnd toAlpha:[self mediumAlphaValue]];
+    [[self infoForWindow:wnd] setObject:[NSNumber numberWithBool:YES] forKey:@"AfloatIsSunk"];
+    [wnd orderBack:self];
+    
+    int i; NSArray* allWnds = [[AfloatImplementation sharedInstance] windows];
+    for (i = 0; i < [allWnds count]; i++) {
+        if ([allWnds objectAtIndex:i] == wnd) {
+            if (i == 0)
+                i = [allWnds count] - 1;
+            else
+                i--;
+            id newWnd = [allWnds objectAtIndex:i];
+            if (![newWnd isKindOfClass:[NSPanel class]] && [newWnd isVisible])
+                [newWnd makeKeyAndOrderFront:self];
+            break;
+        }
+    }
 }
 
 @end
