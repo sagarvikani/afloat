@@ -18,6 +18,7 @@
 #define kAfloatPreferencesChangedNotification @"AfloatPreferencesChanged"
 
 #define kAfloatDefaultTransparencyKey @"AfloatDefaultTransparency"
+#define kAfloatShouldUseSinkRatherThanMinimize @"AfloatShouldUseSinkRatherThanMinimize"
 
 @implementation AfloatPreferences
 
@@ -112,34 +113,28 @@
 
 
 - (float) defaultTransparency {
-    if (defaultTransparencyCached)
-        return [defaultTransparencyCached floatValue];
-    
-    NSNumber* n = [self objectForKey:kAfloatDefaultTransparencyKey];
-    if (!n || ![n respondsToSelector:@selector(floatValue)])
-        n = [NSNumber numberWithFloat:0.8];
-    
-    defaultTransparencyCached = [n retain];
-    return [n floatValue];
+    return [self floatForKey:kAfloatDefaultTransparencyKey withDefault:0.8];
 }
 
 - (void) setDefaultTransparency:(float) v {
     return [self setFloat:v forKey:kAfloatDefaultTransparencyKey];
 }
 
+- (BOOL) shouldUseSinkRatherThanMinimize {
+    return [self boolForKey:kAfloatShouldUseSinkRatherThanMinimize withDefault:NO];
+}
+
+- (void) setShouldUseSinkRatherThanMinimize:(BOOL) useSink {
+    [self setBool:useSink forKey:kAfloatShouldUseSinkRatherThanMinimize];
+}
+
 // ---
 
 - (void) _notifyChanges {
-    [defaultTransparencyCached release];
-    defaultTransparencyCached = nil;
-    
     [[NSDistributedNotificationCenter defaultCenter] postNotificationName:kAfloatPreferencesChangedNotification object:(id) kAfloatDistributedObjectIdentifier];
 }
 
 - (void) _resync:(NSNotification*) n {
-    [defaultTransparencyCached release];
-    defaultTransparencyCached = nil;
-    
     AfloatLog(@"-[AfloatPreferences _resync:...]");
     
     CFPreferencesAppSynchronize(kAfloatPreferencesIdentifier);

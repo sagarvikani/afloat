@@ -9,6 +9,7 @@
                 performSeethru = id; 
                 resetAllOverlays = id; 
                 showAdjustEffectsPanel = id; 
+                sinkFocusedWindow = id; 
                 toggleAlwaysOnTop = id; 
                 toggleKeepAfloat = id; 
             }; 

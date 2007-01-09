@@ -75,4 +75,7 @@ This file is part of Afloat.
 - (void) fadeInWindow:(id) wnd;
 - (void) fadeOutWindow:(id) wnd;
 
+- (IBAction) sinkFocusedWindow:(id) sender;
+- (void) sinkWindow:(id) wnd;
+
 @end
