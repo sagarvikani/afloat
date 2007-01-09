@@ -145,11 +145,11 @@ This file is part of Afloat.
 - (void) setOverlayWindow:(BOOL) overlay {
 	if (overlay) {
 		[self setIgnoresMouseEvents:YES];
-		if ([self alphaValue] == 1.0) [self setAlphaValue:[[AfloatHub sharedHub] adequateOverlayAlphaValue]];
+		if ([self userAlphaValue] == 1.0) [self setUserAlphaValue:[[AfloatHub sharedHub] adequateOverlayAlphaValue]];
 		[self setAlwaysOnTop:YES];
 	} else {
 		[self setIgnoresMouseEvents:NO];
-		if ([self alphaValue] == [[AfloatHub sharedHub] adequateOverlayAlphaValue]) [self setAlphaValue:1.0];
+		if ([self userAlphaValue] == [[AfloatHub sharedHub] adequateOverlayAlphaValue]) [self setUserAlphaValue:1.0];
 		[self setAlwaysOnTop:NO];
 	}
 }
