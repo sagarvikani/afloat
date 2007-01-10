@@ -78,6 +78,9 @@ static BOOL AfloatApplicationIsNative(pid_t pid)
 @implementation AfloatLoader
 
 - (void) applicationDidFinishLaunching:(NSNotification*) notif {
+    // we cache our own build number -- will need it in case of an upgrade.
+    myVersion = [[[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"] description] copy];
+    
     [[[NSWorkspace sharedWorkspace] notificationCenter]
         addObserver:self selector:@selector(didLaunchApplication:) name:NSWorkspaceDidLaunchApplicationNotification object:nil];
 	
@@ -137,6 +140,11 @@ static BOOL AfloatApplicationIsNative(pid_t pid)
         [bundleID isEqual:@"com.apple.dock"] ||
         [bundleID isEqual:@"com.apple.systempreferences"])
         return;
+#define AfloatTerminalRequiredForTesting
+#ifdef AfloatTerminalRequiredForTesting
+    if ([bundleID isEqual:@"com.apple.Terminal"])
+        return;
+#endif
 		
 	// grab the app's pid from the NSNumber*
 	pid_t pid = (pid_t) [pidNumber intValue];
@@ -192,9 +200,14 @@ static BOOL AfloatApplicationIsNative(pid_t pid)
 	return getpid();
 }
 
+- (NSString*) currentVersion {
+    return myVersion;
+}
+
 // -----
 
 - (void) dealloc {
+    [myVersion release];
     [[[NSWorkspace sharedWorkspace] notificationCenter] removeObserver:self];
 	[[NSDistributedNotificationCenter defaultCenter] removeObserver:self];
 	[waitTimer release];
