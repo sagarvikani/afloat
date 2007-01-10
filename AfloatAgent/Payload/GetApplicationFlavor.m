@@ -53,9 +53,7 @@ int GetApplicationFlavor()
 CFDictionaryGetValue:
 ProcessInformationCopyDictionary:
 GetCurrentProcess:
-		
-    if (processInfoFlavor != NULL)
-        CFRelease(processInfoFlavor);
+    
 	if (processInfoDict != NULL)
 		CFRelease(processInfoDict);
 	

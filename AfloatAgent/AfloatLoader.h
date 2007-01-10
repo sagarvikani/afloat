@@ -19,6 +19,8 @@ This file is part of Afloat.
 @interface AfloatLoader : NSObject <AfloatAgent> {
 	NSTimer* waitTimer;
 	NSMutableArray* doNotLoadList;
+    
+    NSString* myVersion;
 }
 
 - (NSString*) pathToAfloatBundle;
