@@ -694,7 +694,7 @@
 				);
 				PREBINDING = NO;
 				PRODUCT_NAME = AfloatAnimationTester;
-				ZERO_LINK = YES;
+				ZERO_LINK = NO;
 			};
 			name = Debug;
 		};
@@ -749,7 +749,7 @@
 				PREBINDING = NO;
 				PRODUCT_NAME = AfloatPayload;
 				WRAPPER_EXTENSION = bundle;
-				ZERO_LINK = YES;
+				ZERO_LINK = NO;
 			};
 			name = "Debug (Universal Binary)";
 		};
@@ -772,7 +772,7 @@
 				INSTALL_PATH = "$(HOME)/Applications";
 				PRODUCT_NAME = "Afloat Agent";
 				WRAPPER_EXTENSION = app;
-				ZERO_LINK = YES;
+				ZERO_LINK = NO;
 			};
 			name = "Debug (Universal Binary)";
 		};
@@ -796,7 +796,7 @@
 				);
 				PREBINDING = NO;
 				PRODUCT_NAME = AfloatAnimationTester;
-				ZERO_LINK = YES;
+				ZERO_LINK = NO;
 			};
 			name = "Debug (Universal Binary)";
 		};
@@ -824,7 +824,7 @@
 				PREBINDING = NO;
 				PRODUCT_NAME = Afloat;
 				WRAPPER_EXTENSION = prefPane;
-				ZERO_LINK = YES;
+				ZERO_LINK = NO;
 			};
 			name = "Debug (Universal Binary)";
 		};
@@ -874,7 +874,7 @@
 				PREBINDING = NO;
 				PRODUCT_NAME = AfloatPayload;
 				WRAPPER_EXTENSION = bundle;
-				ZERO_LINK = YES;
+				ZERO_LINK = NO;
 			};
 			name = Debug;
 		};
@@ -933,7 +933,7 @@
 				PREBINDING = NO;
 				PRODUCT_NAME = Afloat;
 				WRAPPER_EXTENSION = prefPane;
-				ZERO_LINK = YES;
+				ZERO_LINK = NO;
 			};
 			name = Debug;
 		};
@@ -982,7 +982,7 @@
 				INSTALL_PATH = "$(HOME)/Applications";
 				PRODUCT_NAME = "Afloat Agent";
 				WRAPPER_EXTENSION = app;
-				ZERO_LINK = YES;
+				ZERO_LINK = NO;
 			};
 			name = Debug;
 		};
@@ -1006,6 +1006,7 @@
 				INSTALL_PATH = "$(HOME)/Applications";
 				PRODUCT_NAME = "Afloat Agent";
 				WRAPPER_EXTENSION = app;
+				ZERO_LINK = NO;
 			};
 			name = Release;
 		};

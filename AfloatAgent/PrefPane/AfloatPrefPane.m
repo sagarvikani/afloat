@@ -141,9 +141,7 @@ static void AfloatPrefPaneClearAuthorization() {
 //#define AfloatDebugAuthorization 1
 	// please note: Afloat is meant to be built as a 32-bit binary thingy, hence the i386.
 	// who knows what tricks can x86_64 play with mach_*?
-	// I don't want to be the one who finds out.
-#if defined(__i386__) || defined(AfloatDebugAuthorization)
-	
+	// I don't want to be the one who finds out.	
 	NSString* pathToAgentBundle = [[NSBundle bundleForClass:[self class]] pathForResource:@"Afloat Agent" ofType:@"app"];
 	NSBundle* agentBundle = [[[NSBundle alloc] initWithPath:pathToAgentBundle] autorelease];
 	NSDictionary* stats = [[NSFileManager defaultManager] fileAttributesAtPath:[agentBundle executablePath] traverseLink:NO];
@@ -162,10 +160,10 @@ static void AfloatPrefPaneClearAuthorization() {
 		// ABORT! Todo.
 		return NO;
 	}
-	
+#if defined(__i386__)
 	return (minor >= 4 && build >= 4); // i386 10.4.4 and later.
 #else
-	return NO; // no need to check this on PPC
+    return (minor >= 5); // PPC Leopard and later
 #endif
 }
 
