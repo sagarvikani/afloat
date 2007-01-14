@@ -3,18 +3,18 @@
 //  AfloatAgent
 
 /*
-
-Copyright © 2006, Emanuele Vulcano.
-
-This file is part of Afloat.
-
-    Afloat is free software; you can redistribute it and/or modify it under the terms of the GNU Lesser General Public License as published by the Free Software Foundation; either version 2.1 of the License, or (at your option) any later version.
-
-    Afloat is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more details.
-
-    You should have received a copy of the GNU Lesser General Public License along with Afloat; if not, write to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301  USA
-
-*/
+ 
+ Copyright © 2006, Emanuele Vulcano.
+ 
+ This file is part of Afloat.
+ 
+ Afloat is free software; you can redistribute it and/or modify it under the terms of the GNU Lesser General Public License as published by the Free Software Foundation; either version 2.1 of the License, or (at your option) any later version.
+ 
+ Afloat is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more details.
+ 
+ You should have received a copy of the GNU Lesser General Public License along with Afloat; if not, write to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301  USA
+ 
+ */
 
 #import "AfloatAgentCommunication.h"
 #import "AfloatHub.h"
@@ -211,7 +211,7 @@ This file is part of Afloat.
 	[ani addAnimation:[AfloatWindowAlphaAnimation animationForWindow:window fromAlpha:[window alphaValue] toAlpha:alpha]];
 	[ani run];
 	[ani release];
-
+    
 	animating = NO;
 }
 
@@ -225,7 +225,7 @@ This file is part of Afloat.
 		return;	
 	
 	[[self infoForWindow:window] setObject:[NSNumber numberWithBool:YES] forKey:@"AfloatWindowIsFadedIn"];
-
+    
 	
 	// AfloatLog(@"entered: %f", [[theEvent window] alphaValue]);
 	
@@ -301,10 +301,6 @@ This file is part of Afloat.
 }
 
 - (void) sinkWindow:(id) wnd {
-    [self fadeWindow:wnd toAlpha:[self mediumAlphaValue]];
-    [[self infoForWindow:wnd] setObject:[NSNumber numberWithBool:YES] forKey:@"AfloatIsSunk"];
-    [wnd orderBack:self];
-    
     int i; NSArray* allWnds = [[AfloatImplementation sharedInstance] windows];
     for (i = 0; i < [allWnds count]; i++) {
         if ([allWnds objectAtIndex:i] == wnd) {
@@ -312,12 +308,19 @@ This file is part of Afloat.
                 i = [allWnds count] - 1;
             else
                 i--;
+            
             id newWnd = [allWnds objectAtIndex:i];
-            if (![newWnd isKindOfClass:[NSPanel class]] && [newWnd isVisible])
+            if (![newWnd isKindOfClass:[NSPanel class]] && [newWnd isVisible]) {
+                [self fadeWindow:wnd toAlpha:[self mediumAlphaValue]];
+                [[self infoForWindow:wnd] setObject:[NSNumber numberWithBool:YES] forKey:@"AfloatIsSunk"];        
                 [newWnd makeKeyAndOrderFront:self];
+            }
             break;
         }
     }
+    
+    [wnd orderBack:self];
+    
 }
 
 @end
