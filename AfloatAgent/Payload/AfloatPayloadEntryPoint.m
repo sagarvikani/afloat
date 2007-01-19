@@ -31,10 +31,10 @@ void AfloatPayloadEntryPoint() /* __attribute__((constructor)) */ {
 	// the Cocoainess/Carboniness of the app we're in.
 	// to be extra sure, we also wait for the next spin of the
 	// main run loop.
-	
+    
 	Class implClass = nil;
 	
-	if (GetApplicationFlavor() == kCocoaApplicationFlavor)
+	if (NSApp != nil)
 		implClass = [AfloatCocoa class];
 	else
 		implClass = [AfloatCarbon class];

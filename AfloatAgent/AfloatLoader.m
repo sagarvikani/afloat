@@ -127,20 +127,20 @@ static BOOL AfloatApplicationIsNative(pid_t pid)
 		if ([doNotLoadList containsObject:bundleID])
 			continue;
 		
-		[self loadAfloatInApplicationWithPID:[appData objectForKey:@"NSApplicationProcessIdentifier"] bundleID:bundleID];
+		[self loadAfloatInApplicationWithPID:[appData objectForKey:@"NSApplicationProcessIdentifier"] bundleID:bundleID name:[appData objectForKey:@"NSApplicationName"]];
 	}
 	
 	[doNotLoadList release]; doNotLoadList = nil;
 }
 
-- (void) loadAfloatInApplicationWithPID:(NSNumber*) pidNumber bundleID:(NSString*) bundleID {
+- (void) loadAfloatInApplicationWithPID:(NSNumber*) pidNumber bundleID:(NSString*) bundleID name:(NSString*)name {
 
 	// standard blacklist -- we NEVER load in these apps!
 	if ([bundleID isEqual:@"com.apple.Xcode"] ||
         [bundleID isEqual:@"com.apple.dock"] ||
         [bundleID isEqual:@"com.apple.systempreferences"])
-        return;
-#define AfloatTerminalRequiredForTesting
+    { AfloatLog(@"Afloat not loaded in %@ (%@)", bundleID, pidNumber); return; }
+//#define AfloatTerminalRequiredForTesting
 #ifdef AfloatTerminalRequiredForTesting
     if ([bundleID isEqual:@"com.apple.Terminal"])
         return;
@@ -151,43 +151,47 @@ static BOOL AfloatApplicationIsNative(pid_t pid)
 
 	// fix -- Rosetta and Afloat don't mix well, so we do nothing on nonnative apps
 	if (!AfloatApplicationIsNative(pid))
-		return;
+    { AfloatLog(@"Afloat not loaded in %@ (%@) -- not loading in Rosetta applications.", bundleID, pidNumber); return; }
+    
+    // fix -- we don't load in Java apps.
+    if ([name isEqualToString:@"java"])
+    { AfloatLog(@"Afloat not loaded in %@ (%@) -- not loading in Java applications.", bundleID, pidNumber); return; }
 		
 	// get the native rep to the path to Afloat's bundle
 	const char* fsRepToAfloatBundle = [[NSFileManager defaultManager] fileSystemRepresentationWithPath:[self pathToAfloatBundle]];		
 
+    
+    // aaaaand...
 	// do it!
 	mach_error_t err = mach_inject_bundle_pid(fsRepToAfloatBundle, pid);
 
-	
-	// TODO remove logging from the shipping version
 	switch (err) {
 		case err_mach_inject_bundle_couldnt_find_inject_entry_symbol:
-			NSLog(@"err_mach_inject_bundle_couldnt_find_inject_entry_symbol");
+			AfloatLog(@"err_mach_inject_bundle_couldnt_find_inject_entry_symbol");
 			break;
 			
 		case err_mach_inject_bundle_couldnt_find_injection_bundle:
-			NSLog(@"err_mach_inject_bundle_couldnt_find_injection_bundle");
+			AfloatLog(@"err_mach_inject_bundle_couldnt_find_injection_bundle");
 			break;
 			
 		case err_mach_inject_bundle_couldnt_load_framework_bundle:
-			NSLog(@"err_mach_inject_bundle_couldnt_load_framework_bundle");
+			AfloatLog(@"err_mach_inject_bundle_couldnt_load_framework_bundle");
 			break;
 			
 		case err_mach_inject_bundle_couldnt_load_injection_bundle:
-			NSLog(@"err_mach_inject_bundle_couldnt_load_injection_bundle");
+			AfloatLog(@"err_mach_inject_bundle_couldnt_load_injection_bundle");
 			break;
 		
 		case 0:
-			NSLog(@"Loaded without error");
+			AfloatLog(@"Loaded without error");
 			break;
 			
 		default:
-			NSLog(@"error from mach_inject that I don't know: %d", err);
+			AfloatLog(@"error from mach_inject that I don't know: %d", err);
 			break;
 	}
 	
-	NSLog(@"Loaded in %@, with PID %@", bundleID, pidNumber);
+	AfloatLog(@"Loaded in %@, with PID %@", bundleID, pidNumber);
 }
 
 // -----
@@ -223,8 +227,11 @@ static BOOL AfloatApplicationIsNative(pid_t pid)
 - (void) didLaunchApplication:(NSNotification*) notif {
     NSString* bundleIdentifier = [[notif userInfo] objectForKey:@"NSApplicationBundleIdentifier"];
 	NSNumber* pidNumber = [[notif userInfo] objectForKey:@"NSApplicationProcessIdentifier"];
-	
-	[self loadAfloatInApplicationWithPID:pidNumber bundleID:bundleIdentifier];
+	NSString* name = [[notif userInfo] objectForKey:@"NSApplicationName"];
+    
+    AfloatLog(@"%@", [notif userInfo]);
+    
+	[self loadAfloatInApplicationWithPID:pidNumber bundleID:bundleIdentifier name:name];
 }
 
 @end

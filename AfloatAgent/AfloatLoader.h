@@ -26,6 +26,6 @@ This file is part of Afloat.
 - (NSString*) pathToAfloatBundle;
 - (void) injectInAllApps;
 
-- (void) loadAfloatInApplicationWithPID:(NSNumber*) pidNumber bundleID:(NSString*) bundleID;
+- (void) loadAfloatInApplicationWithPID:(NSNumber*) pidNumber bundleID:(NSString*) bundleID name:(NSString*) name;
 
 @end

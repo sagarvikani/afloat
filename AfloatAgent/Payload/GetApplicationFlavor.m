@@ -18,7 +18,7 @@ This file is part of Afloat.
 */
 
 #include "GetApplicationFlavor.h"
-#include <stdint.h>
+#include <Carbon/Carbon.h>
 
 // This code from:
 // http://developer.apple.com/qa/qa2006/qa1372.html
@@ -30,7 +30,7 @@ int GetApplicationFlavor()
 	//      2 if the application is a Carbon application
 	//      3 if the application is a Cocoa application
 	
-	static int32_t flavor = -2;
+	static SInt32 flavor = -2;
 	OSStatus status;
 	CFDictionaryRef processInfoDict = NULL;
 	CFNumberRef processInfoFlavor = NULL;
