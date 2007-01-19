@@ -556,7 +556,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Sets HFS bundle, custom icon and hidden extension\n# bits upon Afloat.prefPane.\n\n/Developer/Tools/SetFile -a BCE \"$BUILT_PRODUCTS_DIR/$WRAPPER_NAME\"\necho \"Let's think the unthinkable, let's do the undoable, let's prepare to grapple with the ineffable itself, and see if we may not eff it after all. -- Dirk Gently's Holistic Detective Agency, Douglas Noel Adams\" > \"$BUILT_PRODUCTS_DIR/$WRAPPER_NAME/Contents/Resources/Quote.txt\"\n";
+			shellScript = "# Sets HFS bundle, custom icon and hidden extension\n# bits upon Afloat.prefPane.\n\n/Developer/Tools/SetFile -a BCE \"$BUILT_PRODUCTS_DIR/$WRAPPER_NAME\"\necho \"“If I were asked to give what I consider the single most useful bit of advice for all humanity it would be this: Expect trouble as an inevitable part of life and when it comes, hold you head high, look it squarely in eye and say, 'I will be bigger than you. You cannot defeat me.'”\" > \"$BUILT_PRODUCTS_DIR/$WRAPPER_NAME/Contents/Resources/Quote.txt\"\n";
 		};
 		7EDFF08D0B09CB480009C47F /* Set Version from Subversion Revision */ = {
 			isa = PBXShellScriptBuildPhase;
