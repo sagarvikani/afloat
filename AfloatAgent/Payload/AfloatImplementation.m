@@ -18,7 +18,6 @@ This file is part of Afloat.
 
 #import "AfloatImplementation.h"
 
-
 @implementation AfloatImplementation
 
 - (BOOL) performInstallOnMainThread { return NO; }

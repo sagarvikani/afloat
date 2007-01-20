@@ -15,7 +15,7 @@
 - (id) initForWindow:(id) w {
 	if (self = [super init]) {
 		window = w; // weak -- we are owned by the window's info dictionary.
-		[window beginMouseTrackingWithOwner:self];
+		tracker = [[w beginMouseTrackingWithOwner:self] retain];
 	}
 	
 	AfloatLog(@"Fader created for window %@", w);
@@ -24,7 +24,7 @@
 }
 
 - (void) dealloc {
-	[window endMouseTrackingIfOwner:self];
+    [tracker release];
 	AfloatLog(@"Fader removed for window %@", window);
 
 	[super dealloc];

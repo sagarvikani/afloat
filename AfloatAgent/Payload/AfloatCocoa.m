@@ -17,7 +17,7 @@ This file is part of Afloat.
 
 #import <objc/objc-class.h>
 #import "AfloatHub.h"
-
+#import "AfloatCocoaWindowTracking.h"
 #import "AfloatPreferences.h"
 
 #define kAfloatCocoaUserAlphaValue @"AfloatCocoaUserAlphaValue"
@@ -184,51 +184,8 @@ This file is part of Afloat.
 }
 
 
-- (void) beginMouseTrackingWithOwner:(id) owner {
-	NSMutableDictionary* myInfo = [[AfloatHub sharedHub] infoForWindow:self];
-	if ([[myInfo objectForKey:@"AfloatTrackingRectTagOwner"] nonretainedObjectValue] == owner) return;
-	
-	[self endMouseTracking];
-	
-	NSView* windowView = [[self contentView] superview];
-	NSRect frame = [windowView frame];
-	
-	NSTrackingRectTag tr = [windowView addTrackingRect:frame owner:owner userData:self assumeInside:NO];
-	
-	[myInfo setObject:[NSNumber numberWithInt:tr] forKey:@"AfloatTrackingRectTag"];
-	[myInfo setObject:[NSValue valueWithNonretainedObject:owner] forKey:@"AfloatTrackingRectTagOwner"];
-	
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_afloat_windowViewDidChangeBounds:) name:NSViewBoundsDidChangeNotification object:windowView];
-}
-
-- (void) endMouseTracking {
-	NSMutableDictionary* myInfo = [[AfloatHub sharedHub] infoForWindow:self];
-	NSNumber* n = [myInfo objectForKey:@"AfloatTrackingRectTag"];
-	if (n == nil) return;
-	
-	NSView* windowView = [[self contentView] superview];
-	[windowView removeTrackingRect:[n intValue]];
-	
-	[[NSNotificationCenter defaultCenter] removeObserver:self name:NSViewBoundsDidChangeNotification object:windowView];
-	
-	[myInfo removeObjectForKey:@"AfloatTrackingRectTag"];
-	[myInfo removeObjectForKey:@"AfloatTrackingRectTagOwner"];
-}
-
-- (void) endMouseTrackingIfOwner:(id) owner {
-	NSMutableDictionary* myInfo = [[AfloatHub sharedHub] infoForWindow:self];
-	NSValue* v = [myInfo objectForKey:@"AfloatTrackingRectTagOwner"];
-	
-	if (v && [v nonretainedObjectValue] == owner)
-		[self endMouseTracking];
-}
-
-- (void) _afloat_windowViewDidChangeBounds:(NSNotification*) notif {
-	NSMutableDictionary* myInfo = [[AfloatHub sharedHub] infoForWindow:self];
-	id theOwner = [[myInfo objectForKey:@"AfloatTrackingRectTagOwner"] nonretainedObjectValue];
-	
-	[self endMouseTracking];
-	[self beginMouseTrackingWithOwner:theOwner];
+- (id) beginMouseTrackingWithOwner:(id) owner {
+	return [[[AfloatCocoaWindowTracking alloc] initForWindow:self owner:owner] autorelease];
 }
 
 @end

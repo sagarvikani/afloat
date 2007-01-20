@@ -43,6 +43,8 @@
 		7EDFF0BE0B09CC540009C47F /* PreferencePanes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EDFF0BB0B09CC540009C47F /* PreferencePanes.framework */; };
 		7EDFF0C70B09CCBF0009C47F /* PrefPane.nib in Resources */ = {isa = PBXBuildFile; fileRef = 7EDFF0C50B09CCBF0009C47F /* PrefPane.nib */; };
 		7EE461990B09007A001C629F /* AfloatWindowAlphaAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EE461980B09007A001C629F /* AfloatWindowAlphaAnimation.m */; };
+		7EECB1AE0B616535004810D3 /* AfloatWindowInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EECB1AD0B616535004810D3 /* AfloatWindowInfo.m */; };
+		7EECB1E40B616AE8004810D3 /* AfloatCocoaWindowTracking.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EECB1BA0B61663B004810D3 /* AfloatCocoaWindowTracking.m */; };
 		7EECBD100B15A7B9003C5C04 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EECBD0F0B15A7B9003C5C04 /* Security.framework */; };
 		8D11072A0486CEB800E47090 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 29B97318FDCFA39411CA2CEA /* MainMenu.nib */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
@@ -134,6 +136,10 @@
 		7EDFF0C60B09CCBF0009C47F /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = PrefPane/English.lproj/PrefPane.nib; sourceTree = "<group>"; };
 		7EE461970B09007A001C629F /* AfloatWindowAlphaAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AfloatWindowAlphaAnimation.h; sourceTree = "<group>"; };
 		7EE461980B09007A001C629F /* AfloatWindowAlphaAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AfloatWindowAlphaAnimation.m; sourceTree = "<group>"; };
+		7EECB1AC0B616535004810D3 /* AfloatWindowInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AfloatWindowInfo.h; sourceTree = "<group>"; };
+		7EECB1AD0B616535004810D3 /* AfloatWindowInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AfloatWindowInfo.m; sourceTree = "<group>"; };
+		7EECB1B90B61663B004810D3 /* AfloatCocoaWindowTracking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AfloatCocoaWindowTracking.h; sourceTree = "<group>"; };
+		7EECB1BA0B61663B004810D3 /* AfloatCocoaWindowTracking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AfloatCocoaWindowTracking.m; sourceTree = "<group>"; };
 		7EECBD0F0B15A7B9003C5C04 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = /System/Library/Frameworks/Security.framework; sourceTree = "<absolute>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* Afloat Agent.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Afloat Agent.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -322,6 +328,10 @@
 				7E4F5D180AFD1FDE00102CBA /* AfloatAnimator.m */,
 				7E06E8300B2A0048000A3440 /* GetApplicationFlavor.h */,
 				7E06E8310B2A0048000A3440 /* GetApplicationFlavor.m */,
+				7EECB1AC0B616535004810D3 /* AfloatWindowInfo.h */,
+				7EECB1AD0B616535004810D3 /* AfloatWindowInfo.m */,
+				7EECB1B90B61663B004810D3 /* AfloatCocoaWindowTracking.h */,
+				7EECB1BA0B61663B004810D3 /* AfloatCocoaWindowTracking.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -588,6 +598,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7EECB1E40B616AE8004810D3 /* AfloatCocoaWindowTracking.m in Sources */,
 				7EAA492B0B529A8A00131991 /* AfloatPreferences.m in Sources */,
 				7E6204F80AED3B1B0024513B /* AfloatPayloadEntryPoint.m in Sources */,
 				7E6204FA0AED3B280024513B /* AfloatCocoa.m in Sources */,
@@ -608,6 +619,7 @@
 				7EA9A1210B519388004C7977 /* AfloatPreferences.m in Sources */,
 				7EDFF0B20B09CBF30009C47F /* AfloatPrefPane.m in Sources */,
 				7E832B100B2E06F80024E307 /* LoginItemsAE.m in Sources */,
+				7EECB1AE0B616535004810D3 /* AfloatWindowInfo.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
