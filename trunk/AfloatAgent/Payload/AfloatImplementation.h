@@ -21,9 +21,11 @@ This file is part of Afloat.
 @interface NSObject (AfloatWindowObject)
 - (BOOL) alwaysOnTop;
 - (void) setAlwaysOnTop:(BOOL) aot;
-- (void) beginMouseTrackingWithOwner:(id) owner;
+- (id) beginMouseTrackingWithOwner:(id) owner;
+/*
 - (void) endMouseTracking;
 - (void) endMouseTrackingIfOwner:(id) owner;
+*/
 
 - (void) setOverlayWindow:(BOOL) ov;
 - (BOOL) overlayWindow;

@@ -23,6 +23,7 @@
 
 @interface AfloatWindowFader : NSObject {
 	id /* AfloatWindow */ window;
+    id tracker;
 	NSTimer* timer;
 }
 

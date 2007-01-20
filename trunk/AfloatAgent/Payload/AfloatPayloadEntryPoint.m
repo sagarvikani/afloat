@@ -34,9 +34,10 @@ void AfloatPayloadEntryPoint() /* __attribute__((constructor)) */ {
     
 	Class implClass = nil;
 	
-	if (NSApp != nil)
+	if (GetApplicationFlavor() == kCocoaApplicationFlavor) {
+        [NSApplication sharedApplication];
 		implClass = [AfloatCocoa class];
-	else
+	} else
 		implClass = [AfloatCarbon class];
 	
 	[(AfloatImplementation*)[implClass sharedInstance] performInstallOnMainThread];
