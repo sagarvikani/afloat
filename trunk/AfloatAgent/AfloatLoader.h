@@ -14,6 +14,8 @@ This file is part of Afloat.
 */
 
 #import <Cocoa/Cocoa.h>
+#import <Carbon/Carbon.h>
+
 #import "AfloatAgentCommunication.h"
 
 @interface AfloatLoader : NSObject <AfloatAgent> {
@@ -21,6 +23,9 @@ This file is part of Afloat.
 	NSMutableArray* doNotLoadList;
     
     NSString* myVersion;
+	
+	NSTimer* checkExistanceTimer;
+	FSRef selfRef;
 }
 
 - (NSString*) pathToAfloatBundle;

@@ -29,9 +29,6 @@ This file is part of Afloat.
 	
 	BOOL temporarilyTrackingOverlays;
 	
-	id windowBeingCleared;
-	NSMutableDictionary* temporaryCopyOfInfoOfWindowBeingCleared;
-	
 	BOOL doingSeethru;
 	NSAppleScript* reactivationScript;
 }
