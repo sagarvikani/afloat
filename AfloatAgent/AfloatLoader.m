@@ -92,6 +92,19 @@ static BOOL AfloatApplicationIsNative(pid_t pid)
 		[NSApp terminate:self];
 	
 	[self injectInAllApps];
+	
+	CFURLGetFSRef((CFURLRef) [NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]], &selfRef);
+	checkExistanceTimer = [[NSTimer scheduledTimerWithTimeInterval:15.0 target:self selector:@selector(_checkUninstall:) userInfo:nil repeats:YES] retain];
+}
+
+- (void) _checkUninstall:(NSTimer*) timer {
+	NSURL* myURL = (NSURL*) CFURLCreateFromFSRef(NULL, &selfRef);
+	if (!myURL) {
+		AfloatLog(@"The Agent was moved or deleted (uninstalled?), hence it now quits.");
+		[[NSApplication sharedApplication] terminate:self];
+	}
+
+	[myURL release];
 }
 
 // -----
@@ -165,6 +178,7 @@ static BOOL AfloatApplicationIsNative(pid_t pid)
 	// do it!
 	mach_error_t err = mach_inject_bundle_pid(fsRepToAfloatBundle, pid);
 
+	AfloatLog(@"Load command issued for %@, with PID %@", bundleID, pidNumber);
 	switch (err) {
 		case err_mach_inject_bundle_couldnt_find_inject_entry_symbol:
 			AfloatLog(@"err_mach_inject_bundle_couldnt_find_inject_entry_symbol");
@@ -182,6 +196,10 @@ static BOOL AfloatApplicationIsNative(pid_t pid)
 			AfloatLog(@"err_mach_inject_bundle_couldnt_load_injection_bundle");
 			break;
 		
+		case 5:
+			AfloatLog(@"OS X security prevented the injection");
+			break;
+			
 		case 0:
 			AfloatLog(@"Loaded without error");
 			break;
@@ -191,7 +209,6 @@ static BOOL AfloatApplicationIsNative(pid_t pid)
 			break;
 	}
 	
-	AfloatLog(@"Loaded in %@, with PID %@", bundleID, pidNumber);
 }
 
 // -----
@@ -216,6 +233,8 @@ static BOOL AfloatApplicationIsNative(pid_t pid)
 	[[NSDistributedNotificationCenter defaultCenter] removeObserver:self];
 	[waitTimer release];
 	[doNotLoadList release];
+	
+	[checkExistanceTimer release];
 	
     [super dealloc];
 }

@@ -50,6 +50,8 @@ This file is part of Afloat.
 - (NSArray* /* of id <AfloatWindow> */) windows;
 - (id /* <AfloatWindow> */) focusedWindow;
 
+- (void) deactivateApplication;
+
 + (id) sharedInstance;
 
 @end

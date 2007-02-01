@@ -26,7 +26,7 @@
 - (void) dealloc {
     [tracker release];
 	AfloatLog(@"Fader removed for window %@", window);
-
+	
 	[super dealloc];
 }
 

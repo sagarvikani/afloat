@@ -34,6 +34,6 @@ This file is part of Afloat.
 	return me;
 }
 
-
+- (void) deactivateApplication {}
 
 @end

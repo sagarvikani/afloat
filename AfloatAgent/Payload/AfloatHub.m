@@ -26,6 +26,8 @@
 
 #import "AfloatPreferences.h"
 
+#import "AfloatWindowInfo.h"
+
 @implementation AfloatHub
 
 + (id) sharedHub {
@@ -74,50 +76,11 @@
 }
 
 - (NSMutableDictionary*) infoForWindow:(id /* AfloatWindow */) wnd {
-	if (wnd == windowBeingCleared)
-		return temporaryCopyOfInfoOfWindowBeingCleared;
-	
-	id data = [windowData objectForKey:[NSValue valueWithNonretainedObject:wnd]];
-	
-	if (!data) {
-		data = [NSMutableDictionary dictionary];
-		[windowData setObject:data forKey:[NSValue valueWithNonretainedObject:wnd]];
-	}
-	
-	return data;
+	return AfloatGetWindowInfoForWindow(wnd);
 }
 
 - (void) clearInfoForWindow:(id) wnd {
-	// The following ballet is done to create a deterministic order
-	// in which we clear the info for a window.
-	// All NSValue objects are removed LAST.
-	// This allows objects that are dealloc'ing to access infoForWindow:
-	// with meaningful content.
-	// This mess is required to allow AfloatWindowFader to dealloc correctly.
-	
-	id oldWBC = windowBeingCleared;
-	NSMutableDictionary* oldTCetcetc = temporaryCopyOfInfoOfWindowBeingCleared;
-	
-	// We make a temporary copy that retains all NSValue objects.
-	// -infoForWindow: will return the copy while we clear, and nil after we return.
-	windowBeingCleared = wnd;
-	temporaryCopyOfInfoOfWindowBeingCleared = [NSMutableDictionary dictionaryWithDictionary:[windowData objectForKey:[NSValue valueWithNonretainedObject:wnd]]];
-	NSEnumerator* enu = [[temporaryCopyOfInfoOfWindowBeingCleared allKeys] objectEnumerator];
-	id key;
-	
-	while (key = [enu nextObject]) {
-		if (![key isKindOfClass:[NSValue class]])
-			[temporaryCopyOfInfoOfWindowBeingCleared removeObjectForKey:key];
-	}
-	
-	// Clear the original data. This deallocs all non-NSValue objects.
-	[windowData removeObjectForKey:[NSValue valueWithNonretainedObject:wnd]];
-	
-	// When the copy will be released by the autorel pool,
-	// NSValue objects will be dealloc'd.
-	
-	windowBeingCleared = oldWBC;
-	temporaryCopyOfInfoOfWindowBeingCleared = oldTCetcetc;
+	AfloatClearWindowInfoForWinow(wnd);
 }
 
 - (void) willRemoveWindow:(id) wnd {
@@ -314,13 +277,16 @@
                 [self fadeWindow:wnd toAlpha:[self mediumAlphaValue]];
                 [[self infoForWindow:wnd] setObject:[NSNumber numberWithBool:YES] forKey:@"AfloatIsSunk"];        
                 [newWnd makeKeyAndOrderFront:self];
-            }
-            break;
-        }
-    }
-    
-    [wnd orderBack:self];
-    
+            } else {
+				[[AfloatImplementation sharedInstance] deactivateApplication];
+				break;
+			}
+		}
+	}
+
+	[wnd orderBack:self];
+	
 }
+
 
 @end

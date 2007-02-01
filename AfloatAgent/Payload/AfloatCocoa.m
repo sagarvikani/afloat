@@ -127,6 +127,10 @@ This file is part of Afloat.
 	return [[[NSApp orderedWindows] objectAtIndex:0] afloatTopWindow];
 }
 
+- (void) deactivateApplication {
+	[[NSApplication sharedApplication] deactivate];
+}
+
 @end
 
 @implementation NSWindow (AfloatCocoaAdditions)
