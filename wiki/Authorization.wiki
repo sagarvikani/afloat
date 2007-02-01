@@ -23,8 +23,8 @@ sudo "~/Library/PreferencePanes/Afloat.prefPane/Contents/Resources/Afloat Agent.
 }}}
 
 The preference pane only requires authorization on the following platforms:
-* Mac OS X 10.4.4 and later on Intel-based Macs; or
-* Mac OS X 10.5 on both Intel-based and PowerPC-based Macs.
+ * Mac OS X 10.4.4 and later on Intel-based Macs; or
+ * Mac OS X 10.5 on both Intel-based and PowerPC-based Macs.
 
 Note that the 10.5 part is speculative, since I can't test it.
 
