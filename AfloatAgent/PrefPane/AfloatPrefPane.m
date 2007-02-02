@@ -345,6 +345,16 @@ AfloatEnabledCleanup:
     return [AfloatPreferences sharedInstance];
 }
 
+- (IBAction) chatWithInfiniteLabs:(id) sender {
+	[[NSWorkspace sharedWorkspace]
+		openURL:[NSURL URLWithString:@"aim:GoIM?screenname=me@infinite-labs.net"]];
+}
+
+- (IBAction) sendEmailToInfiniteLabs:(id) sender {
+	[[NSWorkspace sharedWorkspace]
+		openURL:[NSURL URLWithString:@"mailto:me@infinite-labs.net"]];	
+}
+
 @end
 
 // from http://developer.apple.com/qa/qa2001/qa1134.html

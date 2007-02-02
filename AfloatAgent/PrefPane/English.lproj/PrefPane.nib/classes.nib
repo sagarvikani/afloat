@@ -1,7 +1,12 @@
 {
     IBClasses = (
         {
-            ACTIONS = {openLicense = id; showAboutPanel = id; }; 
+            ACTIONS = {
+                chatWithInfiniteLabs = id; 
+                openLicense = id; 
+                sendEmailToInfiniteLabs = id; 
+                showAboutPanel = id; 
+            }; 
             CLASS = AfloatPrefPane; 
             LANGUAGE = ObjC; 
             OUTLETS = {aboutPanel = NSPanel; }; 

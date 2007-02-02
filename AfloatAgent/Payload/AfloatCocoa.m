@@ -138,8 +138,6 @@ This file is part of Afloat.
 @implementation NSWindow (AfloatCocoaAdditions)
 
 - (void) afloatMiniaturize:(id) sender {
-	AfloatLog(@"Will miniaturize %@", self);
-	
     if ([[AfloatPreferences sharedInstance] shouldUseSinkRatherThanMinimize])
         [[AfloatHub sharedHub] sinkWindow:self];
     else
