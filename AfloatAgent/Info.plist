@@ -41,5 +41,7 @@ This file is part of Afloat.
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
+    <key>CFBundleShortVersionString</key>
+    <string>1.0 release candidate</string>
 </dict>
 </plist>

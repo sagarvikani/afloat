@@ -13,6 +13,8 @@ This file is part of Afloat.
 
 */
 
+#import <Cocoa/Cocoa.h>
+
 #import <sys/types.h>
 
 #define kAfloatDistributedObjectIdentifier @"net.infinite-labs.Afloat.Agent.DO"
@@ -26,5 +28,7 @@ This file is part of Afloat.
 
 - (oneway void) disable;
 - (pid_t) processID;
+
+- (NSString*) currentVersion;
 
 @end

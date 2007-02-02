@@ -198,6 +198,8 @@ static BOOL AfloatApplicationIsNative(pid_t pid)
 		
 		case 5:
 			AfloatLog(@"OS X security prevented the injection");
+			AfloatLog(@"The Agent is not authorized to inject code in other apps -- therefore it terminates now. Use the Afloat pane of System Preferences to authorize it, or use --Afloat-Authorize as root on the command line.");
+			[[NSApplication sharedApplication] terminate:self];
 			break;
 			
 		case 0:
