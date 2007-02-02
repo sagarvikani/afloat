@@ -44,6 +44,7 @@
 		animating = NO;
 		
 		[[NSDistributedNotificationCenter defaultCenter] addObserver:self selector:@selector(respondToRollCall:) name:kAfloatRollCallNotification object:kAfloatDistributedObjectIdentifier];
+		[AfloatPreferences sharedInstance];
 	}
 	
 	return self;
@@ -95,12 +96,15 @@
 	if (wnd != focusedWindow) {
 		[focusedWindow release];
 		focusedWindow = [wnd retain];
-        
-        NSMutableDictionary* info = [self infoForWindow:wnd];
-        if ([info objectForKey:@"AfloatIsSunk"]) {
-            [info removeObjectForKey:@"AfloatIsSunk"];
-            [self fadeWindow:wnd toAlpha:1.0];
-        }
+	}
+	
+	if (wnd == nil)
+		return;
+	
+	NSMutableDictionary* info = [self infoForWindow:wnd];
+	if ([info objectForKey:@"AfloatIsSunk"]) {
+		[info removeObjectForKey:@"AfloatIsSunk"];
+		[self fadeWindow:wnd toAlpha:1.0];
 	}
 }
 
@@ -272,15 +276,16 @@
             else
                 i--;
             
+			[[self infoForWindow:wnd] setObject:[NSNumber numberWithBool:YES] forKey:@"AfloatIsSunk"];
+            [self fadeWindow:wnd toAlpha:[self mediumAlphaValue]];
+			
             id newWnd = [allWnds objectAtIndex:i];
-            if (![newWnd isKindOfClass:[NSPanel class]] && [newWnd isVisible]) {
-                [self fadeWindow:wnd toAlpha:[self mediumAlphaValue]];
-                [[self infoForWindow:wnd] setObject:[NSNumber numberWithBool:YES] forKey:@"AfloatIsSunk"];        
+            if (![newWnd isKindOfClass:[NSPanel class]] && [newWnd isVisible])
                 [newWnd makeKeyAndOrderFront:self];
-            } else {
+            else
 				[[AfloatImplementation sharedInstance] deactivateApplication];
-				break;
-			}
+			
+			break;
 		}
 	}
 
