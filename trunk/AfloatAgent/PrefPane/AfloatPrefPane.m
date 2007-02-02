@@ -91,7 +91,9 @@ static void AfloatPrefPaneClearAuthorization() {
 			upgrading = YES;
 			[self setAfloatEnabled:NO withUIAllowed:NO];
 			[self setAfloatEnabled:YES];
-		}
+		} else
+			[self canProceedWithEnablingWithUIAllowed:YES];
+			
 	} else
 		[self canProceedWithEnablingWithUIAllowed:YES];
 	[self didChangeValueForKey:@"afloatEnabled"];

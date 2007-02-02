@@ -12,7 +12,8 @@ This file is part of Afloat.
 
 */
 
-#import "../AfloatAgentCommunication.h"
+#import "AfloatAgentCommunication.h"
+#import "AfloatLogging.h"
 #import "AfloatCocoa.h"
 
 #import <objc/objc-class.h>
@@ -49,6 +50,9 @@ This file is part of Afloat.
 }
 
 - (void) install {
+    // sink with "-"
+	[self bypassSelector:@selector(miniaturize:) ofClass:[NSWindow class] throughNewSelector:@selector(afloatMiniaturize:) keepOriginalAs:@selector(afloatMiniaturizeOriginal:)];
+
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didChangeFocusedWindow:) name:NSWindowDidBecomeMainNotification object:nil];
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willCloseWindow:) name:NSWindowWillCloseNotification object:nil];
@@ -58,15 +62,13 @@ This file is part of Afloat.
 	// install menu items
 	
 	NSMenu* mainMenu = [NSApp mainMenu], * items = [[AfloatHub sharedHub] afloatMenu];
-	[self searchAndInstallMenuItems:items inAppropriateMenuIn:mainMenu];
+	@try {
+		[self searchAndInstallMenuItems:items inAppropriateMenuIn:mainMenu];
+	} @catch (NSException* ex) { return; }
     
     // install Drag Anywhere
     
     [self bypassSelector:@selector(sendEvent:) ofClass:[NSApplication class] throughNewSelector:@selector(afloatSendEvent:) keepOriginalAs:@selector(afloatSendEventOriginal:)];
-    
-    // sink with "-"
-    
-    [self bypassSelector:@selector(miniaturize:) ofClass:[NSWindow class] throughNewSelector:@selector(afloatMiniaturize:) keepOriginalAs:@selector(afloatMiniaturizeOriginal:)];
 }
 
 - (BOOL) searchAndInstallMenuItems:(NSMenu*) items inAppropriateMenuIn:(NSMenu*) menu {
@@ -136,6 +138,8 @@ This file is part of Afloat.
 @implementation NSWindow (AfloatCocoaAdditions)
 
 - (void) afloatMiniaturize:(id) sender {
+	AfloatLog(@"Will miniaturize %@", self);
+	
     if ([[AfloatPreferences sharedInstance] shouldUseSinkRatherThanMinimize])
         [[AfloatHub sharedHub] sinkWindow:self];
     else
@@ -208,7 +212,7 @@ This file is part of Afloat.
     unsigned int mods = [evt modifierFlags] & /* NSDeviceIndependentModifierFlagsMask */ 0xffff0000U;
     NSPoint ori;
     AfloatHub* hub = [AfloatHub sharedHub]; id wnd; float oldAlpha;
-    
+	
     if (mods == (NSCommandKeyMask | NSControlKeyMask)) {
         
         switch ([evt type]) {
@@ -248,6 +252,12 @@ This file is part of Afloat.
     // If we didn't return above, we return the event to its
     // regular code path.
     [self afloatSendEventOriginal:evt];
+	
+	// "de-sinking"
+	if ([evt type] == NSLeftMouseDown) {
+		[[AfloatHub sharedHub] setFocusedWindow:
+			[[AfloatCocoa sharedInstance] focusedWindow]];
+	}
 }
 
 @end
