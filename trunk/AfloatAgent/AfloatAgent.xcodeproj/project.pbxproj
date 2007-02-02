@@ -234,9 +234,9 @@
 		29B97314FDCFA39411CA2CEA /* AfloatAgent */ = {
 			isa = PBXGroup;
 			children = (
-				7EA9A11E0B519369004C7977 /* Preferences */,
 				7E80FDB20B50333E006D02C1 /* AfloatLogging.h */,
 				7EA7E6EC0B295E7300D94E74 /* AfloatAgentCommunication.h */,
+				7EA9A11E0B519369004C7977 /* Preferences */,
 				7EDFF0800B09CAD90009C47F /* PrefPane */,
 				7EDFF0780B09CA140009C47F /* Agent */,
 				7E19DFAE0AFDF2B3006F3EF9 /* AfloatAnimation Testing Playground */,
@@ -572,7 +572,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Sets HFS bundle, custom icon and hidden extension\n# bits upon Afloat.prefPane.\n\n/Developer/Tools/SetFile -a BCE \"$BUILT_PRODUCTS_DIR/$WRAPPER_NAME\"\necho \"“If I were asked to give what I consider the single most useful bit of advice for all humanity it would be this: Expect trouble as an inevitable part of life and when it comes, hold you head high, look it squarely in eye and say, 'I will be bigger than you. You cannot defeat me.'”\" > \"$BUILT_PRODUCTS_DIR/$WRAPPER_NAME/Contents/Resources/Quote.txt\"\n";
+			shellScript = "# Sets HFS bundle, custom icon and hidden extension\n# bits upon Afloat.prefPane.\n\n/Developer/Tools/SetFile -a BCE \"$BUILT_PRODUCTS_DIR/$WRAPPER_NAME\"\necho \"We can only see a short distance ahead, but we can see plenty there that needs to be done. -- Alan Turing\" > \"$BUILT_PRODUCTS_DIR/$WRAPPER_NAME/Contents/Resources/Quote.txt\"\n";
 		};
 		7EDFF08D0B09CB480009C47F /* Set Version from Subversion Revision */ = {
 			isa = PBXShellScriptBuildPhase;
