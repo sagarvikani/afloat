@@ -25,6 +25,7 @@ This file is part of Afloat.
 
 @interface AfloatPrefPane : NSPreferencePane {
     IBOutlet NSPanel* aboutPanel;
+	BOOL upgrading;
 }
 
 - (pid_t) processIDForAfloatAgent;
@@ -32,6 +33,7 @@ This file is part of Afloat.
 
 - (BOOL) afloatEnabled;
 - (void) setAfloatEnabled:(BOOL) isOn;
+- (void) setAfloatEnabled:(BOOL) isOn withUIAllowed:(BOOL) canAsk;
 
 - (BOOL) requiresAuthorization;
 - (BOOL) canProceedWithEnablingWithUIAllowed:(BOOL) canAsk;
