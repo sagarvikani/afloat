@@ -25,21 +25,27 @@ This file is part of Afloat.
 #import "AfloatLogging.h"
 
 int main(int argc, char *argv[]) {
-	if (argc == 2 && strcmp(argv[1], "--Afloat-RepairPrivileges") == 0) {
-		if (geteuid() != 0) // we are not root.
-			return 1;
-		
+	if (argc == 2 && strcmp(argv[1], "--Afloat-Authorize") == 0) {
 		NSAutoreleasePool* pool = [NSAutoreleasePool new];
+		
+		int i;
+		
+		if (geteuid() != 0) // we are not root. We want this to be seen also in non-Debug
+			// versions of Afloat.
+		{ NSLog(@"You must authorize the privilege repair as root (you can do this with sudo or by using the Afloat pane in System Preferences)."); goto end; }
 		
 		NSString* selfPath = [[NSBundle mainBundle] executablePath];
 		const char* selfPathC = [[NSFileManager defaultManager] fileSystemRepresentationWithPath:selfPath];
 		
-		int i;
-		if ((i = chown(selfPathC, -1, 9 /* procmod */)) == 0)
-			i = chmod(selfPathC, 02755); // setgid bit set
+		if ((i = chown(selfPathC, -1, 9 /* procmod */)) != 0)
+		{ AfloatLog(@"Could not change owning group of the Agent to procmod"); goto end_done; }
 		
+		if ((i = chmod(selfPathC, 02755)) != 0) // setgid bit set
+		{ AfloatLog(@"Could not add setuid bit to the Agent"); goto end_done; }
+		
+end_done:
 		NSLog(@"Authorization done with result %d. (nonzero means trouble.)", i);
-		
+end:
 		[pool release];
 		
 		return i;

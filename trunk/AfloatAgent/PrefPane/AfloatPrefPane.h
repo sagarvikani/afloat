@@ -19,7 +19,7 @@ This file is part of Afloat.
 #import <Cocoa/Cocoa.h>
 #import <PreferencePanes/PreferencePanes.h>
 
-#import "../AfloatAgentCommunication.h"
+#import "AfloatAgentCommunication.h"
 
 #define AfloatPrefPane NetInfinite_LabsAfloatPrefPane
 
@@ -42,5 +42,7 @@ This file is part of Afloat.
 
 - (IBAction) showAboutPanel:(id) sender;
 - (IBAction) openLicense:(id) sender;
+
+- (void) upgradePreviousVersionsIfRequired;
 
 @end

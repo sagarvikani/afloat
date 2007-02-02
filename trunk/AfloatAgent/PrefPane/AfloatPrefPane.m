@@ -67,35 +67,35 @@ static void AfloatPrefPaneClearAuthorization() {
 @implementation AfloatPrefPane
 
 - (void) didSelect {
-	[super didSelect];
-    // let's do updating stuff here.
-    /*
-    BOOL needsUpdate = NO;
-    @try {
-        id <AfloatAgent, NSObject> agt = [self afloatAgent];
-        if (agt) {
-        if ([agt respondsToSelector:@selector(currentVersion)]) {
-            NSString* s = [agt currentVersion];
-            if (![s isEqualToString:[[[self bundle] objectForInfoDictionaryKey:@"CFBundleVersion"] description]])
-                needsUpdate = YES;
-        } else
-            needsUpdate = YES;
-        }
-    } @catch (NSException* ex) {}
-    
-    if (needsUpdate) {
-        [self setAfloatEnabled:NO]; // which kills Afloat.
-        
-        NSAlert* mayNeedLogout = [[NSAlert alloc] init];
-        [mayNeedLogout setMessageText:
-            NSLocalizedString(@"Afloat was updated from an earlier version.", @"Afloat was updated message text")];
-        [mayNeedLogout setInformativeText:
-            NSLocalizedString(@"After an update, logging out is recommended. After you log back in, the new version of Afloat will be enabled.\n\nIf you don't log out, you should restart open applications so that the older version of Afloat is removed from them.", @"Logout explain")];
-        // TODO
-    }
-    */    
-    
-	[self willChangeValueForKey:@"afloatEnabled"]; [self didChangeValueForKey:@"afloatEnabled"];
+	[self upgradePreviousVersionsIfRequired];
+
+	[self willChangeValueForKey:@"afloatEnabled"]; 
+	id <AfloatAgent> agent = [self afloatAgent];
+	if (agent) {
+		NSString* version = nil;
+		
+		@try {
+			version = [agent currentVersion];
+		} @catch (NSException* ex) {
+		}
+		
+		AfloatLog(@"Afloat has detected a running Agent. When asked about its version, it responded: %@", version);
+		
+		if (!version || ![[[self bundle] objectForInfoDictionaryKey:@"CFBundleVersion"] isEqualToString:version]) {
+			AfloatLog(@"Afloat gets disabled and re-enabled as it's a different (lower?) version.");
+			[self setAfloatEnabled:NO];
+			[self setAfloatEnabled:YES];
+		}
+	} else
+		[self canProceedWithEnablingWithUIAllowed:YES];
+	[self didChangeValueForKey:@"afloatEnabled"];
+	
+}
+
+- (void) upgradePreviousVersionsIfRequired {
+	NSFileManager* fm = [NSFileManager defaultManager];
+	NSString* path = [@"~/Library/Application Support/SIMBL/Plugins/Afloat.bundle" stringByStandardizingPath];
+	[fm removeFileAtPath:path handler:nil];
 }
 
 - (void) willUnselect {
@@ -178,7 +178,7 @@ static void AfloatPrefPaneClearAuthorization() {
 		const char* pathToAgentExecC = [[NSFileManager defaultManager] fileSystemRepresentationWithPath:[agentBundle executablePath]];
 
 		char* args[] = {
-			"--Afloat-RepairPrivileges",
+			"--Afloat-Authorize",
 			NULL
 		};
 		
@@ -225,6 +225,7 @@ static void AfloatPrefPaneClearAuthorization() {
 - (void) authorizationPromptDidEnd:(NSAlert*) alert returnCode:(int) retCode nothing:(void*) nothing {
 	if (retCode == NSAlertFirstButtonReturn) {
 		if ([self authorize]) [self setAfloatEnabled:YES];
+		[[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
 	}
 }
 
@@ -281,7 +282,7 @@ static void AfloatPrefPaneClearAuthorization() {
 	}
 	
 AfloatEnabledCleanup:
-		[self performSelector:@selector(didChangeValueForKey:) withObject:@"afloatEnabled" afterDelay:0.5];
+		[self performSelector:@selector(didChangeValueForKey:) withObject:@"afloatEnabled" afterDelay:0.3];
 }
 
 - (id) visibleVersion {
