@@ -853,6 +853,7 @@
 					ppc,
 					i386,
 				);
+				AfloatMarketingVersion = "1.0 release candidate";
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = AfloatDebugging;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -1031,6 +1032,7 @@
 		C01FCF4F08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				AfloatMarketingVersion = "1.0 release candidate";
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = AfloatDebugging;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -1048,6 +1050,7 @@
 					ppc,
 					i386,
 				);
+				AfloatMarketingVersion = "1.0 release candidate";
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;

@@ -35,6 +35,9 @@ This file is part of Afloat.
 - (void) setAfloatEnabled:(BOOL) isOn;
 - (void) setAfloatEnabled:(BOOL) isOn withUIAllowed:(BOOL) canAsk;
 
+- (BOOL) doAnimations;
+- (void) setDoAnimations:(BOOL) doesAni;
+
 - (BOOL) requiresAuthorization;
 - (BOOL) canProceedWithEnablingWithUIAllowed:(BOOL) canAsk;
 - (BOOL) authorize;

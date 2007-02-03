@@ -32,6 +32,6 @@ This file is part of Afloat.
 	<key>CFBundleVersion</key>
 	<string>1.0</string>
     <key>CFBundleShortVersionString</key>
-    <string>1.0 release candidate</string>
+    <string>${AfloatMarketingVersion}</string>
 </dict>
 </plist>

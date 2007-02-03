@@ -69,7 +69,8 @@
     
     NSMutableDictionary* info = [self infoForWindow:wnd];
     
-    [info removeObjectForKey:@"AfloatIsSunk"];    
+    [info removeObjectForKey:@"AfloatIsSunk"];
+	
     if (ua >= 0.95)
         [info removeObjectForKey:kAfloatWindowFaderKey];
     else if (![info objectForKey:kAfloatWindowFaderKey])
@@ -172,14 +173,18 @@
 }
 
 - (void) fadeWindow:(id) window toAlpha:(float) alpha duration:(NSTimeInterval) duration {
-	animating = YES;
-	
-    AfloatAnimator* ani = [[AfloatAnimator alloc] initWithApproximateDuration:duration];
-	[ani addAnimation:[AfloatWindowAlphaAnimation animationForWindow:window fromAlpha:[window alphaValue] toAlpha:alpha]];
-	[ani run];
-	[ani release];
-    
-	animating = NO;
+	if ([[AfloatPreferences sharedInstance] boolForKey:@"AfloatDoAnimation" withDefault:YES]) {
+		animating = YES;
+		
+		AfloatAnimator* ani = [[AfloatAnimator alloc] initWithApproximateDuration:duration];
+		[ani addAnimation:[AfloatWindowAlphaAnimation animationForWindow:window fromAlpha:[window alphaValue] toAlpha:alpha]];
+		[ani run];
+		[ani release];
+		
+		animating = NO;
+	} else {
+		[window setAlphaValue:alpha];
+	}
 }
 
 - (void) fadeWindow:(id) window toAlpha:(float) alpha {

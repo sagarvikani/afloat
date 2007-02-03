@@ -355,6 +355,14 @@ AfloatEnabledCleanup:
 		openURL:[NSURL URLWithString:@"mailto:me@infinite-labs.net"]];	
 }
 
+- (BOOL) doAnimations {
+	return [[AfloatPreferences sharedInstance] boolForKey:@"AfloatDoAnimation" withDefault:YES];
+}
+
+- (void) setDoAnimations:(BOOL) doesAni {
+	[[AfloatPreferences sharedInstance] setBool:doesAni forKey:@"AfloatDoAnimation"];
+}
+
 @end
 
 // from http://developer.apple.com/qa/qa2001/qa1134.html
