@@ -273,29 +273,24 @@
 }
 
 - (void) sinkWindow:(id) wnd {
-    int i; NSArray* allWnds = [[AfloatImplementation sharedInstance] windows];
-    for (i = 0; i < [allWnds count]; i++) {
-        if ([allWnds objectAtIndex:i] == wnd) {
-            if (i == 0)
-                i = [allWnds count] - 1;
-            else
-                i--;
-            
-			[[self infoForWindow:wnd] setObject:[NSNumber numberWithBool:YES] forKey:@"AfloatIsSunk"];
-            [self fadeWindow:wnd toAlpha:[self mediumAlphaValue]];
-			
-            id newWnd = [allWnds objectAtIndex:i];
-            if (![newWnd isKindOfClass:[NSPanel class]] && [newWnd isVisible])
-                [newWnd makeKeyAndOrderFront:self];
-            else
-				[[AfloatImplementation sharedInstance] deactivateApplication];
-			
-			break;
-		}
-	}
+    int i; NSMutableArray* allWnds = [NSMutableArray arrayWithArray:[[AfloatImplementation sharedInstance] windows]];
+	for (i = 0; i < [allWnds count]; i++) {
+		id aWnd = [allWnds objectAtIndex:i];
 
-	[wnd orderBack:self];
+		// TODO remove Cocoa
+		if (aWnd == wnd || [aWnd isKindOfClass:[NSPanel class]] || ![aWnd isVisible]
+			|| [[self infoForWindow:aWnd] objectForKey:@"AfloatIsSunk"])
+		{ [allWnds removeObjectAtIndex:i]; i--; }
+	}
 	
+	if ([allWnds count] == 0)
+		[[AfloatImplementation sharedInstance] deactivateApplication];
+	else
+		[[allWnds objectAtIndex:0] makeKeyAndOrderFront:self];
+	
+	[[self infoForWindow:wnd] setObject:[NSNumber numberWithBool:YES] forKey:@"AfloatIsSunk"];
+	[self fadeWindow:wnd toAlpha:[self adequateOverlayAlphaValue]];
+	[wnd orderBack:self];
 }
 
 
