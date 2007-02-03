@@ -173,18 +173,23 @@
 }
 
 - (void) fadeWindow:(id) window toAlpha:(float) alpha duration:(NSTimeInterval) duration {
+    if ([[self infoForWindow:window] objectForKey:@"AfloatWindowIsAnimating"]) return;
 	if ([[AfloatPreferences sharedInstance] boolForKey:@"AfloatDoAnimation" withDefault:YES]) {
-		animating = YES;
-		
+		[[self infoForWindow:window] setObject:[NSNumber numberWithBool:YES] forKey:@"AfloatWindowIsAnimating"];
+        
 		AfloatAnimator* ani = [[AfloatAnimator alloc] initWithApproximateDuration:duration];
 		[ani addAnimation:[AfloatWindowAlphaAnimation animationForWindow:window fromAlpha:[window alphaValue] toAlpha:alpha]];
+        [ani setDelegate:self];
+        [ani setContextInfo:window];
 		[ani run];
 		[ani release];
-		
-		animating = NO;
 	} else {
 		[window setAlphaValue:alpha];
 	}
+}
+
+- (void) animatorDidEndAnimation:(AfloatAnimator*) ani {
+    [[self infoForWindow:(id)[ani contextInfo]] removeObjectForKey:@"AfloatWindowIsAnimating"];
 }
 
 - (void) fadeWindow:(id) window toAlpha:(float) alpha {

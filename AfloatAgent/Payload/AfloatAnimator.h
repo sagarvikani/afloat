@@ -31,6 +31,9 @@ This file is part of Afloat.
     
     NSTimer* drawingTimer;
     NSDate* startDate;
+    
+    id delegate;
+    void* contextInfo;
 }
 
 - (id) initWithApproximateDuration:(NSTimeInterval) duration;
@@ -39,4 +42,14 @@ This file is part of Afloat.
 - (void) run;
 // - (void) runImmediatly;
 
+- (void) setDelegate:(id) dlg;
+- (id) delegate;
+
+- (void*) contextInfo;
+- (void) setContextInfo:(void*) ci;
+
+@end
+
+@interface NSObject (AfloatAnimatorDelegate)
+- (void) animatorDidEndAnimation:(AfloatAnimator*) animator;
 @end

@@ -282,6 +282,7 @@ static void AfloatPrefPaneClearAuthorization() {
 	if (enabled == NO) {
 		if (![self afloatEnabled]) goto AfloatEnabledCleanup;
 		
+        pid_t agentPID = [self processIDForAfloatAgent];
 		[[self afloatAgent] disable];
 		
 		// remove the login item
@@ -303,8 +304,7 @@ static void AfloatPrefPaneClearAuthorization() {
 		
 		sleep(1); // we give the agent time to die gracefully
 		
-		pid_t agentPID = [self processIDForAfloatAgent];
-		if (agentPID != 0) {
+		if (kill(agentPID, 0) == 0) {
 			kill(agentPID, SIGKILL);
 			AfloatLog(@"Sent a KILL signal to an non-quitting Agent.");
 			
