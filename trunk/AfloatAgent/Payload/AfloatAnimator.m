@@ -111,9 +111,18 @@ This file is part of Afloat.
         [startDate release];
         startDate = nil;
 
+        if (delegate && [delegate respondsToSelector:@selector(animatorDidEndAnimation:)])
+            [delegate animatorDidEndAnimation:self];
+        
         [drawingTimer invalidate];
         [self autorelease];
     }
 }
+
+- (id) delegate { return delegate; }
+- (void) setDelegate:(id) dlg { delegate = dlg; }
+
+- (void*) contextInfo { return contextInfo; }
+- (void) setContextInfo:(void*) ci { contextInfo = ci; }
 
 @end
