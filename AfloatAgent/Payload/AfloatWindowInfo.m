@@ -34,8 +34,21 @@ static NSMutableDictionary* _windowInfos = nil;
 	return [[[self alloc] initWithDictionary:d window:w] autorelease];
 }
 
+- (NSString*) description {
+	return [realDictionary description];
+}
+
+- (void) removeObjectForKey:(id <NSCopying>) key {
+	AfloatLog(@"-[AfloatWindowInfoDictionary removeObjectForKey:%@]", key);
+	id obj = [realDictionary objectForKey:key];
+	if (obj && [obj respondsToSelector:@selector(afloatWillRemoveFromWindow:)])
+		[obj afloatWillRemoveFromWindow:window];
+
+	[realDictionary removeObjectForKey:key];
+}
+
 - (void) setObject:(id) object forKey:(id <NSCopying>) key {
-	AfloatLog(@"Replacing a setObject:%@ forKey:%@", object, key);
+	AfloatLog(@"-[AfloatWindowInfoDictionary setObject:%@ forKey:%@]", object, key);
 	
 	id oldObject = [realDictionary objectForKey:key];
 	if (oldObject && [oldObject respondsToSelector:@selector(afloatWillRemoveFromWindow:)])

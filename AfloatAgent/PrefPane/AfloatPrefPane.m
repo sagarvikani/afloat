@@ -70,34 +70,56 @@ static void AfloatPrefPaneClearAuthorization() {
 @implementation AfloatPrefPane
 
 - (void) didSelect {
-	[self upgradePreviousVersionsIfRequired];
-	
-	upgrading = NO;
-	
-	[self willChangeValueForKey:@"afloatEnabled"]; 
-	id <AfloatAgent> agent = [self afloatAgent];
-	if (agent) {
-		NSString* version = nil;
+	@try {
+		[self upgradePreviousVersionsIfRequired];
 		
-		@try {
-			version = [agent currentVersion];
-		} @catch (NSException* ex) {
-		}
+		upgrading = NO;
 		
-		AfloatLog(@"Afloat has detected a running Agent. When asked about its version, it responded: %@", version);
-		
-		if (!version || ![[[self bundle] objectForInfoDictionaryKey:@"CFBundleVersion"] isEqualToString:version]) {
-			AfloatLog(@"Afloat gets disabled and re-enabled as it's a different (lower?) version.");
-			upgrading = YES;
-			[self setAfloatEnabled:NO withUIAllowed:NO];
-			[self setAfloatEnabled:YES];
+		[self willChangeValueForKey:@"afloatEnabled"]; 
+		id <AfloatAgent> agent = [self afloatAgent];
+		if (agent) {
+			NSString* version = nil;
+			
+			@try {
+				version = [agent currentVersion];
+			} @catch (NSException* ex) {
+			}
+			
+			AfloatLog(@"Afloat has detected a running Agent. When asked about its version, it responded: %@", version);
+			
+			if (!version || ![[[self bundle] objectForInfoDictionaryKey:@"CFBundleVersion"] isEqualToString:version]) {
+				AfloatLog(@"Afloat gets disabled and re-enabled as it's a different (lower?) version.");
+				upgrading = YES;
+				[self setAfloatEnabled:NO withUIAllowed:NO];
+				[self setAfloatEnabled:YES];
+			} else
+				[self canProceedWithEnablingWithUIAllowed:YES];
+			
 		} else
 			[self canProceedWithEnablingWithUIAllowed:YES];
-			
-	} else
-		[self canProceedWithEnablingWithUIAllowed:YES];
-	[self didChangeValueForKey:@"afloatEnabled"];
-	
+		[self didChangeValueForKey:@"afloatEnabled"];
+	} @catch (NSException* ex) {
+		[[NSFileManager defaultManager]
+			removeFileAtPath:[@"~/Library/Caches/com.apple.preferencepanes.cache" stringByStandardizingPath] handler:nil];
+		
+		NSAlert* alert = [NSAlert new];
+		
+		[alert setMessageText:
+			NSLocalizedString(@"Afloat could not be loaded. An error has occurred.", @"Exception while loading the prefpane.")
+			];
+		
+		[alert setInformativeText:
+			NSLocalizedString(@"It's likely that this copy of Afloat is damaged. Reinstalling it from a fresh download should help. If this does not fix the problem, please contact Afloat's technical support at 'afloat@infinite-labs.net'.", @"Exception while loading info text.")
+			];
+		
+		[alert addButtonWithTitle:
+			NSLocalizedString(@"Quit System Preferences", @"Quit button in exception while loading")
+			];
+		
+		[alert runModal];
+		
+		[NSApp terminate:self];
+	}
 }
 
 - (void) upgradePreviousVersionsIfRequired {
