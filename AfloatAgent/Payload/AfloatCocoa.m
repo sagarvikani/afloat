@@ -53,22 +53,25 @@ This file is part of Afloat.
     // sink with "-"
 	[self bypassSelector:@selector(miniaturize:) ofClass:[NSWindow class] throughNewSelector:@selector(afloatMiniaturize:) keepOriginalAs:@selector(afloatMiniaturizeOriginal:)];
 
+    // install Drag Anywhere
+    
+    [self bypassSelector:@selector(sendEvent:) ofClass:[NSApplication class] throughNewSelector:@selector(afloatSendEvent:) keepOriginalAs:@selector(afloatSendEventOriginal:)];
+	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didChangeFocusedWindow:) name:NSWindowDidBecomeMainNotification object:nil];
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willCloseWindow:) name:NSWindowWillCloseNotification object:nil];
     
-	[[AfloatHub sharedHub] setFocusedWindow:[[NSApp mainWindow] afloatTopWindow]];	
+	[[AfloatHub sharedHub] setFocusedWindow:[self focusedWindow]];	
 	
 	// install menu items
 	
 	NSMenu* mainMenu = [NSApp mainMenu], * items = [[AfloatHub sharedHub] afloatMenu];
 	@try {
 		[self searchAndInstallMenuItems:items inAppropriateMenuIn:mainMenu];
-	} @catch (NSException* ex) { return; }
-    
-    // install Drag Anywhere
-    
-    [self bypassSelector:@selector(sendEvent:) ofClass:[NSApplication class] throughNewSelector:@selector(afloatSendEvent:) keepOriginalAs:@selector(afloatSendEventOriginal:)];
+	} @catch (NSException* ex) {
+		AfloatLog(@"An exception was raised while installing Afloat's menu items: %@", ex);
+		return;
+	}
 }
 
 - (BOOL) searchAndInstallMenuItems:(NSMenu*) items inAppropriateMenuIn:(NSMenu*) menu {

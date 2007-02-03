@@ -9,6 +9,7 @@
 #import "AfloatWindowFader.h"
 #import "AfloatHub.h"
 #import "AfloatLogging.h"
+#import "AfloatPreferences.h"
 
 @implementation AfloatWindowFader
 
@@ -32,11 +33,17 @@
 
 // TODO: Factor Cocoa away.
 - (void) mouseEntered:(NSEvent*) evt {
-	[self scheduleMousePositionTest];
+	if ([[AfloatPreferences sharedInstance] boolForKey:@"AfloatDoAnimation" withDefault:YES])
+		[self scheduleMousePositionTest];
+	else
+		[[AfloatHub sharedHub] fadeInWindow:[evt window]];
 }
 
 - (void) mouseExited:(NSEvent*) evt {
-	[self scheduleMousePositionTest];	
+	if ([[AfloatPreferences sharedInstance] boolForKey:@"AfloatDoAnimation" withDefault:YES])
+		[self scheduleMousePositionTest];
+	else
+		[[AfloatHub sharedHub] fadeOutWindow:[evt window]];
 }
 
 - (void) scheduleMousePositionTest {

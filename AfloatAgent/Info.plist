@@ -42,6 +42,6 @@ This file is part of Afloat.
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
     <key>CFBundleShortVersionString</key>
-    <string>1.0 release candidate</string>
+    <string>${AfloatMarketingVersion}</string>
 </dict>
 </plist>
