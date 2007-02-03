@@ -46,6 +46,12 @@ This file is part of Afloat.
 }
 
 - (void) performInstallOnMainThread {
+	if (NSClassFromString(@"ASKWindow")) {
+		// we're in an AppleScript Studio app
+		AfloatLog(@"This is an AppleScript Studio application; Afloat won't load in it.");
+		return;
+	}
+	
 	[self performSelectorOnMainThread:@selector(install) withObject:nil waitUntilDone:NO];
 }
 
@@ -133,7 +139,7 @@ This file is part of Afloat.
 }
 
 - (void) deactivateApplication {
-	[[NSApplication sharedApplication] deactivate];
+//	[[NSApplication sharedApplication] hide:self];
 }
 
 @end

@@ -74,5 +74,6 @@ This file is part of Afloat.
 
 - (IBAction) sinkFocusedWindow:(id) sender;
 - (void) sinkWindow:(id) wnd;
+- (float) sunkWindowAlphaValue;
 
 @end

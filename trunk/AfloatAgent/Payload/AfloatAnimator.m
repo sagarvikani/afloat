@@ -16,7 +16,10 @@ This file is part of Afloat.
 */
 
 #import "AfloatAnimator.h"
-#include <unistd.h>
+
+#import "AfloatLogging.h"
+
+#import <unistd.h>
 #define kAfloatAnimatorFramesPerSecond 15
 
 @implementation AfloatAnimator
@@ -80,6 +83,7 @@ This file is part of Afloat.
 }
 
 - (void) run {
+	AfloatLog(@"-[AfloatAnimator run]");
     [self retain];
     
     if (drawingTimer) {

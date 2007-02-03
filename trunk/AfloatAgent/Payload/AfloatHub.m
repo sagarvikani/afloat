@@ -174,6 +174,7 @@
 
 - (void) fadeWindow:(id) window toAlpha:(float) alpha duration:(NSTimeInterval) duration {
     if ([[self infoForWindow:window] objectForKey:@"AfloatWindowIsAnimating"]) return;
+	AfloatLog(@"-[AfloatHub fadeWindow:%@ toAlpha:%f duration:%f]", window, (double)alpha, duration);
 	if ([[AfloatPreferences sharedInstance] boolForKey:@"AfloatDoAnimation" withDefault:YES]) {
 		[[self infoForWindow:window] setObject:[NSNumber numberWithBool:YES] forKey:@"AfloatWindowIsAnimating"];
         
@@ -278,6 +279,7 @@
 }
 
 - (void) sinkWindow:(id) wnd {
+	AfloatLog(@"-[AfloatHub sinkWindow:%@]", wnd);
     int i; NSMutableArray* allWnds = [NSMutableArray arrayWithArray:[[AfloatImplementation sharedInstance] windows]];
 	for (i = 0; i < [allWnds count]; i++) {
 		id aWnd = [allWnds objectAtIndex:i];
@@ -293,13 +295,20 @@
 	else
 		[[allWnds objectAtIndex:0] makeKeyAndOrderFront:self];
 	
-	[[self infoForWindow:wnd] setObject:[NSNumber numberWithBool:YES] forKey:@"AfloatIsSunk"];
-	[wnd orderBack:self];
 	[self performSelector:@selector(actuallyFadeOutForSinking:) withObject:wnd afterDelay:0.1];
+	[[self infoForWindow:wnd] setObject:[NSNumber numberWithBool:YES] forKey:@"AfloatIsSunk"];
+	[[self infoForWindow:wnd] setObject:[NSNumber numberWithBool:YES] forKey:@"AfloatIsAnimating"];
+	[wnd orderBack:self];
+}
+
+- (float) sunkWindowAlphaValue {
+	return [self mediumAlphaValue] * 0.75;
 }
 
 - (void) actuallyFadeOutForSinking:(id) wnd {
-	[self fadeWindow:wnd toAlpha:[self adequateOverlayAlphaValue]];
+	AfloatLog(@"-[AfloatHub actuallyFadeOutForSinking:%@]", wnd);
+	[[self infoForWindow:wnd] removeObjectForKey:@"AfloatIsAnimating"];
+	[self fadeWindow:wnd toAlpha:[self sunkWindowAlphaValue]];
 }
 
 
