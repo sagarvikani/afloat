@@ -289,8 +289,12 @@
 		[[allWnds objectAtIndex:0] makeKeyAndOrderFront:self];
 	
 	[[self infoForWindow:wnd] setObject:[NSNumber numberWithBool:YES] forKey:@"AfloatIsSunk"];
-	[self fadeWindow:wnd toAlpha:[self adequateOverlayAlphaValue]];
 	[wnd orderBack:self];
+	[self performSelector:@selector(actuallyFadeOutForSinking:) withObject:wnd afterDelay:0.1];
+}
+
+- (void) actuallyFadeOutForSinking:(id) wnd {
+	[self fadeWindow:wnd toAlpha:[self adequateOverlayAlphaValue]];
 }
 
 
