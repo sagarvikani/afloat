@@ -286,7 +286,8 @@
 
 		// TODO remove Cocoa
 		if (aWnd == wnd || [aWnd isKindOfClass:[NSPanel class]] || ![aWnd isVisible]
-			|| [[self infoForWindow:aWnd] objectForKey:@"AfloatIsSunk"])
+			|| [[self infoForWindow:aWnd] objectForKey:@"AfloatIsSunk"]
+			|| [wnd styleMask] & NSBorderlessWindowMask)
 		{ [allWnds removeObjectAtIndex:i]; i--; }
 	}
 	
