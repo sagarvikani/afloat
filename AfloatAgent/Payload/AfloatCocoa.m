@@ -25,8 +25,19 @@ This file is part of Afloat.
 
 @implementation AfloatCocoa
 
+static NSMutableSet* swizzledMethods = nil;
+
 // From SIMBL's creator, ...
 - (BOOL) renameSelector:(SEL) select ofClass:(Class) cls toNewSelector:(SEL) newSel {
+	if (!swizzledMethods)
+		swizzledMethods = [NSMutableSet new];
+	NSString* methodName = [NSString stringWithFormat:@"-[%@ %@]", NSStringFromClass(cls), NSStringFromSelector(select)];
+	
+	if ([swizzledMethods containsObject:methodName]) {
+		NSLog(@"Afloat has detected a double swizzling; we'll crash!");
+		(*((char*)NULL)) = '0'; // ensures we crash.
+	}
+	
     Method method = nil;
 	
     method = class_getInstanceMethod(cls, select);
@@ -34,13 +45,15 @@ This file is part of Afloat.
         return NO;
 	
     method->method_name = newSel;
+	[swizzledMethods addObject:methodName];
+	
     return YES;
 }
 
 - (BOOL) bypassSelector:(SEL) original ofClass:(Class) cls throughNewSelector:(SEL) newSel keepOriginalAs:(SEL) kept {
-	BOOL res = [self renameSelector:original ofClass:cls toNewSelector:kept];
+	BOOL res = [self renameSelector:newSel ofClass:cls toNewSelector:kept];
 	if (res)
-		res = [self renameSelector:newSel ofClass:cls toNewSelector:original];
+		res = [self renameSelector:original ofClass:cls toNewSelector:kept];
 	
 	return res;
 }
@@ -128,8 +141,13 @@ This file is part of Afloat.
 	NSWindow* wnd;
 	NSMutableSet* topWindows = [NSMutableSet set];
 	
-	while (wnd = [enu nextObject])
-		[topWindows addObject:[wnd afloatTopWindow]];
+	while (wnd = [enu nextObject]) {
+		if ([wnd isKindOfClass:[NSPanel class]] || [wnd styleMask] & NSBorderlessWindowMask)
+			continue;
+		
+		id atp = [wnd afloatTopWindow];
+		if (atp) [topWindows addObject:[wnd afloatTopWindow]];
+	}
 	
 	return [topWindows allObjects];
 }
