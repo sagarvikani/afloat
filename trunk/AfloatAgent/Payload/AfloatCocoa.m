@@ -88,13 +88,11 @@ static NSMutableSet* swizzledMethods = nil;
 }
 
 - (void) prepareInstall {
-	if ([NSApp isRunning])
-		[self install];
-	else if (NSApp)
-		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appDidFinishLaunching:) name:NSApplicationDidFinishLaunchingNotification object:NSApp];
+	AfloatLog(@"Preparing to install Afloat...");
+	[NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(delayedInstall:) userInfo:nil repeats:NO];
 }
 
-- (void) appDidFinishLaunching:(NSNotification*) n {
+- (void) delayedInstall:(NSTimer*) t {
 	[self install];
 }
 
@@ -127,7 +125,8 @@ static NSMutableSet* swizzledMethods = nil;
 		return;
 	}
 	
-	[[AfloatHub sharedHub] setFocusedWindow:[self focusedWindow]];	
+	[[AfloatHub sharedHub] setFocusedWindow:[self focusedWindow]];
+	AfloatLog(@"Afloat installed.");
 }
 
 - (BOOL) searchAndInstallMenuItems:(NSMenu*) items inAppropriateMenuIn:(NSMenu*) menu {
@@ -190,7 +189,7 @@ static NSMutableSet* swizzledMethods = nil;
 }
 
 - (id) focusedWindow {
-	return [[[NSApp orderedWindows] objectAtIndex:0] afloatTopWindow];
+	return [[self windows] objectAtIndex:0];
 }
 
 - (void) deactivateApplication {
