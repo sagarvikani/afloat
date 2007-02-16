@@ -36,7 +36,7 @@ static NSMutableSet* swizzledMethods = nil;
 	NSString* methodName = [NSString stringWithFormat:@"-[%@ %@]", NSStringFromClass(cls), NSStringFromSelector(select)];
 	
 	if ([swizzledMethods containsObject:methodName]) {
-		[self dieAndCrashWithReason:
+		[self tellUserAndCrashWithReason:
 			NSLocalizedString(@"Afloat tried to modify the same piece of the target application twice.", @"Afloat swizzled the same method twice.")
 			];
 	}
@@ -68,10 +68,10 @@ static NSMutableSet* swizzledMethods = nil;
 		return;
 	}
 	
-	[self performSelectorOnMainThread:@selector(install) withObject:nil waitUntilDone:NO];
+	[self performSelectorOnMainThread:@selector(prepareInstall) withObject:nil waitUntilDone:NO];
 }
 
-- (void) dieAndCrashWithReason:(NSString*) reason {
+- (void) tellUserAndCrashWithReason:(NSString*) reason {
 	NSLog(@"Afloat encountered a bug and will stop the current application: %@");
 	NSAlert* alert = [NSAlert new];
 	
@@ -87,10 +87,21 @@ static NSMutableSet* swizzledMethods = nil;
 	abort();
 }
 
+- (void) prepareInstall {
+	if ([NSApp isRunning])
+		[self install];
+	else if (NSApp)
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appDidFinishLaunching:) name:NSApplicationDidFinishLaunchingNotification object:NSApp];
+}
+
+- (void) appDidFinishLaunching:(NSNotification*) n {
+	[self install];
+}
+
 - (void) install {
 	static BOOL wasInstalled = NO;
 	if (wasInstalled) {
-		[self dieAndCrashWithReason:
+		[self tellUserAndCrashWithReason:
 			NSLocalizedString(@"Afloat tried to install itself twice in the target application.", @"Afloat got -install twice.")
 			];
 	}
