@@ -28,6 +28,8 @@ This file is part of Afloat.
 - (BOOL) searchAndInstallMenuItems:(NSMenu*) items inAppropriateMenuIn:(NSMenu*) menu;
 - (void) installMenuItems:(NSMenu*) items inMenu:(NSMenu*) menu index:(int) i;
 
+- (void) dieAndCrashWithReason:(NSString*) localizedReason;
+
 @end
 
 @interface NSObject (AfloatCocoaAdditions)

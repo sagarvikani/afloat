@@ -23,6 +23,8 @@ This file is part of Afloat.
 
 #define kAfloatCocoaUserAlphaValue @"AfloatCocoaUserAlphaValue"
 
+#import <stdlib.h>
+
 @implementation AfloatCocoa
 
 static NSMutableSet* swizzledMethods = nil;
@@ -34,8 +36,9 @@ static NSMutableSet* swizzledMethods = nil;
 	NSString* methodName = [NSString stringWithFormat:@"-[%@ %@]", NSStringFromClass(cls), NSStringFromSelector(select)];
 	
 	if ([swizzledMethods containsObject:methodName]) {
-		NSLog(@"Afloat has detected a double swizzling; we'll crash!");
-		(*((char*)NULL)) = '0'; // ensures we crash.
+		[self dieAndCrashWithReason:
+			NSLocalizedString(@"Afloat tried to modify the same piece of the target application twice.", @"Afloat swizzled the same method twice.")
+			];
 	}
 	
     Method method = nil;
@@ -51,9 +54,9 @@ static NSMutableSet* swizzledMethods = nil;
 }
 
 - (BOOL) bypassSelector:(SEL) original ofClass:(Class) cls throughNewSelector:(SEL) newSel keepOriginalAs:(SEL) kept {
-	BOOL res = [self renameSelector:newSel ofClass:cls toNewSelector:kept];
+	BOOL res = [self renameSelector:original ofClass:cls toNewSelector:kept];
 	if (res)
-		res = [self renameSelector:original ofClass:cls toNewSelector:kept];
+		res = [self renameSelector:newSel ofClass:cls toNewSelector:original];
 	
 	return res;
 }
@@ -68,7 +71,30 @@ static NSMutableSet* swizzledMethods = nil;
 	[self performSelectorOnMainThread:@selector(install) withObject:nil waitUntilDone:NO];
 }
 
+- (void) dieAndCrashWithReason:(NSString*) reason {
+	NSLog(@"Afloat encountered a bug and will stop the current application: %@");
+	NSAlert* alert = [NSAlert new];
+	
+	[alert setMessageText:
+		NSLocalizedString(@"Afloat has encountered an internal problem. The application it was being executed in will now quit unexpectedly. Please report this to afloat@infinite-labs.net rather than the application's developer.", @"Afloat is going to crash.")
+		];
+	
+	[alert setInformativeText:reason];
+	
+	[alert runModal];
+	[alert release];
+	(*((char*)NULL)) = '0'; // ensures we crash.	
+	abort();
+}
+
 - (void) install {
+	static BOOL wasInstalled = NO;
+	if (wasInstalled) {
+		[self dieAndCrashWithReason:
+			NSLocalizedString(@"Afloat tried to install itself twice in the target application.", @"Afloat got -install twice.")
+			];
+	}
+	
     // sink with "-"
 	[self bypassSelector:@selector(miniaturize:) ofClass:[NSWindow class] throughNewSelector:@selector(afloatMiniaturize:) keepOriginalAs:@selector(afloatMiniaturizeOriginal:)];
 
