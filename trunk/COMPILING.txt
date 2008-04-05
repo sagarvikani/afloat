@@ -1,0 +1,22 @@
+Welcome to the Afloat microverse. A "microverse" is a smaller, portable version of ∞labs's Multiverse code repository and building rig. This microverse contains all files you need to build Afloat on your machine.
+
+What this microverse does not contain:
+ - Packaging tools (the ones that make the DMG and web site) because, well, they're not needed and I'm pretty much ashamed of them. They're not very machine-specific, but not ready yet.
+ - Localizations. They're strongly tied to the above packaging tools.
+ - Code signing tools. See below.
+
+To compile Afloat on your machine (which MUST be a machine running Mac OS X 10.5 and having Xcode 3.0 or later):
+
+ - from a Terminal, cd into the trunk's root directory and run
+
+	sh Bootstrap
+	
+which will initialize this microverse. (With the first revision this is not really needed, but it might be in the future.)
+
+ - Compile the Afloat target of the Xcode project at Afloat/Afloat.xcodeproj.
+
+The result will have three unavoidable warnings -- two because code signing is unused and one for the missing packaging tools. All three can be safely ignored -- they do not impact on the final product.
+
+To sign the products with your own key, modify the "Sign Code" script phase in all targets and make sure the private key is in a keychain on the compiling machine. (This project uses a projectwide setting, USE_CODE_SIGNING, to switch code signing on or off, but not to specify what key you use to sign. This is probably a forthcoming feature.)
+
+The missing packaging tools warning simply complains because the compilation of Afloat uses the seticon tool from http://osxtools.sf.net/ to make sure the Afloat icon is shown in the Finder. This is noncritical, and you can fix it by following the warning's instructions.
