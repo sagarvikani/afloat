@@ -1,0 +1,17 @@
+#!/bin/bash
+
+HERE="`dirname "$0"`"
+
+mkdir -p "$HERE/__Build"
+if [ $? != 0 ]; then
+	echo "error: Can't create the __Build folder"
+	exit 1
+fi
+
+if [ -e "$HERE"/PackagingTools/Trash.m ]; then
+	(cd "$HERE"/PackagingTools; gcc -o MvTrash Trash.m -framework Carbon -framework Foundation --std=c99)
+	if [ $? != 0 ]; then
+		echo "error: Can't compile the MvTrash packaging tool"
+		exit 1
+	fi
+fi
