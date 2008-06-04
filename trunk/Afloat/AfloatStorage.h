@@ -35,6 +35,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 + (void) removeSharedValueForWindow:(NSWindow*) w key:(NSString*) k;
 
 - (void) saveWindowIfRequired:(NSWindow*) w;
++ (void) removeSavedWindowWithCategory:(NSString*) cat identifier:(NSString*) ident;
 
 @end
 

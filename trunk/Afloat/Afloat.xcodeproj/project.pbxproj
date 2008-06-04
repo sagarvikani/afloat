@@ -17,7 +17,6 @@
 		151354870D9E415C007D56FA /* AfloatNag.m in Sources */ = {isa = PBXBuildFile; fileRef = 151354860D9E415C007D56FA /* AfloatNag.m */; };
 		1513548E0D9E41EC007D56FA /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1513548D0D9E41EC007D56FA /* Carbon.framework */; };
 		151354B20D9E44F8007D56FA /* Afloat_AfloatNagging.m in Sources */ = {isa = PBXBuildFile; fileRef = 151354B10D9E44F8007D56FA /* Afloat_AfloatNagging.m */; };
-		151354B40D9E4534007D56FA /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 151354B30D9E4534007D56FA /* Carbon.framework */; };
 		151354C90D9E47C0007D56FA /* Donate for Afloat.app in Resources */ = {isa = PBXBuildFile; fileRef = 151354250D9E3E31007D56FA /* Donate for Afloat.app */; };
 		1513550A0D9E4DF1007D56FA /* Afloat2.icns in Resources */ = {isa = PBXBuildFile; fileRef = 15522F9C0D999F770007B44F /* Afloat2.icns */; };
 		153C040B0D882C3700037E2F /* JRSwizzle.m in Sources */ = {isa = PBXBuildFile; fileRef = 153C040A0D882C3700037E2F /* JRSwizzle.m */; };
@@ -38,6 +37,8 @@
 		15CB74510D8932F6002BAA81 /* AfloatFloatingBadge.png in Resources */ = {isa = PBXBuildFile; fileRef = 15CB74500D8932F6002BAA81 /* AfloatFloatingBadge.png */; };
 		15CB745C0D89336B002BAA81 /* AfloatBadge.nib in Resources */ = {isa = PBXBuildFile; fileRef = 15CB745A0D89336B002BAA81 /* AfloatBadge.nib */; };
 		15CB745F0D8933B1002BAA81 /* AfloatBadgeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CB745E0D8933B1002BAA81 /* AfloatBadgeController.m */; };
+		15EDDA380DA80E4C00C16A67 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1513548D0D9E41EC007D56FA /* Carbon.framework */; };
+		15EDDA3A0DA80E5C00C16A67 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */; };
 		15F2FF6D0D6611BC00737D76 /* Afloat.m in Sources */ = {isa = PBXBuildFile; fileRef = 15F2FF6C0D6611BC00737D76 /* Afloat.m */; };
 		8D5B49B0048680CD000E48DA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C167DFE841241C02AAC07 /* InfoPlist.strings */; };
 		8D5B49B4048680CD000E48DA /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */; };
@@ -87,7 +88,6 @@
 		1513548D0D9E41EC007D56FA /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
 		151354B00D9E44F8007D56FA /* Afloat_AfloatNagging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Afloat_AfloatNagging.h; sourceTree = "<group>"; };
 		151354B10D9E44F8007D56FA /* Afloat_AfloatNagging.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Afloat_AfloatNagging.m; sourceTree = "<group>"; };
-		151354B30D9E4534007D56FA /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
 		151354B60D9E455E007D56FA /* AfloatNagPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AfloatNagPreferences.h; sourceTree = "<group>"; };
 		153C040A0D882C3700037E2F /* JRSwizzle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRSwizzle.m; sourceTree = "<group>"; };
 		153C04170D882CEF00037E2F /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/Afloat.nib; sourceTree = "<group>"; };
@@ -124,6 +124,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				15EDDA3A0DA80E5C00C16A67 /* Cocoa.framework in Frameworks */,
 				1513548E0D9E41EC007D56FA /* Carbon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -132,10 +133,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				15EDDA380DA80E4C00C16A67 /* Carbon.framework in Frameworks */,
 				8D5B49B4048680CD000E48DA /* Cocoa.framework in Frameworks */,
 				15950C070D7F4CEB00D48A24 /* iLifeControls.framework in Frameworks */,
 				15950C1E0D7F4D1600D48A24 /* QuartzCore.framework in Frameworks */,
-				151354B40D9E4534007D56FA /* Carbon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -151,7 +152,6 @@
 				089C167CFE841241C02AAC07 /* Resources */,
 				089C1671FE841209C02AAC07 /* Frameworks and Libraries */,
 				19C28FB8FE9D52D311CA2CBB /* Products */,
-				151354B30D9E4534007D56FA /* Carbon.framework */,
 			);
 			name = Afloat;
 			sourceTree = "<group>";
@@ -396,7 +396,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ \"$USE_CODE_SIGNING\" == \"\" ]; then\n\techo \"warning: The code was not signed. Set the USE_CODE_SIGNING build setting.\" >&2\n\texit 0\nfi\n\ncodesign --force --sign \"∞labs code signing (v1)\" \"$BUILT_PRODUCTS_DIR/$WRAPPER_NAME\" --file-list \"$BUILT_PRODUCTS_DIR/$WRAPPER_NAME.signed-files.log\"\n";
+			shellScript = "if [ \"$USE_CODE_SIGNING\" == \"\" ]; then\n\techo \"warning: The code was not signed. Set the USE_CODE_SIGNING build setting.\" >&2\nfi\n\ncodesign --force --sign \"∞labs code signing (v1)\" \"$BUILT_PRODUCTS_DIR/$WRAPPER_NAME\" --file-list \"$BUILT_PRODUCTS_DIR/$WRAPPER_NAME.signed-files.log\"\n";
 		};
 		152C72A70D8AAF87007438FA /* Hide Extension & Add HFS+ Attributes */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -424,7 +424,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ \"$USE_CODE_SIGNING\" == \"\" ]; then\n\techo \"warning: The code was not signed. Set the USE_CODE_SIGNING build setting.\" >&2\n\texit 0\nfi\n\ncodesign --force --sign \"∞labs code signing (v1)\" \"$BUILT_PRODUCTS_DIR/$WRAPPER_NAME\" --file-list \"$BUILT_PRODUCTS_DIR/$WRAPPER_NAME.signed-files.log\"\ncodesign --force --sign \"∞labs code signing (v1)\" \"$BUILT_PRODUCTS_DIR/$WRAPPER_NAME/Contents/Frameworks/iLifeControls.framework\" --file-list \"$BUILT_PRODUCTS_DIR/$WRAPPER_NAME-iLifeControls.signed-files.log\"\n\n";
+			shellScript = "if [ \"$USE_CODE_SIGNING\" == \"\" ]; then\n\techo \"warning: The code was not signed. Set the USE_CODE_SIGNING build setting.\" >&2\nfi\n\ncodesign --force --sign \"∞labs code signing (v1)\" \"$BUILT_PRODUCTS_DIR/$WRAPPER_NAME\" --file-list \"$BUILT_PRODUCTS_DIR/$WRAPPER_NAME.signed-files.log\"\ncodesign --force --sign \"∞labs code signing (v1)\" \"$BUILT_PRODUCTS_DIR/$WRAPPER_NAME/Contents/Frameworks/iLifeControls.framework\" --file-list \"$BUILT_PRODUCTS_DIR/$WRAPPER_NAME-iLifeControls.signed-files.log\"\n\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -590,6 +590,7 @@
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_ENABLE_OBJC_GC = supported;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -614,6 +615,7 @@
 					"\"$(SRCROOT)\"",
 				);
 				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_ENABLE_OBJC_GC = supported;
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Afloat_Prefix.pch;
@@ -632,6 +634,7 @@
 				PREBINDING = NO;
 				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.5.sdk";
 				SYMROOT = "$(SRCROOT)/../__Build";
+				USE_CODE_SIGNING = "-YES-";
 			};
 			name = Debug;
 		};
@@ -647,6 +650,7 @@
 				PREBINDING = NO;
 				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.5.sdk";
 				SYMROOT = "$(SRCROOT)/../__Build";
+				USE_CODE_SIGNING = "-YES-";
 			};
 			name = Release;
 		};

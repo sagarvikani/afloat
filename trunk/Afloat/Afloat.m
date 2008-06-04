@@ -174,7 +174,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 			[item setState:[self isWindowKeptAfloat:c]? NSOnState : NSOffState];
 		return c != nil;
 	} else if ([item action] == @selector(showWindowFileInFinder:))
-		return [[[self currentWindow] representedURL] isFileURL];
+		return [[self currentWindow] representedURL]? [[[self currentWindow] representedURL] isFileURL] : NO;
 	
 	return YES;
 }
@@ -384,7 +384,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 	} else {
 		if ([w alphaValue] <= kAfloatOverlayAlphaValue)
 			[self setAlphaValue:1.0 forWindow:w animated:animated];
-		[self setAlphaValueAnimatesOnMouseOver:YES forWindow:w];
+		// [self setAlphaValueAnimatesOnMouseOver:YES forWindow:w];
 		[self setKeptAfloat:NO forWindow:w showBadgeAnimation:badge];
 		[w setIgnoresMouseEvents:NO];
 		[AfloatStorage removeSharedValueForWindow:w key:kAfloatIsOverlayKey];
@@ -430,8 +430,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
         switch ([evt type]) {
 // The three-finger swipe gesture on a multitouch (MB Air/Pro) trackpad
 #define kAfloatNSSwipeGestureEvent (31)
-			case kAfloatNSSwipeGestureEvent:
-			{
+			case kAfloatNSSwipeGestureEvent: {
 				NSWindow* w = [evt window];
 				if ([hub isWindowIgnoredByAfloat:w]) w = [hub currentWindow];
 				if (w) {

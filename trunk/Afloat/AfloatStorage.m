@@ -126,6 +126,11 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 	[[NSUserDefaults standardUserDefaults] setObject:m forKey:cat];
 }
 
++ (void) removeSavedWindowWithCategory:(NSString*) cat identifier:(NSString*) ident {
+	NSString* key = [NSString stringWithFormat:@"Afloat:%@:%@", cat, key];
+	[[NSUserDefaults standardUserDefaults] removeObjectForKey:key];	
+}
+
 @synthesize persistedKeys = _persistedKeys;
 
 + (id) sharedStorage {
