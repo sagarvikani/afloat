@@ -7,9 +7,9 @@ To build Afloat:
  - from the command line, set the MULTIVERSE build setting to the full path to the Multiverse directory in this path. For example, if you have checked out the repository in /Projects/AfloatSVN, the following will build Afloat correctly:
 
 	cd /Projects/AfloatSVN/Afloat
-	xcodebuild clean build MULTIVERSE=/Projects/AfloatSVN/Multiverse
+	xcodebuild -configuration Debug clean build MULTIVERSE=/Projects/AfloatSVN/Multiverse
 	
- - from the Xcode IDE, choose Xcode > Preferences from the menu, select the Source Trees section, then add a new source tree called MULTIVERSE that points to the Multiverse folder in this tree. For example, if you have checked out the repository in /Projects/AfloatSVN, use /Projects/AfloatSVN/Multiverse as the path.
+ - from the Xcode IDE, choose Xcode > Preferences from the menu, select the Source Trees section, then add a new source tree called MULTIVERSE that points to the Multiverse folder in this tree. For example, if you have checked out the repository in /Projects/AfloatSVN, use /Projects/AfloatSVN/Multiverse as the path. To build non-release code, build the Debug configuration. (See below for building with the Release configuration.)
 
 Note that the build for the Release configuration tries to sign the final output with a Multiverse script. This will likely fail since you don't have a ∞labs code signing certificate in your keychain. You can disable signing by adding the `DISABLE_CODE_SIGNING = YES` user-defined build setting. You can specify it on the xcodebuild command line like this:
 
@@ -18,4 +18,3 @@ Note that the build for the Release configuration tries to sign the final output
 	
 or in the Xcode IDE in the project settings or in the Afloat.xcconfig file.
 
-	
