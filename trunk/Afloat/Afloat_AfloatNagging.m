@@ -18,7 +18,7 @@
 	
 	if (AfloatNagCurrentAction() != kAfloatDoNotShowAlerts) {
 		NSBundle* b = [NSBundle bundleForClass:[self class]];
-		NSString* donateApp = [b pathForResource:@"Donate for Afloat" ofType:@"app"];
+		NSString* donateApp = [[b bundlePath] stringByAppendingPathComponent:@"Donate for Afloat.app"];
 		[[NSWorkspace sharedWorkspace] openFile:donateApp];
 	}
 }

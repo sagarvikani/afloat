@@ -19,6 +19,7 @@ typedef NSUInteger AfloatBadgeType;
 	IBOutlet NSImageView* badgeView;
 	
 	BOOL fadingOut;
+	unsigned int enqueuedFades;
 }
 
 @property(retain) NSWindow* parentWindow;

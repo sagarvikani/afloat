@@ -1,22 +1,21 @@
-Welcome to the Afloat microverse. A "microverse" is a smaller, portable version of ∞labs's Multiverse code repository and building rig. This microverse contains all files you need to build Afloat on your machine.
+Welcome to Afloat.
 
-What this microverse does not contain:
- - Packaging tools (the ones that make the DMG and web site) because, well, they're not needed and I'm pretty much ashamed of them. They're not very machine-specific, but not ready yet.
- - Localizations. They're strongly tied to the above packaging tools.
- - Code signing tools. See below.
+Since version 2.1, Afloat is built by the new Multiverse 3.0 build infrastructure. A small part of this infrastructure is replicated in this tree to allow you to build Afloat correctly; you must however set up your environment to use that folder.
 
-To compile Afloat on your machine (which MUST be a machine running Mac OS X 10.5 and having Xcode 3.0 or later):
+To build Afloat:
 
- - from a Terminal, cd into the trunk's root directory and run
+ - from the command line, set the MULTIVERSE build setting to the full path to the Multiverse directory in this path. For example, if you have checked out the repository in /Projects/AfloatSVN, the following will build Afloat correctly:
 
-	sh Bootstrap
+	cd /Projects/AfloatSVN/Afloat
+	xcodebuild clean build MULTIVERSE=/Projects/AfloatSVN/Multiverse
 	
-which will initialize this microverse. (With the first revision this is not really needed, but it might be in the future.)
+ - from the Xcode IDE, choose Xcode > Preferences from the menu, select the Source Trees section, then add a new source tree called MULTIVERSE that points to the Multiverse folder in this tree. For example, if you have checked out the repository in /Projects/AfloatSVN, use /Projects/AfloatSVN/Multiverse as the path.
 
- - Compile the Afloat target of the Xcode project at Afloat/Afloat.xcodeproj.
+Note that the build for the Release configuration tries to sign the final output with a Multiverse script. This will likely fail since you don't have a ∞labs code signing certificate in your keychain. You can disable signing by adding the `DISABLE_CODE_SIGNING = YES` user-defined build setting. You can specify it on the xcodebuild command line like this:
 
-The result will have three unavoidable warnings -- two because code signing is unused and one for the missing packaging tools. All three can be safely ignored -- they do not impact on the final product.
+	cd /Projects/AfloatSVN/Afloat
+	xcodebuild -configuration Release clean build MULTIVERSE=/Projects/AfloatSVN/Multiverse DISABLE_CODE_SIGNING=YES
+	
+or in the Xcode IDE in the project settings or in the Afloat.xcconfig file.
 
-To sign the products with your own key, modify the "Sign Code" script phase in all targets and make sure the private key is in a keychain on the compiling machine. (This project uses a projectwide setting, USE_CODE_SIGNING, to switch code signing on or off, but not to specify what key you use to sign. This is probably a forthcoming feature.)
-
-The missing packaging tools warning simply complains because the compilation of Afloat uses the seticon tool from http://osxtools.sf.net/ to make sure the Afloat icon is shown in the Finder. This is noncritical, and you can fix it by following the warning's instructions.
+	

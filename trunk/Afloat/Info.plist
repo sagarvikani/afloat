@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
-	<string>English</string>
+	<string>en</string>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIconFile</key>
@@ -19,9 +19,9 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>2.0</string>
+	<string>${VERSION}</string>
 	<key>CFBundleShortVersionString</key>
-	<string>2.0</string>
+	<string>${USER_VISIBLE_VERSION}</string>
 	<key>NSPrincipalClass</key>
 	<string>Afloat</string>
 	<key>SIMBLTargetApplications</key>

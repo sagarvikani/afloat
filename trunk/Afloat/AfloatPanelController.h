@@ -8,6 +8,11 @@
 
 #import <Cocoa/Cocoa.h>
 
+typedef enum {
+	kAfloatWindowStateNormal = 0,
+	kAfloatWindowStateAfloat = 1,
+	kAfloatWindowStatePinnedToDesktop = 2,
+} AfloatWindowState;
 
 @interface AfloatPanelController : NSWindowController {
 	NSWindow* _parentWindow;
@@ -23,8 +28,10 @@
 - (IBAction) disableAllOverlays:(id) sender;
 
 @property(retain) NSWindow* parentWindow;
-@property float alphaValue;
-@property(getter=isKeptAfloat) BOOL keptAfloat;
+@property CGFloat alphaValue;
+// @property(getter=isKeptAfloat) BOOL keptAfloat;
+@property AfloatWindowState windowState;
+
 @property(getter=isOnAllSpaces) BOOL onAllSpaces;
 @property(getter=isOverlay) BOOL overlay;
 @property BOOL alphaValueAnimatesOnMouseOver;
