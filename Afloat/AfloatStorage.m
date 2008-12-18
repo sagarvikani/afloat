@@ -96,12 +96,13 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 // YES if Afloat could save the window's state (returns cat/key if YES).
 // NO otherwise.
 - (BOOL) canSaveWindow:(NSWindow*) w category:(NSString**) cat key:(NSString**) key {
-	// autosaves only for now
 	if ([w frameAutosaveName] && ![[w frameAutosaveName] isEqual:@""]) {
 		if (cat) *cat = kAfloatNamedWindowsCategoryAutosaveKey;
 		if (key) *key = [w frameAutosaveName];
 		return YES;
 	}
+	
+	
 	
 	return NO;	
 }
@@ -127,7 +128,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 }
 
 + (void) removeSavedWindowWithCategory:(NSString*) cat identifier:(NSString*) ident {
-	NSString* key = [NSString stringWithFormat:@"Afloat:%@:%@", cat, key];
+	NSString* key = [NSString stringWithFormat:@"Afloat:%@:%@", cat, ident];
 	[[NSUserDefaults standardUserDefaults] removeObjectForKey:key];	
 }
 

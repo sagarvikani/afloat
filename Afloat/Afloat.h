@@ -51,4 +51,11 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 
 - (IBAction) showWindowFileInFinder:(id) sender;
 
+
+- (void) setKeptPinnedToDesktop:(BOOL) pinned forWindow:(NSWindow*) c showBadgeAnimation:(BOOL) animated;
+- (BOOL) isWindowKeptPinnedToDesktop:(NSWindow*) w;
+
+- (void) animateFadeInForWindow:(NSWindow*) w;
+- (void) animateFadeOutForWindow:(NSWindow*) w;
+
 @end

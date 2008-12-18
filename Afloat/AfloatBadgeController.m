@@ -70,6 +70,9 @@
 	
 	NSRect parentFrame = [self.parentWindow frame];
 	NSRect windowFrame = [[self window] frame];
+	NSRect screenFrame = [[self.parentWindow screen] visibleFrame];
+	parentFrame = NSIntersectionRect(parentFrame, screenFrame);
+	
 	NSPoint origin = parentFrame.origin;
 	origin.x += parentFrame.size.width / 2;
 	origin.x -= windowFrame.size.width / 2;
@@ -100,7 +103,7 @@
 					[[[self window] animator] setFrameOrigin:targetOrigin];
 				[NSAnimationContext endGrouping];
 				
-				[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(_fadeOut) object:nil];
+				enqueuedFades++;
 				[self performSelector:@selector(_fadeOut) withObject:nil afterDelay:0.7];
 			//}
 		}
@@ -123,7 +126,7 @@
 					[[[self window] animator] setFrameOrigin:targetOrigin];
 				[NSAnimationContext endGrouping];
 
-				[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(_fadeOut) object:nil];
+				enqueuedFades++;
 				[self performSelector:@selector(_fadeOut) withObject:nil afterDelay:0.7];
 			//}
 		}
@@ -132,6 +135,13 @@
 }
 
 - (void) _fadeOut {
+	if (enqueuedFades <= 1)
+		enqueuedFades = 0;
+	else {
+		enqueuedFades--;
+		return;
+	}
+	
 	if (fadingOut || ![[self window] isVisible]) return;
 	fadingOut = YES;
 	
@@ -139,13 +149,14 @@
 		[[[self window] animator] setAlphaValue:0];
 	[NSAnimationContext endGrouping];
 	
+	[AfloatStorage removeSharedValueForWindow:self.parentWindow key:kAfloatBadgeControllerKey];
+	
 	[self performSelector:@selector(_endAnimation) withObject:nil afterDelay:0.3];
 }
 
 - (void) _endAnimation {
 	fadingOut = NO;	
 	[[self window] orderOut:self];
-	[AfloatStorage removeSharedValueForWindow:self.parentWindow key:kAfloatBadgeControllerKey];
 }
 
 + (NSImage*) didBeginKeepingAfloatBadge {

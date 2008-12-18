@@ -14,7 +14,7 @@
 @implementation AfloatNag
 
 - (void) applicationDidFinishLaunching:(NSNotification*) n {
-	NSAlert* a; NSInteger donateButton;
+	NSAlert* a = nil; NSInteger donateButton;
 	
 	switch (AfloatNagCurrentAction()) {
 		case kAfloatDoNotShowAlerts:

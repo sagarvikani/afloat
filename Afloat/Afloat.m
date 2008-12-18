@@ -127,6 +127,11 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 	if (!result) // we want this to be visible to end users, too :)
 		NSLog(@"<Afloat> Could not install events filter (error: %@). Some features may not work.", err);
 	
+	// Set up window did become main/did resign main notification
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(windowDidBecomeMain:) name:NSWindowDidBecomeMainNotification object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(windowDidResignMain:) name:NSWindowDidResignMainNotification object:nil];
+	
 	// Nag, nag, nag, nag, nag, nag, nag, nag...
 	// delayed -- PS already slows down app launch enough.
 	//[self checkForNagOnInstall];
@@ -185,20 +190,20 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 
 - (void) setKeptAfloat:(BOOL) afloat forWindow:(NSWindow*) c showBadgeAnimation:(BOOL) animated {
 	L0Log(@"window = %@, will be afloat = %d, was afloat = %d", c, afloat, [self isWindowKeptAfloat:c]);
-	BOOL wasAfloat = [self isWindowKeptAfloat:c];		
+	BOOL wasKeptElsewhere = [self isWindowKeptAfloat:c] || [self isWindowKeptPinnedToDesktop:c];
 
-	if ([c level] == NSNormalWindowLevel && afloat) {
+	if (afloat) {
 		[c setLevel:NSFloatingWindowLevel];
 		
-		if (!wasAfloat && animated) {
+		if (!wasKeptElsewhere && animated) {
 			L0LogS(@"Starting begin keeping afloat animation...");
 			[[AfloatBadgeController badgeControllerForWindow:c] animateWithBadgeType:AfloatBadgeDidBeginKeepingAfloat];
 		}
 
-	} else if ([c level] == NSFloatingWindowLevel && !afloat) {
+	} else if (!afloat) {
 		[c setLevel:NSNormalWindowLevel];
 		
-		if (wasAfloat && animated) {
+		if (wasKeptElsewhere && animated) {
 			L0LogS(@"Starting end keeping afloat animation...");
 			[[AfloatBadgeController badgeControllerForWindow:c] animateWithBadgeType:AfloatBadgeDidEndKeepingAfloat];
 		}
@@ -295,7 +300,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 	if (animate) {
 		[NSAnimationContext beginGrouping];
 		[[NSAnimationContext currentContext] setDuration:0.3];
-			[[window animator] setAlphaValue:f];
+			[(NSWindow*)[window animator] setAlphaValue:f];
 		[NSAnimationContext endGrouping];
 	} else
 		[window setAlphaValue:f];
@@ -325,6 +330,8 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 	[AfloatStorage setSharedValue:v window:window key:kAfloatTrackedViewKey];
 	
 	L0Log(@"tracker = %@ view = %@", tracker, v);
+	
+	[tracker release];
 }
 
 - (void) endTrackingWindow:(NSWindow*) window {
@@ -341,27 +348,45 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 - (void) mouseEntered:(NSEvent*) e {
 	L0Log(@"%@", e);
 	
-	if (![self alphaValueAnimatesOnMouseOverForWindow:[e window]]) return;
+	[self animateFadeInForWindow:[e window]];
+}
+
+- (void) windowDidBecomeMain:(NSNotification*) n {
+	[self animateFadeInForWindow:[n object]];
+}
+
+- (void) animateFadeInForWindow:(NSWindow*) w {
+	if (![self alphaValueAnimatesOnMouseOverForWindow:w]) return;
 	
 	[NSAnimationContext beginGrouping];
 	[[NSAnimationContext currentContext] setDuration:0.2];
-	[[[e window] animator] setAlphaValue:1.0];
+	[[w animator] setAlphaValue:1.0];
 	[NSAnimationContext endGrouping];
+	
 }
 
 - (void) mouseExited:(NSEvent*) e {
 	L0Log(@"%@", e);
 	
-	if (![self alphaValueAnimatesOnMouseOverForWindow:[e window]]) return;
-	
-	id alphaValue = [AfloatStorage sharedValueForWindow:[e window] key:kAfloatLastAlphaValueKey];
+	[self animateFadeOutForWindow:[e window]];
+}
+
+- (void) windowDidResignMain:(NSNotification*) n {
+	[self animateFadeOutForWindow:[n object]];
+}
+
+- (void) animateFadeOutForWindow:(NSWindow*) w {
+	if (![self alphaValueAnimatesOnMouseOverForWindow:w]) return;
+		
+	id alphaValue = [AfloatStorage sharedValueForWindow:w key:kAfloatLastAlphaValueKey];
 	if (!alphaValue) return;
 	
 	float a = [alphaValue floatValue];
 	[NSAnimationContext beginGrouping];
 	[[NSAnimationContext currentContext] setDuration:0.5];
-	[[[e window] animator] setAlphaValue:a];
+	[[w animator] setAlphaValue:a];
 	[NSAnimationContext endGrouping];	
+	
 }
 
 - (IBAction) showAdjustEffectsPanel:(id) sender {
@@ -415,6 +440,22 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 	[[NSWorkspace sharedWorkspace] selectFile:[url path] inFileViewerRootedAtPath:@""];
 }
 
+- (void) setKeptPinnedToDesktop:(BOOL) pinned forWindow:(NSWindow*) c showBadgeAnimation:(BOOL) animated {
+	L0Log(@"window = %@, will be pinned to desktop = %d, was pinned to desktop = %d", c, pinned, [self isWindowKeptPinnedToDesktop:c]);
+	// BOOL wasPinned = [self isWindowKeptAfloat:c];
+	// TODO: make a badge for "Pinned to Desktop"
+
+	[c setLevel:(pinned)? kCGDesktopWindowLevel : NSNormalWindowLevel];
+		
+	if (!pinned && [self isWindowOverlay:c] && !_settingOverlay)
+		[self setOverlay:NO forWindow:c animated:animated showBadgeAnimation:NO];
+		
+}
+
+- (BOOL) isWindowKeptPinnedToDesktop:(NSWindow*) w {
+	return [w level] == kCGDesktopWindowLevel;
+}
+
 @end
 
 @implementation NSApplication (Afloat)
@@ -422,6 +463,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 - (void) afloat_sendEvent:(NSEvent*) evt {
 	unsigned mods = [evt modifierFlags] & NSDeviceIndependentModifierFlagsMask;
     NSPoint ori;
+	NSRect frame;
     Afloat* hub = [Afloat sharedInstance];
 	NSWindow* wnd;
     
@@ -443,6 +485,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 			}
 				
             case NSLeftMouseDown:
+			case NSRightMouseDown:
                 return; // filter it
                 
             case NSLeftMouseDragged:
@@ -453,8 +496,29 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
                 ori.y -= [evt deltaY];
                 [wnd setFrameOrigin:ori];
                 return; // filter it once done
+				
+			case NSRightMouseDragged:
+                if ((wnd = [hub currentWindow]) && ([wnd styleMask] & NSResizableWindowMask)) {
+					NSSize minSize = [wnd minSize];
+					
+					frame = [wnd frame];
+					frame.size.width += [evt deltaX];
+					frame.size.height += [evt deltaY];
+					
+					if (frame.size.width < minSize.width)
+						frame.size.width = minSize.width;
+					
+					if (frame.size.height < minSize.height)
+						frame.size.height = minSize.height;
+					else
+						frame.origin.y -= [evt deltaY];
+					
+					[wnd setFrame:frame display:YES];
+					return; // filter it once done
+				}
                 
 			case NSLeftMouseUp:
+			case NSRightMouseUp:
 				return; // filter it
 				
 			case NSScrollWheel:

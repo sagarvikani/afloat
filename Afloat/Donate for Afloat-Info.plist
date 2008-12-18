@@ -5,7 +5,7 @@
 	<key>AfloatDonationsURL</key>
 	<string>http://infinite-labs.net/afloat/donate/</string>
 	<key>CFBundleDevelopmentRegion</key>
-	<string>English</string>
+	<string>en</string>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIconFile</key>
@@ -19,9 +19,11 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1.0</string>
+	<string>${VERSION}</string>
 	<key>LSUIElement</key>
 	<true/>
+	<key>CFBundleShortVersionString</key>
+	<string>${USER_VISIBLE_VERSION}</string>
 	<key>NSMainNibFile</key>
 	<string>Donate</string>
 	<key>NSPrincipalClass</key>
